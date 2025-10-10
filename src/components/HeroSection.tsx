@@ -1,5 +1,12 @@
 import { profile } from "@/data/profile";
-import { Mail, ArrowDownRight } from "lucide-react";
+import {
+  Mail,
+  ArrowDownRight,
+  Globe,
+  MapPin,
+  MonitorSmartphone,
+  Zap,
+} from "lucide-react";
 
 function mailtoHref() {
   const s = encodeURIComponent("Demande de mission freelance");
@@ -11,18 +18,49 @@ function mailtoHref() {
 
 export default function HeroSection() {
   return (
-    <section className="pt-10 md:pt-16 space-y-8">
-      {/* Badges méta */}
+    <div
+      id="hero"
+      aria-labelledby="hero-title"
+      className="pt-16 sm:pt-20 space-y-8"
+    >
+      {/* Badges méta + dispo */}
       <div className="inline-flex flex-wrap items-center gap-2 text-sm text-[--muted]">
-        <span className="rounded-full border px-2 py-0.5">Webmaster & Intégrateur</span>
-        <span className="rounded-full border px-2 py-0.5">{profile.location}</span>
-        <span className="rounded-full border px-2 py-0.5">Réponse &lt; 24 h</span>
+        {/* Métier */}
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
+          <MonitorSmartphone className="size-3 text-sky-500" aria-hidden="true" />
+          <span>Front-end freelance & WordPress</span>
+        </span>
+
+        {/* Localisation */}
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
+          <MapPin className="size-3 text-rose-500" aria-hidden="true" />
+          <span>{profile.location}</span>
+        </span>
+
+        {/* Disponibilité */}
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
+          <Globe className="size-3 text-emerald-500" aria-hidden="true" />
+          <span>Disponible</span>
+        </span>
+
+        {/* Réactivité */}
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
+          <Zap className="size-3 text-amber-500" aria-hidden="true" />
+          <span>Réponse sous 24 h</span>
+        </span>
       </div>
 
       {/* Titre */}
-      <h1 className="tracking-tight leading-[1.08] text-[clamp(2.4rem,6vw,4.2rem)] font-bold">
-        Louis ROTELLINI<br className="hidden md:block" />
-        <span className="font-normal">Intégrations propres, rapides et sans lourdeur de process.</span>
+      <h1
+        id="hero-title"
+        className="tracking-tight leading-[1.08] text-[clamp(2rem,6vw,4.2rem)] font-bold text-balance"
+      >
+        <span className="block">
+          Louis <span className="font-bold">ROTELLINI</span>
+        </span>
+        <span className="block font-normal text-[clamp(1.5rem,5vw,2.8rem)]">
+          Développeur front-end freelance
+        </span>
       </h1>
 
       {/* Sous-texte */}
@@ -31,20 +69,42 @@ export default function HeroSection() {
         maintenance WordPress et emailing HTML responsive.
       </p>
 
-      {/* CTA */}
+      {/* CTA principal + lien offre */}
       <div className="flex flex-wrap items-center gap-3">
         <a
           href={mailtoHref()}
-          className="inline-flex items-center gap-2 rounded-md border px-5 py-3 text-sm hover:bg-[--foreground]/5 transition-colors"
+          className="inline-flex items-center gap-2 rounded-md border border-[--surface-border] px-5 py-3 text-sm hover:bg-[--foreground]/5 transition-colors hover-invert"
         >
           <Mail className="size-4" />
-          <span>Discutons de votre projet</span>
+          <span>Discuter de votre projet</span>
         </a>
-        <a href="/#offre" className="inline-flex items-center gap-2 text-sm underline underline-offset-4 hover:opacity-80">
+        <a
+          href="/#offre"
+          className="inline-flex items-center gap-2 text-sm underline underline-offset-4 hover:opacity-80"
+        >
           Voir mon offre
           <ArrowDownRight className="size-4" />
         </a>
       </div>
-    </section>
+
+      {/* Barre de confiance : Outils & stack de prédilection */}
+      <div className="pt-2">
+        <p className="text-xs uppercase tracking-wider text-[--muted]">
+          Outils & stack de prédilection
+        </p>
+        <ul className="mt-3 flex flex-wrap gap-2 text-sm text-[--muted]">
+          {["Next.js", "Tailwind", "WordPress", "Emails HTML", "Framer Motion"].map(
+            (tag) => (
+              <li
+                key={tag}
+                className="rounded-md border border-[--surface-border] px-3 py-1"
+              >
+                {tag}
+              </li>
+            )
+          )}
+        </ul>
+      </div>
+    </div>
   );
 }

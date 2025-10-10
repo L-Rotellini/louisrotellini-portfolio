@@ -1,53 +1,66 @@
+// src/data/offers.ts
 export type Offer = {
   id: string;
   title: string;
   subtitle?: string;
   bullets: string[];
   deliverables?: string[];
-  leadTime?: string;     // délai indicatif (ex: "48–72h")
-  startingAt?: string;   // ex: "à partir de 300€"
+  leadTime?: string;
+  startingAt?: string;
 };
 
 export const offers: Offer[] = [
   {
+    id: "creation-site",
+    title: "Création de site vitrine",
+    subtitle: "Site moderne, rapide et facile à maintenir",
+    bullets: [
+      "Design responsive et accessible (WCAG AA)",
+      "Pages clés : accueil, services, à propos, contact",
+      "SEO technique (balises, perf, sitemap/robots)",
+      "Mise en ligne et configuration hébergement",
+    ],
+    deliverables: [
+      "Site clé en main",
+      "Code source propre (Next.js/WordPress)",
+      "Guide d’administration rapide",
+    ],
+    leadTime: "1–3 semaines",
+    startingAt: "à partir de 800€",
+  },
+  {
     id: "integration-web",
-    title: "Intégration Web",
+    title: "Intégration front-end",
     subtitle: "Landing pages, mini-sites, composants UI",
     bullets: [
-      "HTML/CSS/JS propre, compatible et responsive",
-      "Debug et QA rapides",
-      "Collaboration directe avec l’équipe marketing/produit",
+      "Intégration fidèle à Figma (pixels & states)",
+      "HTML/CSS/TS — code accessible et maintenable",
+      "Perf mesurée (Lighthouse > 90) & QA",
+      "Livraison modulaire et documentée",
     ],
-    deliverables: ["LP/section prête à mettre en prod", "Conseils perf & accessibilité basiques"],
-    leadTime: "48–72h selon complexité",
+    deliverables: [
+      "Section/page prête prod",
+      "Rapport compatibilité & performance",
+    ],
+    leadTime: "48–72 h selon complexité",
     startingAt: "à partir de 300€",
   },
   {
-    id: "wordpress",
-    title: "WordPress",
-    subtitle: "Maintenance et petites évolutions",
+    id: "maintenance-wordpress",
+    title: "Maintenance WordPress",
+    subtitle: "Mises à jour, sécurité, correctifs & support",
     bullets: [
-      "Mises à jour de contenus et templates",
-      "Correctifs front basiques (thèmes, CSS)",
-      "Durcissement léger (rôles, extensions, sauvegardes)",
+      "Mises à jour cœur/thèmes/plugins",
+      "Corrections d’affichage & contenu",
+      "Sauvegardes et durcissement léger",
+      "Améliorations de perf & SEO",
     ],
-    deliverables: ["Changelog simple", "Recommandations d’amélioration"],
-    leadTime: "mission ponctuelle ou récurrente",
-    startingAt: "mission courte, devis rapide",
-  },
-];
-
-export const addons: Offer[] = [
-  {
-    id: "emailing",
-    title: "Emailing",
-    subtitle: "Templates responsive",
-    bullets: [
-      "Intégration HTML email (compatibilité clients majeurs)",
-      "A/B tests simples",
-      "Conseils délivrabilité de base",
+    deliverables: [
+      "Changelog clair",
+      "Backup avant/après",
+      "Suggestions d’amélioration",
     ],
-    leadTime: "24–48h par template",
-    startingAt: "à partir de 150€ / template",
+    leadTime: "ponctuel ou récurrent",
+    startingAt: "à partir de 90€ / intervention",
   },
 ];

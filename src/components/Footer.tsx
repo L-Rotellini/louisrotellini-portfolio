@@ -1,6 +1,8 @@
+import { profile } from "@/data/profile";
+
 export default function Footer() {
   return (
-    <footer className="fixed bottom-0 left-0 w-full border-t border-[--surface-border] bg-[--background]/80 backdrop-blur-sm py-3 text-sm text-[--muted] z-40">
+    <footer className="fixed bottom-0 left-0 w-full border-t border-[--surface-border] py-3 text-sm text-[--muted] z-40">
       <div className="mx-auto max-w-5xl px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between gap-2">
         <p>
           © {new Date().getFullYear()} <strong>louisrotellini.fr</strong>
@@ -8,7 +10,7 @@ export default function Footer() {
 
         <nav className="flex items-center gap-4">
           <a
-            href="mailto:louis.rotellini@gmail.com"
+            href={`mailto:${profile.email}`}
             className="hover:text-[--foreground] transition-colors"
           >
             Contact
