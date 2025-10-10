@@ -6,6 +6,8 @@ import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "next-themes";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import BackToTop from "@/components/BackToTop";
+import ScrollProgressBar from "@/components/ScrollProgressBar";
 
 export const metadata = {
   title: {
@@ -73,8 +75,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
+          <ScrollProgressBar placeBelowHeader />
           <main className="mx-auto max-w-5xl px-4 md:px-6 pb-24">{children}</main>
           <Footer />
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>

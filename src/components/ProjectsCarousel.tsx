@@ -2,22 +2,29 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import projects from "@/data/projects";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PER_PAGE = 3;
 const AUTOPLAY_MS = 7000;
 
 export default function ProjectSection() {
-  const totalPages = useMemo(() => Math.ceil(projects.length / PER_PAGE), []);
+  const prefersReducedMotion = useReducedMotion();
+
+  const totalPages = useMemo(
+    () => Math.ceil(projects.length / PER_PAGE),
+    [projects.length]
+  );
+
   const [page, setPage] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
 
-  // Hauteur verrouillée (max de ce qui a été vu)
+  // Hauteur verrouillée (max vu)
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
   const pageRef = useRef<HTMLDivElement | null>(null);
 
-  // autoplay (pas d'animations carte par carte)
+  // autoplay
   const timerRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
 
@@ -26,7 +33,9 @@ export default function ProjectSection() {
     setPage((next + totalPages) % totalPages);
   };
 
+  // Gestion autoplay (pause si reduced motion / tab masqué / blur)
   useEffect(() => {
+    if (prefersReducedMotion) return; // pas d'autoplay
     const start = () => {
       stop();
       timerRef.current = window.setInterval(() => {
@@ -39,11 +48,27 @@ export default function ProjectSection() {
         timerRef.current = null;
       }
     };
-    start();
-    return stop;
-  }, [page, totalPages]);
 
-  // Mesure la hauteur de la page courante et garde la valeur max
+    const onVisibility = () => {
+      pausedRef.current = document.hidden;
+    };
+    const onBlur = () => { pausedRef.current = true; };
+    const onFocus = () => { pausedRef.current = false; };
+
+    start();
+    document.addEventListener("visibilitychange", onVisibility);
+    window.addEventListener("blur", onBlur);
+    window.addEventListener("focus", onFocus);
+
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", onVisibility);
+      window.removeEventListener("blur", onBlur);
+      window.removeEventListener("focus", onFocus);
+    };
+  }, [page, totalPages, prefersReducedMotion]);
+
+  // Mesure hauteur
   useEffect(() => {
     const measure = () => {
       if (!pageRef.current) return;
@@ -51,7 +76,6 @@ export default function ProjectSection() {
       setContainerHeight((prev) => (prev ? Math.max(prev, h) : h));
     };
     measure();
-    // re-mesure si fenêtre resize
     const onR = () => measure();
     window.addEventListener("resize", onR);
     return () => window.removeEventListener("resize", onR);
@@ -63,7 +87,10 @@ export default function ProjectSection() {
 
   // Drag (grab & slide)
   const startX = useRef<number | null>(null);
-  const onDown = (e: React.PointerEvent) => (startX.current = e.clientX);
+  const onDown = (e: React.PointerEvent) => {
+    pausedRef.current = true;
+    startX.current = e.clientX;
+  };
   const onUp = (e: React.PointerEvent) => {
     if (startX.current == null) return;
     const delta = e.clientX - startX.current;
@@ -71,34 +98,73 @@ export default function ProjectSection() {
     if (delta < -TH) goTo(page + 1, 1);
     else if (delta > TH) goTo(page - 1, -1);
     startX.current = null;
+    pausedRef.current = false;
   };
 
+  // Clavier
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowRight") { e.preventDefault(); goTo(page + 1, 1); }
+    if (e.key === "ArrowLeft")  { e.preventDefault(); goTo(page - 1, -1); }
+    if (e.key === "Home")       { e.preventDefault(); goTo(0, -1); }
+    if (e.key === "End")        { e.preventDefault(); goTo(totalPages - 1, 1); }
+    if (e.key === " " || e.key === "Enter") { // pause/reprise via espace/enter
+      e.preventDefault();
+      pausedRef.current = !pausedRef.current;
+    }
+  };
+
+  // Annonce SR
+  const srRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!srRef.current) return;
+    srRef.current.textContent = `Page ${page + 1} sur ${totalPages}`;
+  }, [page, totalPages]);
+
   return (
-    <section
-      id="projets"
+    <div
       className="space-y-8 overflow-hidden"
       onMouseEnter={() => (pausedRef.current = true)}
       onMouseLeave={() => (pausedRef.current = false)}
+      aria-labelledby="projets-title"
     >
-      <h2>Projets</h2>
+      <h2 id="projets-title">Projets</h2>
 
-      {/* Conteneur à hauteur fixe + curseur grab */}
+      {/* live region pour lecteurs d'écran */}
+      <div ref={srRef} aria-live="polite" className="sr-only" />
+
+      {/* Conteneur à hauteur stabilisée + grab + clavier */}
       <div
         className="relative select-none cursor-grab active:cursor-grabbing touch-pan-y"
         onPointerDown={onDown}
         onPointerUp={onUp}
-        style={{ height: containerHeight }} // ⚑ bloque la hauteur après mesure
+        onKeyDown={onKeyDown}
+        tabIndex={0}
+        aria-roledescription="carrousel"
+        aria-label="Projets"
+        aria-live="off"
+        //style={{ minHeight: containerHeight }}
       >
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={page}
             custom={dir}
-            initial={(d: 1 | -1) => ({ opacity: 0, x: 40 * d })}
-            animate={{ opacity: 1, x: 0 }}
-            exit={(d: 1 | -1) => ({ opacity: 0, x: -40 * d })}
+            initial={
+              prefersReducedMotion
+                ? false
+                : (d: 1 | -1) => ({ opacity: 0, x: 40 * d })
+            }
+            animate={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
+            exit={
+              prefersReducedMotion
+                ? false
+                : (d: 1 | -1) => ({ opacity: 0, x: -40 * d })
+            }
             transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
             className="divide-y divide-[--surface-border]"
             ref={pageRef}
+            id="carousel-viewport"
+            aria-atomic="false"
+            aria-live="off"
           >
             {visible.map((p, idx) => (
               <article key={p.brand + idx}>
@@ -116,7 +182,7 @@ export default function ProjectSection() {
                     {p.role}
                   </div>
 
-                  <ul className="mt-4 space-y-1 max-w-prose">
+                  <ul className="mt-4 space-y-1 max-w-prose" role="list">
                     {p.details.map((d, i) => (
                       <li key={i} className="text-[15px]">
                         {d}
@@ -139,7 +205,7 @@ export default function ProjectSection() {
                           href={p.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-sm underline ml-1"
+                          className="text-sm underline ml-1 hover-invert rounded px-1"
                         >
                           Voir
                         </a>
@@ -154,24 +220,36 @@ export default function ProjectSection() {
       </div>
 
       {/* Dots : actif = noir (light) / blanc (dark) */}
-      <div className="flex justify-center gap-2 pt-3">
+      <div className="flex justify-center gap-3 pt-4" role="tablist" aria-label="Pagination des projets">
         {Array.from({ length: totalPages }).map((_, i) => {
           const isActive = i === page;
           return (
-            <button
+            <motion.button
               key={i}
-              aria-label={`Page ${i + 1}`}
-              onClick={() => goTo(i, i > page ? 1 : -1)}
+              layout
+              aria-label={`Page ${i + 1} sur ${totalPages}`}
               aria-current={isActive ? "page" : undefined}
-              className="h-2.5 w-2.5 rounded-full appearance-none border transition-colors duration-200"
-              style={{
-                backgroundColor: isActive ? "var(--foreground)" : "transparent",
-                borderColor: isActive ? "var(--foreground)" : "var(--surface-border)",
+              role="tab"
+              aria-controls="carousel-viewport"
+              onClick={() => goTo(i, i > page ? 1 : -1)}
+              onFocus={() => (pausedRef.current = true)}
+              onBlur={() => (pausedRef.current = false)}
+              className={[
+                "relative h-2.5 appearance-none rounded-full border border-[--surface-border]",
+                "transition-colors duration-300 cursor-pointer",
+                isActive
+                  ? "bg-[--foreground] border-[--foreground] w-8"
+                  : "bg-transparent hover:bg-[--foreground]/20 w-2.5",
+              ].join(" ")}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 30,
               }}
             />
           );
         })}
       </div>
-    </section>
+    </div>
   );
 }
