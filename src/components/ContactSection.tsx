@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Mail, MapPin, MessageSquare, Copy, Check, Info } from "lucide-react";
+import { Mail, MapPin, Globe, MessageSquare, Copy, Check, Info, Zap } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
 import { profile } from "@/data/profile";
 
@@ -40,15 +40,20 @@ export default function ContactSection() {
       <FadeIn delay={0.06}>
         <div className="max-w space-y-4 text-[15px] leading-relaxed">
           <p>
-            Besoin d’une intégration front soignée, d’une LP rapide ou d’une maintenance WordPress&nbsp;? 
+            Besoin d’une intégration front soignée, d’une LP rapide ou d’une maintenance WordPress&nbsp;?<br/>
             Écrivez-moi et on définit ensemble le périmètre, le budget et le délai.
           </p>
-          <div className="flex flex-wrap items-center gap-2 text-sm text-[--muted]">
-            <span className="rounded-full border border-[--surface-border] px-2 py-0.5">
-              ✅ Disponible
+          <div className="inline-flex flex-wrap items-center gap-2 text-sm text-[--muted]">
+            {/* Disponibilité */}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
+              <Globe className="size-3 text-emerald-500" aria-hidden="true" />
+              <span>Disponible</span>
             </span>
-            <span className="rounded-full border border-[--surface-border] px-2 py-0.5">
-              ⚡ Réponse &lt; 24 h
+
+            {/* Réactivité */}
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
+              <Zap className="size-3 text-amber-500" aria-hidden="true" />
+              <span>Réponse sous 24 h</span>
             </span>
           </div>
         </div>
@@ -82,10 +87,6 @@ export default function ContactSection() {
                 {copied ? "Copié" : "Copier"}
               </button>
             </div>
-            <p className="text-[13px] text-[--muted]">
-              Joignez un lien Figma ou un dossier d’exemples si possible — cela facilite
-              l’estimation.
-            </p>
           </div>
 
           {/* Localisation */}
@@ -93,14 +94,6 @@ export default function ContactSection() {
             <MapPin className="size-5 text-[--muted]" aria-hidden="true" />
             <div className="text-sm text-[--muted] uppercase tracking-wide">Localisation</div>
             <p className="text-lg font-medium">{profile.location}</p>
-            <a
-              href={mapsHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs underline underline-offset-4"
-            >
-              Ouvrir dans Maps
-            </a>
           </div>
         </div>
       </FadeIn>
@@ -119,7 +112,7 @@ export default function ContactSection() {
             <li>• Délai souhaité & budget indicatif</li>
           </ul>
           <p className="text-[13px] text-[--muted]">
-            NDA possible. Merci d’éviter les données sensibles par email.
+            Merci d’éviter les données sensibles par email.
           </p>
         </div>
       </FadeIn>

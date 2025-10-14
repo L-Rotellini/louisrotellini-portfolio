@@ -1,4 +1,3 @@
-// src/app/page.tsx  (SERVER COMPONENT)
 import SkillGrid from "@/components/SkillGrid";
 import OfferSection from "@/components/OfferSection";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
