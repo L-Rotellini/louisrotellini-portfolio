@@ -87,15 +87,16 @@ button,
 
 header,
 footer {
-  background-color: color-mix(in oklab, var(--background) 00%, transparent);
-  backdrop-filter: blur(12px);
+  background-color: color-mix(in oklab, var(--background) 0%, transparent);
   -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   border-color: color-mix(in oklab, var(--foreground) 12%, transparent);
   transition:
     background-color var(--dur) var(--ease-in-out),
     border-color var(--dur) var(--ease-in-out),
     backdrop-filter var(--dur) var(--ease-in-out);
 }
+
 
 
 /* Icônes */
