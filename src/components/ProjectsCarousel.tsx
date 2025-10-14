@@ -1,30 +1,30 @@
-// src/components/ProjectSection.tsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import projects from "@/data/projects";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PER_PAGE = 3;
 const AUTOPLAY_MS = 7000;
 
+// ✅ Variants qui utilisent `custom` (dir: 1 | -1)
+const slideVariants: Variants = {
+  enter: (d: 1 | -1) => ({ opacity: 0, x: 40 * d }),
+  center: { opacity: 1, x: 0 },
+  exit: (d: 1 | -1) => ({ opacity: 0, x: -40 * d }),
+};
+
 export default function ProjectSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  const totalPages = useMemo(
-    () => Math.ceil(projects.length / PER_PAGE),
-    [projects.length]
-  );
-
+  const totalPages = useMemo(() => Math.ceil(projects.length / PER_PAGE), [projects.length]);
   const [page, setPage] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
 
-  // Hauteur verrouillée (max vu)
   const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
   const pageRef = useRef<HTMLDivElement | null>(null);
 
-  // autoplay
   const timerRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
 
@@ -33,27 +33,24 @@ export default function ProjectSection() {
     setPage((next + totalPages) % totalPages);
   };
 
-  // Gestion autoplay (pause si reduced motion / tab masqué / blur)
   useEffect(() => {
-    if (prefersReducedMotion) return; // pas d'autoplay
-    const start = () => {
-      stop();
-      timerRef.current = window.setInterval(() => {
-        if (!pausedRef.current) goTo(page + 1, 1);
-      }, AUTOPLAY_MS);
-    };
+    if (prefersReducedMotion) return;
     const stop = () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
       }
     };
-
-    const onVisibility = () => {
-      pausedRef.current = document.hidden;
+    const start = () => {
+      stop();
+      timerRef.current = window.setInterval(() => {
+        if (!pausedRef.current) goTo(page + 1, 1);
+      }, AUTOPLAY_MS);
     };
-    const onBlur = () => { pausedRef.current = true; };
-    const onFocus = () => { pausedRef.current = false; };
+
+    const onVisibility = () => (pausedRef.current = document.hidden);
+    const onBlur = () => (pausedRef.current = true);
+    const onFocus = () => (pausedRef.current = false);
 
     start();
     document.addEventListener("visibilitychange", onVisibility);
@@ -68,7 +65,6 @@ export default function ProjectSection() {
     };
   }, [page, totalPages, prefersReducedMotion]);
 
-  // Mesure hauteur
   useEffect(() => {
     const measure = () => {
       if (!pageRef.current) return;
@@ -81,11 +77,9 @@ export default function ProjectSection() {
     return () => window.removeEventListener("resize", onR);
   }, [page]);
 
-  // Données visibles
   const startIndex = page * PER_PAGE;
   const visible = projects.slice(startIndex, startIndex + PER_PAGE);
 
-  // Drag (grab & slide)
   const startX = useRef<number | null>(null);
   const onDown = (e: React.PointerEvent) => {
     pausedRef.current = true;
@@ -101,19 +95,17 @@ export default function ProjectSection() {
     pausedRef.current = false;
   };
 
-  // Clavier
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "ArrowRight") { e.preventDefault(); goTo(page + 1, 1); }
     if (e.key === "ArrowLeft")  { e.preventDefault(); goTo(page - 1, -1); }
     if (e.key === "Home")       { e.preventDefault(); goTo(0, -1); }
     if (e.key === "End")        { e.preventDefault(); goTo(totalPages - 1, 1); }
-    if (e.key === " " || e.key === "Enter") { // pause/reprise via espace/enter
+    if (e.key === " " || e.key === "Enter") {
       e.preventDefault();
       pausedRef.current = !pausedRef.current;
     }
   };
 
-  // Annonce SR
   const srRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
     if (!srRef.current) return;
@@ -128,11 +120,8 @@ export default function ProjectSection() {
       aria-labelledby="projets-title"
     >
       <h2 id="projets-title">Projets</h2>
-
-      {/* live region pour lecteurs d'écran */}
       <div ref={srRef} aria-live="polite" className="sr-only" />
 
-      {/* Conteneur à hauteur stabilisée + grab + clavier */}
       <div
         className="relative select-none cursor-grab active:cursor-grabbing touch-pan-y"
         onPointerDown={onDown}
@@ -142,23 +131,16 @@ export default function ProjectSection() {
         aria-roledescription="carrousel"
         aria-label="Projets"
         aria-live="off"
-        //style={{ minHeight: containerHeight }}
+        // style={{ minHeight: containerHeight }}
       >
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div
             key={page}
             custom={dir}
-            initial={
-              prefersReducedMotion
-                ? false
-                : (d: 1 | -1) => ({ opacity: 0, x: 40 * d })
-            }
-            animate={prefersReducedMotion ? { opacity: 1, x: 0 } : { opacity: 1, x: 0 }}
-            exit={
-              prefersReducedMotion
-                ? false
-                : (d: 1 | -1) => ({ opacity: 0, x: -40 * d })
-            }
+            variants={slideVariants}                              
+            initial={prefersReducedMotion ? false : "enter"}        
+            animate={prefersReducedMotion ? { opacity: 1, x: 0 } : "center"}  
+            exit={prefersReducedMotion ? undefined : "exit"}         
             transition={{ duration: 0.45, ease: [0.4, 0, 0.2, 1] }}
             className="divide-y divide-[--surface-border]"
             ref={pageRef}
