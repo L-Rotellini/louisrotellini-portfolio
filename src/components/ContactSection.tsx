@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Mail, MapPin, Globe, MessageSquare, Copy, Check, Info, Zap } from "lucide-react";
 import FadeIn from "@/components/FadeIn";
@@ -127,12 +128,12 @@ export default function ContactSection() {
             <MessageSquare className="size-4" />
             <span>Discutons de votre projet</span>
           </a>
-          <a
+          <Link
             href="/#offre"
             className="inline-flex items-center gap-2 rounded-md border border-[--surface-border] px-5 py-3 text-sm transition-colors"
           >
             Voir mes offres
-          </a>
+          </Link>
         </div>
       </FadeIn>
     </section>

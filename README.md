@@ -24,7 +24,6 @@
 
 ## 🧰 Installation & développement
 
-```bash
 # 1. Cloner le projet
 git clone https://github.com/L-Rotellini/louisrotellini-portfolio.git
 cd portfolio
@@ -34,3 +33,53 @@ npm install
 
 # 3. Lancer le serveur local
 npm run dev
+
+Puis ouvre http://localhost:3000 dans ton navigateur 🚀
+
+---
+
+## ⚙️ Scripts disponibles
+
+| Commande            | Description                         |
+| ------------------- | ----------------------------------- |
+| `npm run dev`       | Lance le serveur de développement   |
+| `npm run build`     | Crée la build de production         |
+| `npm run start`     | Lance la version compilée           |
+| `npm run lint`      | Vérifie le code avec ESLint         |
+| `npm run lint:fix`  | Corrige automatiquement les erreurs |
+| `npm run typecheck` | Vérifie les types TypeScript        |
+
+
+
+---
+
+## 🌟 Fonctionnalités
+
+🌗 Mode clair/sombre automatique selon la préférence système
+
+⚡ Performance optimisée grâce à Next.js App Router
+
+🎞️ Animations fluides avec Framer Motion
+
+📱 Responsive design mobile-first
+
+🧠 Composants typés avec TypeScript
+
+🔍 SEO intégré (balises meta, image OpenGraph, favicon, etc.)
+
+🧩 Architecture modulaire pour la maintenance et l’évolutivité
+
+---
+
+## 🧠 À propos
+
+Je suis Louis ROTELLINI, développeur front-end passionné par les interfaces modernes, les performances web et l’expérience utilisateur.
+Ce portfolio est à la fois un projet vitrine et un laboratoire pour expérimenter les dernières technologies de l’écosystème React et Next.js.
+
+📫 Contact : louis.rotellini@gmail.com
+
+🌐 Site : https://ton-portfolio.vercel.app
+
+💼 LinkedIn : https://www.linkedin.com/in/louis-rotellini/
+
+🐙 GitHub : https://github.com/L-Rotellini
