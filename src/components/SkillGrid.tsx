@@ -25,7 +25,7 @@ export default function SkillGrid() {
       (entries) => {
         const e = entries[0];
         if (e.isIntersecting) {
-          setActive(true);     // déclenche une fois
+          setActive(true);
           io.disconnect();
         }
       },
@@ -49,7 +49,8 @@ export default function SkillGrid() {
             key={title}
             className="surface h-full flex flex-col justify-between rounded-2xl border border-[--surface-border] p-5 transition-all duration-300 hover:bg-[--foreground]/[0.02]"
             aria-labelledby={`${title}-title`}
-            style={{ ["--card" as "--card"]: cardIndex } as CSSVars}
+            // ⬇️ ICI: clé littérale au lieu d'une assertion
+            style={{ "--card": cardIndex } as CSSVars}
           >
             <div>
               <div className="flex items-center gap-3 mb-4">
@@ -64,7 +65,8 @@ export default function SkillGrid() {
                   <li
                     key={it}
                     className="chip-anim text-xs text-[--muted] border border-[--surface-border] rounded-full px-2 py-1"
-                    style={{ ["--i" as "--i"]: i } as CSSVars}
+                    // ⬇️ ICI aussi
+                    style={{ "--i": i } as CSSVars}
                   >
                     {it}
                   </li>
