@@ -93,7 +93,7 @@ export default function HeroSection() {
           Outils & stack de prédilection
         </p>
         <ul className="mt-3 flex flex-wrap gap-2 text-sm text-[--muted]">
-          {["Next.js", "Tailwind", "WordPress", "Emails HTML", "Framer Motion"].map(
+          {["Next.js", "Tailwind", "WordPress", "HTML / Emailing"].map(
             (tag) => (
               <li
                 key={tag}

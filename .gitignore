@@ -32,7 +32,6 @@ yarn-error.log*
 pnpm-debug.log*
 
 # === MISC ===
-.DS_Store
 *.pem
 *.tsbuildinfo
 next-env.d.ts
@@ -40,3 +39,16 @@ next-env.d.ts
 # === IDE ===
 .vscode/
 .idea/
+
+# === OS SPECIFIC ===
+.DS_Store
+Thumbs.db
+
+# === TOOLING ===
+.turbo/
+.npm/
+
+# === ASSETS / EXPORTS ===
+*.sketch
+*.fig
+*.psd

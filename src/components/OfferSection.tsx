@@ -2,6 +2,7 @@
 
 import OfferCard from "@/components/OfferCard";
 import { offers } from "@/data/offers";
+import { profile } from "@/data/profile";
 
 function mailtoHref(subject: string) {
   const b = encodeURIComponent(
@@ -11,17 +12,22 @@ function mailtoHref(subject: string) {
 }
 
 export default function OfferSection() {
+  // 1) Sépare les offres
+  const mainOffers = offers.filter((o) => o.id !== "subscription");
+  const subscriptionOffer = offers.find((o) => o.id === "subscription");
+
   return (
-    <div id="offre" aria-labelledby="offre-title" className="space-y-8">
+    <section id="offre" aria-labelledby="offre-title" className="space-y-8">
       <div className="space-y-2">
         <h2 id="offre-title">Offre</h2>
         <p className="text-[--muted] text-sm">
-          Trois formats simples et efficaces. Délai court, code propre, transfert sans friction.
+          Trois formats clairs, pensés pour livrer vite et bien. Code propre, intégration fluide, zéro perte de temps.
         </p>
       </div>
 
+      {/* 2) Grille = seulement les 3 principales */}
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3">
-        {offers.map((o) => (
+        {mainOffers.map((o) => (
           <OfferCard
             key={o.id}
             id={o.id}
@@ -35,6 +41,23 @@ export default function OfferSection() {
           />
         ))}
       </div>
-    </div>
+
+      {/* 3) Abonnement plein largeur en dessous */}
+      {subscriptionOffer && (
+        <div className="pt-2">
+          <OfferCard
+            key={subscriptionOffer.id}
+            id={subscriptionOffer.id}
+            title={subscriptionOffer.title}
+            subtitle={subscriptionOffer.subtitle}
+            bullets={subscriptionOffer.bullets}
+            deliverables={subscriptionOffer.deliverables}
+            leadTime={subscriptionOffer.leadTime}
+            startingAt={subscriptionOffer.startingAt}
+            ctaSubject={`${subscriptionOffer.title} — Demande d’information`}
+          />
+        </div>
+      )}
+    </section>
   );
 }
