@@ -7,6 +7,7 @@ import {
   MonitorSmartphone,
   Zap,
 } from "lucide-react";
+import Link from "next/link";
 
 function mailtoHref() {
   const s = encodeURIComponent("Demande de mission freelance");
@@ -78,13 +79,13 @@ export default function HeroSection() {
           <Mail className="size-4" />
           <span>Discuter de votre projet</span>
         </a>
-        <a
+        <Link
           href="/#offre"
           className="inline-flex items-center gap-2 text-sm underline underline-offset-4 hover:opacity-80"
         >
           Voir mon offre
           <ArrowDownRight className="size-4" />
-        </a>
+        </Link>
       </div>
 
       {/* Barre de confiance : Outils & stack de prédilection */}
