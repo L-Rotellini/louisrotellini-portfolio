@@ -49,15 +49,7 @@ Puis ouvre http://localhost:3000 dans ton navigateur 🚀
 | `npm run lint:fix`  | Corrige automatiquement les erreurs |
 | `npm run typecheck` | Vérifie les types TypeScript        |
 
----
 
-## 🧩 Structure du projet
-src/
-├── app/             # Pages & layouts Next.js (App Router)
-├── components/      # Composants UI réutilisables
-├── data/            # Données statiques (profil, projets, compétences)
-├── hooks/           # Hooks React personnalisés
-└── styles/          # Fichiers CSS globaux
 
 ---
 
