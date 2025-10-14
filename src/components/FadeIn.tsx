@@ -1,30 +1,41 @@
 "use client";
 
-import { motion } from "framer-motion";
-import type { ReactNode, HTMLAttributes } from "react";
+import { motion, type Variants } from "framer-motion";
+import type { ReactNode, ElementType } from "react";
+
+const fadeIn: Variants = {
+  hidden: { opacity: 0, y: 6 },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+};
+
+type Props = {
+  as?: ElementType;         // ✅ au lieu de keyof JSX.IntrinsicElements
+  className?: string;
+  children: ReactNode;
+  delay?: number;
+  once?: boolean;
+};
 
 export default function FadeIn({
   as: Tag = "div",
   className,
   children,
   delay = 0,
+  once = true,
   ...rest
-}: {
-  as?: keyof JSX.IntrinsicElements;
-  className?: string;
-  children: ReactNode;
-  delay?: number;
-} & HTMLAttributes<HTMLElement>) {
+}: Props & React.ComponentPropsWithoutRef<"div">) {
+  const Comp = motion(Tag as ElementType);
   return (
-    <motion.div
+    <Comp
       className={className}
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.45, ease: "easeOut", delay }}
+      variants={fadeIn}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once, amount: 0.2 }}
+      transition={{ delay }}
       {...rest}
     >
       {children}
-    </motion.div>
+    </Comp>
   );
 }
