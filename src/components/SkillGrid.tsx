@@ -15,7 +15,7 @@ const categories = [
 type CSSVars = React.CSSProperties & { ["--card"]?: number; ["--i"]?: number };
 
 export default function SkillGrid() {
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const sectionRef = useRef<HTMLDivElement | null>(null);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
