@@ -36,9 +36,9 @@ npm run dev
 
 Puis ouvre http://localhost:3000 dans ton navigateur 🚀
 
+---
 
-
-⚙️ Scripts disponibles
+## ⚙️ Scripts disponibles
 
 | Commande            | Description                         |
 | ------------------- | ----------------------------------- |
@@ -49,8 +49,9 @@ Puis ouvre http://localhost:3000 dans ton navigateur 🚀
 | `npm run lint:fix`  | Corrige automatiquement les erreurs |
 | `npm run typecheck` | Vérifie les types TypeScript        |
 
+---
 
-🧩 Structure du projet
+## 🧩 Structure du projet
 src/
 ├── app/             # Pages & layouts Next.js (App Router)
 ├── components/      # Composants UI réutilisables
@@ -58,8 +59,9 @@ src/
 ├── hooks/           # Hooks React personnalisés
 └── styles/          # Fichiers CSS globaux
 
+---
 
-🌟 Fonctionnalités
+## 🌟 Fonctionnalités
 
 🌗 Mode clair/sombre automatique selon la préférence système
 
@@ -75,8 +77,9 @@ src/
 
 🧩 Architecture modulaire pour la maintenance et l’évolutivité
 
+---
 
-🧠 À propos
+## 🧠 À propos
 
 Je suis Louis ROTELLINI, développeur front-end passionné par les interfaces modernes, les performances web et l’expérience utilisateur.
 Ce portfolio est à la fois un projet vitrine et un laboratoire pour expérimenter les dernières technologies de l’écosystème React et Next.js.
