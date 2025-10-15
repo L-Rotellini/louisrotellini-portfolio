@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: {
@@ -79,6 +80,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <BackToTop />
         </ThemeProvider>
+        {/* Vercel Web Analytics */}
+        <Analytics />
       </body>
     </html>
   );
