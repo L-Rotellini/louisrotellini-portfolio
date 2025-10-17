@@ -7,53 +7,75 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackToTop from "@/components/BackToTop";
 import ScrollProgressBar from "@/components/ScrollProgressBar";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
-export const metadata = {
+export const metadata: Metadata = {
+  metadataBase: new URL("https://www.louisrotellini.fr"),
   title: {
-    default: "Louis Rotellini — Webmaster & Intégrateur freelance",
+    default:
+      "Développeur Front-End & Intégrateur Freelance | React, Next.js & WordPress – Louis Rotellini",
     template: "%s | Louis Rotellini",
   },
   description:
-    "Portfolio de Louis Rotellini, webmaster et intégrateur freelance basé entre Lille et Paris. Spécialisé en intégration front, maintenance WordPress et emailing responsive.",
-  metadataBase: new URL("https://www.louisrotellini.fr"),
+    "Développeur front-end & intégrateur freelance. J’aide les entreprises et agences à transformer leurs maquettes en sites rapides, accessibles et SEO-friendly. Spécialiste React, Next.js, Tailwind et WordPress.",
   keywords: [
     "Louis Rotellini",
-    "webmaster freelance",
+    "développeur front-end freelance",
     "intégrateur web",
+    "intégration maquettes Figma",
+    "React",
     "Next.js",
+    "Tailwind CSS",
     "WordPress",
-    "HTML",
-    "CSS",
-    "JavaScript",
-    "emailing responsive",
+    "SEO",
+    "accessibilité",
+    "performance web",
     "Lille",
     "Paris",
   ],
   authors: [{ name: "Louis Rotellini", url: "https://www.louisrotellini.fr" }],
+  alternates: {
+    canonical: "/",
+    languages: { "fr-FR": "https://www.louisrotellini.fr" },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "fr_FR",
     url: "https://www.louisrotellini.fr",
-    title: "Louis Rotellini — Webmaster & Intégrateur freelance",
+    siteName: "Louis Rotellini",
+    title:
+      "Développeur Front-End & Intégrateur Freelance | React, Next.js & WordPress – Louis Rotellini",
     description:
-      "Portfolio de Louis Rotellini, freelance basé entre Lille et Paris. Intégration front-end, maintenance WordPress et emailing responsive.",
-    siteName: "Louis Rotellini Portfolio",
+      "Intégration pixel-perfect, performance et accessibilité. React/Next.js, Tailwind et WordPress.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Aperçu du portfolio de Louis Rotellini",
+        alt: "Portfolio de Louis Rotellini – développeur front-end & intégrateur freelance",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Louis Rotellini — Webmaster & Intégrateur freelance",
-    description:
-      "Intégration front, maintenance WordPress et emailing responsive.",
+    site: "@louisrotellini",
     creator: "@louisrotellini",
+    title:
+      "Développeur Front-End & Intégrateur Freelance – Louis Rotellini",
+    description:
+      "React/Next.js, WordPress, performance, accessibilité & SEO.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -61,6 +83,8 @@ export const metadata = {
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+  // (optionnel) : vérifs Search Console, etc.
+  // verification: { google: "..." },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -73,6 +97,71 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           "min-h-dvh bg-[--background] text-[--foreground] antialiased transition-colors duration-500",
         ].join(" ")}
       >
+        {/* Données structurées Person + offre de services */}
+        <Script
+          id="ld-json-person"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: "Louis Rotellini",
+              jobTitle: "Développeur front-end freelance",
+              url: "https://www.louisrotellini.fr",
+              sameAs: [
+                "https://www.malt.fr/profile/louisrotellini", // ajuste si besoin
+                "https://www.linkedin.com/in/louis-rotellini/"
+              ],
+              knowsAbout: [
+                "React",
+                "Next.js",
+                "Tailwind CSS",
+                "WordPress",
+                "SEO",
+                "Accessibilité web",
+                "Performance web",
+                "Intégration maquettes Figma",
+              ],
+              worksFor: {
+                "@type": "Organization",
+                name: "Freelance",
+              },
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Lille",
+                addressRegion: "Hauts-de-France",
+                addressCountry: "FR",
+              },
+            }),
+          }}
+        />
+        {/* Variante service (utile pour des requêtes type “prestations développeur front-end”) */}
+        <Script
+          id="ld-json-service"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ProfessionalService",
+              name:
+                "Développeur front-end & intégrateur freelance – Louis Rotellini",
+              url: "https://www.louisrotellini.fr",
+              areaServed: ["FR", "Europe"],
+              description:
+                "Intégration de maquettes Figma, développement React/Next.js et création de sites WordPress performants. Priorité à la performance, à l’accessibilité et au SEO.",
+              serviceType: [
+                "Intégration HTML/CSS/JS",
+                "Développement React/Next.js",
+                "Création/Refonte WordPress",
+                "Optimisation performance & SEO",
+                "Maintenance & débogage",
+              ],
+            }),
+          }}
+        />
+
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <ScrollProgressBar placeBelowHeader />
@@ -80,9 +169,30 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Footer />
           <BackToTop />
         </ThemeProvider>
+
         {/* Vercel Web Analytics */}
         <Analytics />
       </body>
+      <Script id="console-signature" strategy="afterInteractive">
+          {`
+            const styleHeader = [
+              "color: #0f172a",
+              "background: #e2e8f0",
+              "font-size: 14px",
+              "padding: 6px 10px",
+              "border-radius: 4px",
+              "font-weight: 600",
+            ].join(";");
+            const styleBody = [
+              "color: #475569",
+              "font-size: 13px",
+            ].join(";");
+
+            console.log("%cLouis Rotellini — Développeur Front-End Freelance", styleHeader);
+            console.log("%cPortfolio : https://www.louisrotellini.fr", styleBody);
+            console.log("%cSpécialités : React · Next.js · WordPress · Performance · Accessibilité", styleBody);
+          `}
+       </Script>
     </html>
   );
 }
