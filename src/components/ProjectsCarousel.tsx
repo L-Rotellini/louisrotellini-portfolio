@@ -29,7 +29,7 @@ export default function ProjectSection() {
 
   const goTo = useCallback((next: number, direction: 1 | -1) => {
     setDir(direction);
-    setPage((p) => (next + totalPages) % totalPages);
+    setPage((next + totalPages) % totalPages);
   }, [totalPages]);
 
   useEffect(() => {
