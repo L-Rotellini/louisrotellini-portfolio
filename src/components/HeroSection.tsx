@@ -32,7 +32,6 @@ function mailtoHref() {
 }
 
 export default function HeroSection() {
-const maltUrl = profile.maltUrl;
 
   return (
     <div

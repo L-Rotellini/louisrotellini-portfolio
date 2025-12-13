@@ -20,8 +20,7 @@ export const profile = {
   email: "louis.rotellini@gmail.com",
   phone: "",
   availability: "Disponible pour missions freelance (soir/week-end)",
-  // Renseigne si tu veux le CTA "Malt"
   maltUrl: "https://www.malt.fr/profile/louisrotellini",
-  // linkedinUrl: "https://www.linkedin.com/in/louisrotellini/",
-  // githubUrl: "https://github.com/tonhandle",
+  linkedinUrl: "https://www.linkedin.com/in/louis-rotellini/",
+  githubUrl: "https://github.com/L-Rotellini",
 } satisfies Profile;

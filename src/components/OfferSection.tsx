@@ -2,14 +2,7 @@
 
 import OfferCard from "@/components/OfferCard";
 import { offers } from "@/data/offers";
-import { profile } from "@/data/profile";
-
-function mailtoHref(subject: string) {
-  const b = encodeURIComponent(
-    "Bonjour Louis,\n\nJe suis intéressé par cette offre. Voici quelques infos :\n- Contexte :\n- Délai souhaité :\n- Budget indicatif :\n\nMerci !"
-  );
-  return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${b}`;
-}
+import { mailtoHref } from "@/lib/mailto";
 
 export default function OfferSection() {
   // 1) Sépare les offres
@@ -37,7 +30,7 @@ export default function OfferSection() {
             deliverables={o.deliverables}
             leadTime={o.leadTime}
             startingAt={o.startingAt}
-            ctaSubject={`${o.title} — Demande de mission`}
+            ctaHref={mailtoHref(`${o.title} — Demande de mission`)}
           />
         ))}
       </div>
@@ -54,7 +47,7 @@ export default function OfferSection() {
             deliverables={subscriptionOffer.deliverables}
             leadTime={subscriptionOffer.leadTime}
             startingAt={subscriptionOffer.startingAt}
-            ctaSubject={`${subscriptionOffer.title} — Demande d’information`}
+            ctaHref={mailtoHref(`${subscriptionOffer.title} — Demande d'information`)}
           />
         </div>
       )}

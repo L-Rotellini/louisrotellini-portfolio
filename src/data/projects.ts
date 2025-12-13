@@ -10,13 +10,13 @@ export type Project = {
 const projects: Project[] = [
   {
     brand: "IÉSEG",
-    role: "Webmaster (CDI)",
-    period: "09/2024 – 09/2025",
+    role: "Développpeur front-end",
+    period: "09/2024 – aujourd’hui",
     details: [
       "Webmaster, design, maintenance, développement",
-      "HTML, CSS, JavaScript, PHP, Débogage, JSON, Emailing, WordPress"
+      "HTML, CSS, JavaScript, PHP, Débogage, JSON, Emailing, WordPress, React"
     ],
-    stack: ["HTML5", "CSS", "JavaScript", "WordPress / PHP", "Webdesign"],
+    stack: ["HTML5", "CSS", "JavaScript", "WordPress / PHP", "Webdesign", "React"],
   },
   {
     brand: "Decathlon",

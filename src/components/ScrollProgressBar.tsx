@@ -34,7 +34,7 @@ export default function ScrollProgressBar({
     measure();
     window.addEventListener("resize", measure);
     const ro = header ? new ResizeObserver(measure) : null;
-    header && ro?.observe(header);
+    if (header && ro) ro.observe(header);
     return () => {
       window.removeEventListener("resize", measure);
       ro?.disconnect();

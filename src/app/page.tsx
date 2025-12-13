@@ -2,7 +2,6 @@ import SkillGrid from "@/components/SkillGrid";
 import OfferSection from "@/components/OfferSection";
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
-import FadeIn from "@/components/FadeIn";
 import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
@@ -41,24 +40,6 @@ export default function Home() {
       <ContactSection />
     </AnimatedSection>
     </div>
-  );
-}
-
-function SkillBlock({ title, items }: { title: string; items: string[] }) {
-  return (
-    <FadeIn>
-      <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
-      <ul className="mt-3 flex flex-wrap gap-2">
-        {items.map((it) => (
-          <li
-            key={it}
-            className="text-xs text-[--muted] border border-[--surface-border] rounded-full px-2 py-1"
-          >
-            {it}
-          </li>
-        ))}
-      </ul>
-    </FadeIn>
   );
 }
 

@@ -1,16 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { Timer, Euro, CheckCircle2, Shield, Wrench, Code2, LayoutTemplate } from "lucide-react";
-import { profile } from "@/data/profile";
-
-function mailtoHref(subject: string) {
-  const b = encodeURIComponent(
-    "Bonjour Louis,\n\nJe suis intéressé par cette offre. Voici quelques infos :\n- Contexte :\n- Délai souhaité :\n- Budget indicatif :\n\nMerci !"
-  );
-  return `mailto:${profile.email}?subject=${encodeURIComponent(subject)}&body=${b}`;
-}
-
+import { Timer, Euro, CheckCircle2, Shield} from "lucide-react";
 
 type Props = {
   id: string;
@@ -20,24 +10,11 @@ type Props = {
   deliverables?: string[];
   leadTime?: string;
   startingAt?: string;
-  ctaSubject: string;
+  ctaHref: string;
 };
 
-function iconFor(id: string) {
-  switch (id) {
-    case "creation-site":
-      return <LayoutTemplate className="size-5" aria-hidden="true" />;
-    case "integration-web":
-      return <Code2 className="size-5" aria-hidden="true" />;
-    case "maintenance-wordpress":
-      return <Wrench className="size-5" aria-hidden="true" />;
-    default:
-      return <CheckCircle2 className="size-5" aria-hidden="true" />;
-  }
-}
-
 export default function OfferCard({
-  id, title, subtitle, bullets, deliverables, leadTime, startingAt, ctaSubject,
+  id, title, subtitle, bullets, deliverables, leadTime, startingAt, ctaHref,
 }: Props) {
   return (
     <article
@@ -107,7 +84,7 @@ export default function OfferCard({
       {/* CTAs */}
       <div className="pt-5 sm:grid-cols-2 gap-2">
         <a
-          href={mailtoHref(`${title} — Demande de mission`)}
+          href={ctaHref}
           className="inline-block w-full rounded-md border border-[--surface-border] bg-[--foreground] text-[--background] px-4 py-2 text-center text-sm font-medium hover:opacity-90 transition-colors hover-invert"
         >
           Discuter de cette offre

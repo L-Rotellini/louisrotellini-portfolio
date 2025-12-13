@@ -29,8 +29,6 @@ export default function ContactSection() {
     } catch {}
   };
 
-  const mapsHref = `https://www.google.com/maps/search/${encodeURIComponent(profile.location)}`;
-
   return (
     <section id="contact" aria-labelledby="contact-title" className="space-y-8">
       <FadeIn>

@@ -11,14 +11,13 @@
 - [React](https://react.dev) 19 – architecture moderne  
 - [Tailwind CSS](https://tailwindcss.com) 4 – design system léger  
 - [Framer Motion](https://www.framer.com/motion/) – animations fluides  
-- [Embla Carousel](https://www.embla-carousel.com/) – carrousel des projets  
 - [Next Themes](https://github.com/pacocoursey/next-themes) – mode clair/sombre  
 
 ---
 
 ## 🖥️ Aperçu
 
-**Démo en ligne :** [https://ton-domaine.vercel.app](https://ton-domaine.vercel.app)
+**Démo en ligne :** [https://www.louisrotellini.fr](https://www.louisrotellini.fr)
 
 ---
 
@@ -78,7 +77,7 @@ Ce portfolio est à la fois un projet vitrine et un laboratoire pour expériment
 
 📫 Contact : louis.rotellini@gmail.com
 
-🌐 Site : https://ton-portfolio.vercel.app
+🌐 Site : https://www.louisrotellini.fr
 
 💼 LinkedIn : https://www.linkedin.com/in/louis-rotellini/
 

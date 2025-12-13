@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion, type Variants } from "framer-motion";
 import projects from "@/data/projects";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const PER_PAGE = 3;
 const AUTOPLAY_MS = 7000;
@@ -18,20 +17,20 @@ const slideVariants: Variants = {
 export default function ProjectSection() {
   const prefersReducedMotion = useReducedMotion();
 
-  const totalPages = useMemo(() => Math.ceil(projects.length / PER_PAGE), [projects.length]);
+  const totalPages = useMemo(() => Math.ceil(projects.length / PER_PAGE), []);
   const [page, setPage] = useState(0);
   const [dir, setDir] = useState<1 | -1>(1);
 
-  const [containerHeight, setContainerHeight] = useState<number | undefined>(undefined);
+  const [, setContainerHeight] = useState<number | undefined>(undefined);
   const pageRef = useRef<HTMLDivElement | null>(null);
 
   const timerRef = useRef<number | null>(null);
   const pausedRef = useRef(false);
 
-  const goTo = (next: number, direction: 1 | -1) => {
+  const goTo = useCallback((next: number, direction: 1 | -1) => {
     setDir(direction);
-    setPage((next + totalPages) % totalPages);
-  };
+    setPage((p) => (next + totalPages) % totalPages);
+  }, [totalPages]);
 
   useEffect(() => {
     if (prefersReducedMotion) return;
@@ -63,7 +62,7 @@ export default function ProjectSection() {
       window.removeEventListener("blur", onBlur);
       window.removeEventListener("focus", onFocus);
     };
-  }, [page, totalPages, prefersReducedMotion]);
+  }, [page, totalPages, prefersReducedMotion, goTo]);
 
   useEffect(() => {
     const measure = () => {
@@ -131,7 +130,6 @@ export default function ProjectSection() {
         aria-roledescription="carrousel"
         aria-label="Projets"
         aria-live="off"
-        // style={{ minHeight: containerHeight }}
       >
         <AnimatePresence mode="wait" custom={dir}>
           <motion.div

@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fontsource/space-grotesk": "^5.2.10",
     "@vercel/analytics": "^1.5.0",
-    "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.23.22",
     "geist": "^1.5.1",
     "lucide-react": "^0.544.0",
