@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { profile } from "@/data/profile";
 import {
   Mail,
@@ -66,28 +67,54 @@ export default function HeroSection() {
         </span>
       </div>
 
-      {/* Titre */}
-      <h1
-        id="hero-title"
-        className="tracking-tight leading-[1.08] text-[clamp(2rem,6vw,4.2rem)] font-bold text-balance"
-      >
-        <span className="block">
-          Louis <span className="font-bold">ROTELLINI</span>
-        </span>
-        <span className="block font-normal text-[clamp(1.5rem,5vw,2.8rem)]">
-          Développeur front-end & intégrateur freelance
-        </span>
-      </h1>
+      {/* Contenu principal : Texte + Photo */}
+      <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-8">
+        {/* Texte */}
+        <div className="space-y-6">
+          <h1
+            id="hero-title"
+            className="tracking-tight leading-[1.08] text-[clamp(2rem,6vw,4.2rem)] font-bold text-balance"
+          >
+            <span className="block">
+              Louis <span className="font-bold">ROTELLINI</span>
+            </span>
+            <span className="block font-normal text-[clamp(1.5rem,5vw,2.8rem)]">
+              Développeur front-end & intégrateur freelance
+            </span>
+          </h1>
 
-      {/* Sous-texte aligné MALT : promesse + mots-clés */}
-      <p className="max-w-prose text-[--muted] text-[15px]">
-        J’aide les entreprises et agences à transformer leurs{" "}
-        <strong>maquettes</strong> en{" "}
-        <strong>sites rapides, accessibles</strong> et fidèles au design initial.
-        Spécialiste <strong>React / Next.js</strong> et{" "}
-        <strong>WordPress</strong>. Code propre, maintenable,{" "}
-        <strong>optimisé SEO & performance</strong>.
-      </p>
+          <p className="max-w-prose text-[--muted] text-[15px]">
+            J'aide les entreprises et agences à transformer leurs{" "}
+            <strong>maquettes</strong> en{" "}
+            <strong>sites rapides, accessibles</strong> et fidèles au design initial.
+            Spécialiste <strong>React / Next.js</strong> et{" "}
+            <strong>WordPress</strong>. Code propre, maintenable,{" "}
+            <strong>optimisé SEO & performance</strong>.
+          </p>
+        </div>
+
+        {/* Photo */}
+        <div className="flex-shrink-0 relative">
+          {/* Fond dégradé derrière */}
+          <div className="absolute -inset-6 bg-gradient-to-br from-white/10 via-transparent to-white/5 rounded-full blur-2xl" />
+          
+          {/* Photo */}
+          <div 
+            className="relative w-56 h-56 md:w-80 md:h-80 overflow-hidden border-2 border-[--surface-border] shadow-[0_0_60px_rgba(255,255,255,0.1)]"
+            style={{
+              borderRadius: "50% 50% 45% 55% / 55% 45% 50% 50%",
+            }}
+          >
+            <Image
+              src="/louis-rotellini.jpg"
+              alt="Louis Rotellini"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </div>
+      </div>
 
       {/* CTA principaux */}
       <div className="flex flex-wrap items-center gap-3">

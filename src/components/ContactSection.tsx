@@ -30,7 +30,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" aria-labelledby="contact-title" className="space-y-8">
+    <div className="space-y-8">
       <FadeIn>
         <h2 id="contact-title">Contact</h2>
       </FadeIn>
@@ -134,6 +134,6 @@ export default function ContactSection() {
           </Link>
         </div>
       </FadeIn>
-    </section>
+    </div>
   );
 }

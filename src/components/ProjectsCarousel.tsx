@@ -112,15 +112,14 @@ export default function ProjectSection() {
   }, [page, totalPages]);
 
   return (
-    <div
-      className="space-y-8 overflow-hidden"
+  <div
+    className="space-y-8"
       onMouseEnter={() => (pausedRef.current = true)}
       onMouseLeave={() => (pausedRef.current = false)}
       aria-labelledby="projets-title"
     >
       <h2 id="projets-title">Projets</h2>
       <div ref={srRef} aria-live="polite" className="sr-only" />
-
       <div
         className="relative select-none cursor-grab active:cursor-grabbing touch-pan-y"
         onPointerDown={onDown}
