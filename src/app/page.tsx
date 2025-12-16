@@ -4,6 +4,7 @@ import ProjectsCarousel from "@/components/ProjectsCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
+import ClientsSection from "@/components/ClientsSection";
 
 export default function Home() {
   return (
@@ -11,6 +12,11 @@ export default function Home() {
       {/* HERO */}
       <AnimatedSection immediate>
         <HeroSection />
+      </AnimatedSection>
+      
+      {/* CLIENTS */}
+      <AnimatedSection>
+        <ClientsSection />
       </AnimatedSection>
 
       {/* OFFRE */}
