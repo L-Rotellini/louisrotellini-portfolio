@@ -4,7 +4,6 @@ import ProjectsCarousel from "@/components/ProjectsCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
-import AboutSection from "@/components/AboutSection";
 
 export default function Home() {
   return (
@@ -13,11 +12,6 @@ export default function Home() {
       <AnimatedSection immediate>
         <HeroSection />
       </AnimatedSection>
-
-    {/* ABOUT */}
-    {/* <AnimatedSection id="a-propos">
-      <AboutSection />
-    </AnimatedSection> */}
 
       {/* OFFRE */}
       <AnimatedSection id="offre">
