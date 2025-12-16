@@ -84,7 +84,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="max-w-prose text-[--muted] text-[15px]">
-            J'aide les entreprises et agences à transformer leurs{" "}
+            J&apos;aide les entreprises et agences à transformer leurs{" "}
             <strong>maquettes</strong> en{" "}
             <strong>sites rapides, accessibles</strong> et fidèles au design initial.
             Spécialiste <strong>React / Next.js</strong> et{" "}
