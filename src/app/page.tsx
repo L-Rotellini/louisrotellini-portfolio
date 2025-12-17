@@ -1,4 +1,3 @@
-
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";

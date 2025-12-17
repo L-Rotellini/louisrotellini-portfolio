@@ -9,7 +9,6 @@ import { useActiveSection } from "@/hooks/useActiveSection";
 
 const NAV_ITEMS = [
   { id: "projets", label: "Projets" },
-  { id: "faq", label: "FAQ" },
   { id: "contact", label: "Contact" },
 ];
 
