@@ -8,9 +8,8 @@ import { Moon, Sun } from "lucide-react";
 import { useActiveSection } from "@/hooks/useActiveSection";
 
 const NAV_ITEMS = [
-  { id: "offre", label: "Offre" },
   { id: "projets", label: "Projets" },
-  { id: "skills", label: "Compétences" },
+  { id: "faq", label: "FAQ" },
   { id: "contact", label: "Contact" },
 ];
 

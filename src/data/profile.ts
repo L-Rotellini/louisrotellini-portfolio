@@ -15,11 +15,11 @@ export interface Profile {
 
 export const profile = {
   name: "Louis Rotellini",
-  title: "Webmaster / Développeur web",
+  title: "Développeur front-end freelance",
   location: "Lille / Paris",
   email: "louis.rotellini@gmail.com",
   phone: "",
-  availability: "Disponible pour missions freelance (soir/week-end)",
+  availability: "Disponible pour missions freelance",
   maltUrl: "https://www.malt.fr/profile/louisrotellini",
   linkedinUrl: "https://www.linkedin.com/in/louis-rotellini/",
   githubUrl: "https://github.com/L-Rotellini",
