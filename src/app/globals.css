@@ -179,12 +179,12 @@ html.dark .hover-invert:hover {
   animation: marquee 30s linear infinite;
 }
 
+/* Logos clients - container */
 
-
-/* Logos clients - invert uniquement en dark mode */
 .logo-invert {
   filter: grayscale(100%);
   opacity: 0.7;
+  transition: all 0.3s ease;
 }
 
 html.dark .logo-invert {
@@ -194,4 +194,27 @@ html.dark .logo-invert {
 .logo-invert:hover {
   filter: none;
   opacity: 1;
+}
+
+html.dark .logo-invert:hover {
+  filter: none;
+  opacity: 1;
+}
+
+.logo-card {
+  background-color: rgb(229 231 235 / 0.8); /* gray-200/80 */
+  border-color: rgb(209 213 219); /* gray-300 */
+}
+
+html.dark .logo-card {
+  background-color: rgb(255 255 255 / 0.1); /* white/10 */
+  border-color: rgb(255 255 255 / 0.15); /* white/15 */
+}
+
+.logo-card:hover {
+  background-color: rgb(209 213 219 / 0.8); /* gray-300/80 */
+}
+
+html.dark .logo-card:hover {
+  background-color: rgb(255 255 255 / 0.15); /* white/15 */
 }

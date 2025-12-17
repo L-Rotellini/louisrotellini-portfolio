@@ -23,13 +23,13 @@ export default function ClientsSection() {
         {duplicatedClients.map((client, i) => (
           <div
             key={client.name}
-            className="relative flex items-center justify-center h-16 md:h-20 px-4 rounded-xl bg-[--foreground]/5 border border-[--surface-border] hover:bg-[--foreground]/10 transition-colors"
+            className="logo-card relative flex items-center justify-center h-16 md:h-20 px-4 rounded-xl border transition-colors"
           >
             <Image
               src={client.logo}
               alt={client.name}
               fill
-             className="object-contain p-4 logo-invert transition-all duration-300"
+             className="object-contain p-4 logo-invert"
 
             />
           </div>
