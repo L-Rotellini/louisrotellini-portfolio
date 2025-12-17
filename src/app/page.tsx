@@ -1,5 +1,4 @@
-import SkillGrid from "@/components/SkillGrid";
-import OfferSection from "@/components/OfferSection";
+
 import ProjectsCarousel from "@/components/ProjectsCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";
@@ -19,21 +18,10 @@ export default function Home() {
         <ClientsSection />
       </AnimatedSection>
 
-      {/* OFFRE */}
-      <AnimatedSection id="offre">
-         <OfferSection />
-      </AnimatedSection>
-
       {/* PROJETS */}
     <AnimatedSection id="projets">
       <ProjectsCarousel />
     </AnimatedSection>
-
-      {/* SKILLS */}
-    <AnimatedSection id="skills">
-      <SkillGrid />
-    </AnimatedSection>
-
 
       {/* CONTACT */}
       <AnimatedSection id="contact">

@@ -10,7 +10,7 @@ export type Project = {
 const projects: Project[] = [
   {
     brand: "IÉSEG",
-    role: "Développpeur front-end",
+    role: "Développeur front-end",
     period: "09/2024 – aujourd’hui",
     details: [
       "Webmaster, design, maintenance, développement",
