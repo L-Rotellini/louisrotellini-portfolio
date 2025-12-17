@@ -1,136 +1,70 @@
 export type Project = {
-  brand: string;
+  id: string;
+  client: string;
+  title: string;
+  context: string;
   role: string;
-  period?: string;
-  details: string[];
-  stack?: string[];
-  link?: string;
+  stack: string[];
+  url?: string;
+  thumbnail: string;
+  images: string[];
 };
 
 const projects: Project[] = [
   {
-    brand: "IÉSEG",
-    role: "Développeur front-end",
-    period: "09/2024 – aujourd’hui",
-    details: [
-      "Webmaster, design, maintenance, développement",
-      "HTML, CSS, JavaScript, PHP, Débogage, JSON, Emailing, WordPress, React"
-    ],
-    stack: ["HTML5", "CSS", "JavaScript", "WordPress / PHP", "Webdesign", "React"],
-  },
-  {
-    brand: "Decathlon",
-    role: "Responsable des landing pages (freelance)",
-    period: "04/2023 – aujourd’hui",
-    details: [
-      "Réception & QA des livrables (HTML + assets) de prestataires",
-      "Contrôle performance & accessibilité (directives internes)",
-      "Publication / dépublication + correctifs rapides",
-      "Création ponctuelle de nouvelles LP si besoin",
-    ],
-    stack: ["HTML5", "CSS", "JavaScript", "QA", "Accessibilité"],
-  },
-  {
-    brand: "Damart",
-    role: "Intégrateur web (freelance)",
-    period: "12/2021 – 03/2024",
-    details: [
-      "Remplacement ponctuel de l’intégrateur (congés/arrêts)",
-      "LP, guides d’achat, opérations commerciales",
-      "Emailing HTML (tables), Liferay → puis Magento / Dartan­gan",
-      "Découpe/optimisation médias, intégrations via builder",
-    ],
-    stack: ["HTML5", "CSS", "JavaScript", "Photoshop", "Liferay", "Magento", "Emailing"],
-  },
-  {
-    brand: "Disneyland Paris",
-    role: "Content integrator (app mobile – freelance)",
-    period: "12/2021 – 01/2024",
-    details: [
-      "Intégration contenu multi-langues dans Tridion (app parcs)",
-      "Workflow anglais (équipes US/Amérique du Sud)",
-      "Clés schémas fournies par front designers (Confluence → Tridion)",
-      "Pré-prod puis mise en prod avec QA",
-    ],
-    stack: ["JSON", "HTML", "Figma", "Tridion", "Teamwork"],
-  },
-  {
-    brand: "Crédit Mutuel",
-    role: "Intégrateur web (freelance)",
-    period: "09/2021 – 12/2021",
-    details: [
-      "Pages services & actualités : intégration et maintenance",
-      "Structure, accessibilité, cohérence UI",
-      "Coordination design / contenu / dev",
-    ],
-    stack: ["HTML", "CSS", "Photoshop", "Emailing", "DotLiquid"],
-  },
-  {
-    brand: "Promod",
-    role: "Intégrateur web (freelance)",
-    period: "09/2020 – 12/2021",
-    details: [
-      "Soutien ops commerciales (bannières, habillages)",
-      "Injection JS contrôlée sur pages produit",
-      "Respect strict de la charte visuelle",
-    ],
+    id: "decathlon-lp",
+    client: "Decathlon",
+    title: "LP App Mobile",
+    context: "Intégration d'une landing page responsive pour promouvoir l'application Decathlon Shopping.",
+    role: "Intégration complète de la maquette. Responsive mobile-first.",
     stack: ["HTML", "CSS", "JavaScript"],
+    url: "https://www.decathlon.fr/landing/application-decathlon-decathlon/_/R-a-appli-decathlon",
+    thumbnail: "/projects/decathlon-lp-desktop.jpg",
+    images: ["/projects/decathlon-lp-desktop.jpg", "/projects/decathlon-lp-mobile.jpg"]
   },
   {
-    brand: "La Foir’Fouille",
-    role: "Intégrateur web (freelance)",
-    period: "02/2020 – 12/2021",
-    details: [
-      "Refonte complète du site (collab design)",
-      "Site interne WordPress pour la centrale d’achat",
-      "LP récurrentes pour opérations marketing",
-    ],
-    stack: ["HTML", "CSS", "JavaScript", "WordPress", "Adobe XD"],
+    id: "decathlon-data",
+    client: "Decathlon",
+    title: "Pages Données Personnelles",
+    context: "Refonte visuelle des pages de politique de confidentialité pour améliorer la lisibilité.",
+    role: "Refonte UI : accordions interactifs, iconographie, mise en page en grille.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    url: "https://www.decathlon.fr/landing/donnees-personnelles/_/R-a-donnees-personnelles",
+    thumbnail: "/projects/decathlon-data-after.jpg",
+    images: ["/projects/decathlon-data-before.jpg", "/projects/decathlon-data-after.jpg"]
   },
   {
-    brand: "Tape à l’œil",
-    role: "Webmaster / Intégrateur (freelance)",
-    period: "10/2019 – 11/2019",
-    details: [
-      "Renfort pendant transition d’équipe",
-      "Formation & passation au/à la remplaçant(e)",
-      "Ops commerciales & adaptations front",
-    ],
-    stack: ["HTML", "CSS", "JavaScript", "Photoshop", "Hybris"],
+    id: "ieseg-fiches",
+    client: "IÉSEG",
+    title: "Fiches Métiers",
+    context: "Création d'un template WordPress pour afficher des fiches métiers dynamiques à partir de données JSON.",
+    role: "Développement du template, intégration WordPress, structure responsive.",
+    stack: ["WordPress", "PHP", "JSON", "HTML", "CSS"],
+    url: "https://ieseg.fr/domaines-expertise/marketing-communication/analyste-cybersecurite/",
+    thumbnail: "/projects/ieseg-fiches-1.jpg",
+    images: ["/projects/ieseg-fiches-1.jpg", "/projects/ieseg-fiches-2.jpg"]
   },
   {
-    brand: "Blancheporte",
-    role: "Intégrateur e-mail (freelance)",
-    period: "04/2019 – 09/2019",
-    details: [
-      "Intégration emails HTML (tables, compat clients)",
-      "Tests Email on Acid & QA multi-clients",
-      "Ops AB Tasty (tests A/B & perso)",
-    ],
-    stack: ["HTML", "CSS", "Photoshop", "Emailing", "AB Tasty"],
+    id: "ieseg-datalayers",
+    client: "IÉSEG",
+    title: "Data Layers & Tracking",
+    context: "Mise en place d'un système de tracking personnalisé pour suivre les interactions utilisateurs.",
+    role: "Développement JS : architecture modulaire, mapping programmes, hash SHA-256, intégration GTM. Déployé sur 3 environnements (landing pages, brochures, prod).",
+    stack: ["JavaScript", "JSON", "GTM", "WordPress"],
+    thumbnail: "/projects/ieseg-datalayers-console.jpg",
+    images: ["/projects/ieseg-datalayers-console.jpg"]
   },
   {
-    brand: "Cometik / Novaseo",
-    role: "Intégrateur web (agence)",
-    period: "09/2017 – 08/2018",
-    details: [
-      "Refonte CMS de l’agence (front du builder)",
-      "Montée en compétence JS (Angular), jQuery",
-      "Collab étroite avec développeur back",
-    ],
-    stack: ["HTML", "CSS", "JavaScript", "Angular", "jQuery", "Git"],
-  },
-  {
-    brand: "Sites vitrines & e-commerce (TPE)",
-    role: "Créateur de sites (freelance)",
-    period: "09/2017 – 12/2025",
-    details: [
-      "Gestion de A à Z : cadrage, design, dev, SEO, maintenance",
-      "Thèmes vierges & optimisation sur mesure",
-      "Suivi client et évolutions continues",
-    ],
-    stack: ["HTML", "CSS", "WordPress", "jQuery", "JavaScript", "SEO"],
-  },
+    id: "decathlon-rappels",
+    client: "Decathlon",
+    title: "Page Rappels Produits",
+    context: "Refonte complète de la page de rappels produits avec système de recherche, filtres par statut et historique par année.",
+    role: "Développement front-end : recherche dynamique, filtres, accordéons par année, cartes produits responsive.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    url: "https://www.decathlon.fr/landing/rappels-produits-decathlon/_/R-a-rappels-produits",
+    thumbnail: "/projects/decathlon-rappels-after.jpg",
+    images: ["/projects/decathlon-rappels-before.jpg", "/projects/decathlon-rappels-after.jpg"]
+  }
 ];
 
 export default projects;

@@ -20,16 +20,16 @@ export default function ClientsSection() {
     <section className="space-y-8">
       {/* Première ligne - 5 logos */}
       <div className="grid grid-cols-3 md:grid-cols-5 gap-4 md:gap-6">
-        {duplicatedClients.map((client, i) => (
+        {duplicatedClients.map((client) => (
           <div
             key={client.name}
-            className="relative flex items-center justify-center h-16 md:h-20 px-4 rounded-xl bg-[--foreground]/5 border border-[--surface-border] hover:bg-[--foreground]/10 transition-colors"
+            className="logo-card relative flex items-center justify-center h-16 md:h-20 px-4 rounded-xl border transition-colors"
           >
             <Image
               src={client.logo}
               alt={client.name}
               fill
-             className="object-contain p-4 logo-invert transition-all duration-300"
+             className="object-contain p-4 logo-invert"
 
             />
           </div>
