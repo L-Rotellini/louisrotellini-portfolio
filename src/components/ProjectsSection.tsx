@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import projects from "@/data/projects";
 import { ArrowUpRight } from "lucide-react";
 
@@ -22,9 +21,11 @@ export default function ProjectsSection() {
         {/* Liste */}
         <div className="divide-y divide-[--surface-border]">
           {projects.map((project) => (
-            <Link
-              key={project.id}
-              href={`/projets/${project.id}`}
+            
+            <a key={project.id}
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group flex items-center gap-4 py-6 cursor-pointer"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
@@ -65,7 +66,7 @@ export default function ProjectsSection() {
 
               {/* Arrow */}
               <ArrowUpRight className="size-5 text-[--muted] flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Link>
+            </a>
           ))}
         </div>
 
