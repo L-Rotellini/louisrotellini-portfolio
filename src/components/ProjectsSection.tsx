@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import projects from "@/data/projects";
 import { ArrowUpRight } from "lucide-react";
 
@@ -21,26 +22,36 @@ export default function ProjectsSection() {
         {/* Liste */}
         <div className="divide-y divide-[--surface-border]">
           {projects.map((project) => (
-            
-             <a key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center justify-between py-6 cursor-pointer"
+            <Link
+              key={project.id}
+              href={`/projets/${project.id}`}
+              className="group flex items-center gap-4 py-6 cursor-pointer"
               onMouseEnter={() => setHoveredProject(project.id)}
               onMouseLeave={() => setHoveredProject(null)}
             >
-              <div className="space-y-1">
-                <p className="text-sm text-[--muted] uppercase tracking-wider">
+              {/* Thumbnail mobile */}
+              <div className="relative w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-[--surface-border] md:hidden">
+                <Image
+                  src={project.thumbnail}
+                  alt={project.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-[--muted] uppercase tracking-wider">
                   {project.client}
                 </p>
-                <h3 className="text-xl md:text-2xl font-semibold group-hover:text-[--muted] transition-colors">
+                <h3 className="text-lg md:text-2xl font-semibold group-hover:text-[--muted] transition-colors truncate">
                   {project.title}
                 </h3>
               </div>
 
-              <div className="flex items-center gap-4">
-                <div className="hidden md:flex gap-2">
+              {/* Stack - desktop only */}
+              <div className="hidden md:flex items-center gap-4">
+                <div className="flex gap-2">
                   {project.stack.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
@@ -50,16 +61,18 @@ export default function ProjectsSection() {
                     </span>
                   ))}
                 </div>
-                <ArrowUpRight className="size-5 text-[--muted] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </div>
-            </a>
+
+              {/* Arrow */}
+              <ArrowUpRight className="size-5 text-[--muted] flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+            </Link>
           ))}
         </div>
 
-        {/* Image flottante */}
+        {/* Image flottante - desktop only */}
         {hoveredProject && (
           <div
-            className="fixed pointer-events-none z-50 w-80 aspect-video rounded-xl overflow-hidden border border-[--surface-border] shadow-2xl"
+            className="fixed pointer-events-none z-50 w-80 aspect-video rounded-xl overflow-hidden border border-[--surface-border] shadow-2xl hidden md:block"
             style={{
               left: mousePosition.x + 20,
               top: mousePosition.y - 100,
