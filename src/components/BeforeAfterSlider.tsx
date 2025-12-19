@@ -17,7 +17,7 @@ export default function BeforeAfterSlider({
   const [position, setPosition] = useState(50);
 
   return (
-    <div className="rounded-xl overflow-hidden border border-[--surface-border] bg-[#1a1a1a]">
+    <div className="rounded-xl overflow-hidden bg-[#1a1a1a]">
       {/* Browser bar */}
       <div className="flex items-center gap-2 px-4 py-3 bg-[#2d2d2d] border-b border-[#3d3d3d]">
         <div className="flex gap-1.5">

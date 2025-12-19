@@ -6,11 +6,13 @@ import DeviceMockup from "@/components/DeviceMockup";
 import CodeBlock from "@/components/CodeBlock";
 
 type PageProps = {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 };
 
-export default function ProjectPage({ params }: PageProps) {
-  const project = projects.find((p) => p.id === params.id);
+export default async function ProjectPage({ params }: PageProps) {
+  const { id } = await params;
+
+  const project = projects.find((p) => p.id === id);
   if (!project) return notFound();
 
   // ---- Nouveau modèle media ----

@@ -1,14 +1,18 @@
 "use client";
 
-import { Highlight, themes } from "prism-react-renderer";
+import { Highlight, themes, type Language } from "prism-react-renderer";
+
+type CodeLanguage = Language | "text";
 
 type CodeBlockProps = {
+  title: string;
+  language: CodeLanguage;
   code: string;
-  language: string;
-  title?: string;
 };
 
-export default function CodeBlock({ code, language, title }: CodeBlockProps) {
+export default function CodeBlock({ title, language, code }: CodeBlockProps) {
+  const prismLanguage: Language = language === "text" ? "markup" : language;
+
   return (
     <div className="rounded-xl overflow-hidden bg-[#1e1e1e]">
       {/* Header style IDE */}
@@ -25,7 +29,7 @@ export default function CodeBlock({ code, language, title }: CodeBlockProps) {
       </div>
 
       {/* Code */}
-      <Highlight theme={themes.vsDark} code={code.trim()} language={language as any}>
+      <Highlight theme={themes.vsDark} code={code.trim()} language={prismLanguage}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre
             className={`${className} p-4 overflow-x-auto text-sm leading-relaxed`}
