@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import projects from "@/data/projects";
-
+import Link from "next/link";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import DeviceMockup from "@/components/DeviceMockup";
 import CodeBlock from "@/components/CodeBlock";
@@ -231,19 +231,20 @@ export default function ProjectPage({ params }: PageProps) {
           </p>
 
           <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="/#projets"
-              className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
-            >
-              Retour aux projets
-            </a>
+          <Link
+            href="/#projets"
+            className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
+          >
+            Retour aux projets
+          </Link>
 
-            <a
-              href="/#contact"
-              className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
-            >
-              Me contacter
-            </a>
+          <Link
+            href="/#contact"
+            className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
+          >
+            Me contacter
+          </Link>
+
 
             {project.url && (
               <a
