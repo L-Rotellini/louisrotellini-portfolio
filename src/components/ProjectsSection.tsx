@@ -1,17 +1,22 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import projects from "@/data/projects";
 import { ArrowUpRight } from "lucide-react";
 
 export default function ProjectsSection() {
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
   };
+
+  const hoveredProject = hoveredProjectId
+    ? projects.find((p) => p.id === hoveredProjectId)
+    : null;
 
   return (
     <section id="projets" aria-labelledby="projets-title" className="space-y-8">
@@ -21,19 +26,17 @@ export default function ProjectsSection() {
         {/* Liste */}
         <div className="divide-y divide-[--surface-border]">
           {projects.map((project) => (
-            
-            <a key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              key={project.id}
+              href={`/projets/${project.id}`}
               className="group flex items-center gap-4 py-6 cursor-pointer"
-              onMouseEnter={() => setHoveredProject(project.id)}
-              onMouseLeave={() => setHoveredProject(null)}
+              onMouseEnter={() => setHoveredProjectId(project.id)}
+              onMouseLeave={() => setHoveredProjectId(null)}
             >
               {/* Thumbnail mobile */}
               <div className="relative w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-[--surface-border] md:hidden">
                 <Image
-                  src={project.thumbnail}
+                  src={project.after}
                   alt={project.title}
                   fill
                   className="object-cover"
@@ -45,43 +48,41 @@ export default function ProjectsSection() {
                 <p className="text-xs text-[--muted] uppercase tracking-wider">
                   {project.client}
                 </p>
-                <h3 className="text-lg md:text-2xl font-semibold group-hover:text-[--muted] transition-colors truncate">
+                <h3 className="text-lg md:text-2xl font-semibold truncate group-hover:text-[--muted] transition-colors">
                   {project.title}
                 </h3>
               </div>
 
               {/* Stack - desktop only */}
-              <div className="hidden md:flex items-center gap-4">
-                <div className="flex gap-2">
-                  {project.stack.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs text-[--muted] border border-[--surface-border] px-2 py-1 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
+              <div className="hidden md:flex items-center gap-2">
+                {project.stack.slice(0, 3).map((tech) => (
+                  <span
+                    key={tech}
+                    className="text-xs text-[--muted] border border-[--surface-border] px-2 py-1 rounded-full"
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
 
               {/* Arrow */}
               <ArrowUpRight className="size-5 text-[--muted] flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
+            </Link>
           ))}
         </div>
 
-        {/* Image flottante - desktop only */}
+        {/* Image flottante (desktop only) */}
         {hoveredProject && (
           <div
-            className="fixed pointer-events-none z-50 w-80 aspect-video rounded-xl overflow-hidden border border-[--surface-border] shadow-2xl hidden md:block"
+            className="fixed pointer-events-none z-[9999] w-80 aspect-video rounded-xl overflow-hidden border border-[--surface-border] shadow-2xl hidden md:block"
             style={{
               left: mousePosition.x + 20,
-              top: mousePosition.y - 100,
+              top: mousePosition.y - 120,
             }}
           >
             <Image
-              src={projects.find((p) => p.id === hoveredProject)?.thumbnail || ""}
-              alt=""
+              src={hoveredProject.after}
+              alt={hoveredProject.title}
               fill
               className="object-cover"
             />
