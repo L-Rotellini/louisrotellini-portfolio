@@ -4,10 +4,61 @@ import Link from "next/link";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import DeviceMockup from "@/components/DeviceMockup";
 import CodeBlock from "@/components/CodeBlock";
+import type { Metadata } from "next";
 
-type PageProps = {
-  params: Promise<{ id: string }>;
-};
+type Params = Promise<{ id: string }>;
+
+type PageProps = { params: Params };
+type MetadataProps = { params: Params };
+
+
+export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
+  const { id } = await params;
+
+  const project = projects.find((p) => p.id === id);
+
+  if (!project) {
+    return {
+      title: "Projet introuvable",
+      description: "Ce projet n’existe pas ou a été supprimé.",
+      robots: { index: false, follow: false },
+    };
+  }
+
+  const baseUrl = "https://louisrotellini.fr";
+  const url = `${baseUrl}/projets/${project.id}`;
+
+  const description =
+    project.tagline ??
+    project.context ??
+    `Étude de cas du projet ${project.title}.`;
+
+  const ogImage = project.after;
+
+  const ogUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
+
+  return {
+    title: `${project.title} | Louis Rotellini`,
+    description,
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${project.title} | Louis Rotellini`,
+      description,
+      url,
+      siteName: "Louis Rotellini",
+      type: "article",
+      images: [{ url: ogUrl }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | Louis Rotellini`,
+      description,
+      images: [ogUrl],
+    },
+  };
+}
+
+
 
 export default async function ProjectPage({ params }: PageProps) {
   const { id } = await params;
@@ -28,9 +79,9 @@ export default async function ProjectPage({ params }: PageProps) {
   const mainSnippet = project.codeSnippets?.[0] ?? null;
 
   return (
-    <main className="pt-24 pb-20 overflow-x-hidden">
+    <article className="pt-32 pb-20 overflow-x-hidden">
       {/* ================= HERO ================= */}
-      <section className="container mx-auto px-6 pb-10 overflow-x-hidden">
+      <section className="mx-auto  pb-10 overflow-x-hidden">
         <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-8 min-w-0">
           <div className="col-span-12 md:col-span-8 min-w-0">
             <p className="text-sm mb-2 text-muted-foreground">
@@ -41,7 +92,7 @@ export default async function ProjectPage({ params }: PageProps) {
                   <a
                     href={project.url}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
                     className="underline hover:text-foreground"
                   >
                     Voir en ligne
@@ -102,7 +153,7 @@ export default async function ProjectPage({ params }: PageProps) {
 
       {/* ================= MEDIA PRINCIPALE ================= */}
       {hasBeforeAfter ? (
-        <section className="container mx-auto px-6 pb-14 overflow-x-hidden">
+        <section className="mx-auto  pb-14 overflow-x-hidden">
           <h2 className="text-2xl font-semibold mb-4">Avant / Après</h2>
 
           {/* Desktop : slider */}
@@ -120,7 +171,7 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
         </section>
       ) : (
-        <section className="container mx-auto px-6 pb-14 overflow-x-hidden">
+        <section className="mx-auto  pb-14 overflow-x-hidden">
           <h2 className="text-2xl font-semibold mb-4">Aperçu</h2>
           <div className="min-w-0 max-w-full overflow-hidden">
             <DeviceMockup type="desktop" src={after} alt={project.title} />
@@ -129,7 +180,7 @@ export default async function ProjectPage({ params }: PageProps) {
       )}
 
       {/* ================= CONCEPTION & RÉALISATION ================= */}
-      <section className="container mx-auto px-6 pt-20 pb-14 overflow-x-hidden">
+      <section className="mx-auto  pt-20 pb-14 overflow-x-hidden">
         <div className="mb-8 flex items-end justify-between gap-6">
           <div>
             <h2 className="text-2xl md:text-3xl font-semibold">
@@ -225,7 +276,7 @@ export default async function ProjectPage({ params }: PageProps) {
       </section>
 
       {/* ================= NAV FIN (style contact) ================= */}
-      <section className="container mx-auto px-6 pt-12 overflow-x-hidden">
+      <section className="mx-auto  pt-12 overflow-x-hidden">
         <div className="space-y-6 text-center">
           <h2 className="text-2xl md:text-3xl font-semibold">Suite du parcours</h2>
           <p className="text-sm text-muted-foreground">
@@ -252,7 +303,7 @@ export default async function ProjectPage({ params }: PageProps) {
               <a
                 href={project.url}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
               >
                 Voir en ligne
@@ -261,6 +312,6 @@ export default async function ProjectPage({ params }: PageProps) {
           </div>
         </div>
       </section>
-    </main>
+    </article>
   );
 }
