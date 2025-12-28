@@ -222,13 +222,19 @@ export default async function ProjectPage({ params }: PageProps) {
                   {problems.length} point{problems.length > 1 ? "s" : ""}
                 </span>
               </div>
-              <ul className="mt-5 space-y-2 text-sm text-muted-foreground min-w-0">
+              <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
                 {problems.map((p, i) => (
-                  <li key={i} className="min-w-0 break-words">
-                    – {p}
+                  <li key={i} className="flex gap-3">
+                    <span className="font-medium text-foreground/60">
+                      {i + 1}.
+                    </span>
+                    <span className="min-w-0 break-words">
+                      {p}
+                    </span>
                   </li>
                 ))}
-              </ul>
+              </ol>
+
             </div>
 
             {/* Actions */}
@@ -239,13 +245,18 @@ export default async function ProjectPage({ params }: PageProps) {
                   {actions.length} livrable{actions.length > 1 ? "s" : ""}
                 </span>
               </div>
-              <ul className="mt-5 space-y-2 text-sm text-muted-foreground min-w-0">
+              <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
                 {actions.map((a, i) => (
-                  <li key={i} className="min-w-0 break-words">
-                    – {a}
+                  <li key={i} className="flex gap-3">
+                    <span className="font-medium text-foreground/60">
+                      {i + 1}.
+                    </span>
+                    <span className="min-w-0 break-words">
+                      {a}
+                    </span>
                   </li>
                 ))}
-              </ul>
+              </ol>
             </div>
 
             {/* Code */}
