@@ -22,6 +22,7 @@ export default function DeviceMockup({
               alt={alt}
               fill
               className="object-cover object-top"
+              sizes="(min-width: 1024px) 900px, 100vw"
             />
           </div>
         </div>

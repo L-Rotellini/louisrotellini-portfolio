@@ -21,206 +21,6 @@ export type Project = {
 
 const projects: Project[] = [
   {
-    id: "decathlon-app",
-    client: "Decathlon",
-    title: "Landing Page — Decathlon App",
-    context:
-      "Création d’une landing page marketing pour promouvoir l’app Decathlon : structure claire, sections éditoriales, et preuve sociale (avis) via slider.",
-    stack: ["HTML", "CSS", "JavaScript", "Slick.js"],
-    year: "2023",
-    url: "https://www.decathlon.fr/landing/application-decathlon-decathlon/_/R-a-appli-decathlon",
-
-    after: "/projects/decathlon-app-desktop.jpg",
-    mobile: "/projects/decathlon-app-mobile.jpg",
-
-    challenges: [
-      "Présenter une proposition de valeur claire (app + bénéfices) en quelques sections",
-      "Maintenir une bonne lisibilité sur une page longue (scan rapide)",
-      "Adapter le contenu mobile (ordre, CTA, blocs) sans perdre d’information",
-      "Ajouter une preuve sociale (avis) sans alourdir la page",
-    ],
-    solutions: [
-      "Hero orienté conversion (stores + QR code) + rappel CTA en bas de page",
-      "Sections alternées (media/texte) pour rythmer la lecture",
-      "Responsive : réorganisation des blocs et simplification sur mobile",
-      "Slider d’avis avec pagination et navigation",
-    ],
-    codeSnippets: [
-      {
-        title: "Slider d’avis (Slick) + navigation",
-        language: "javascript",
-        code: `$(document).ready(function () {
-  $('.slider--object').slick({
-    dots: true,
-    dotsClass: 'slick-pastilles slick-pastilles-circles',
-    arrows: false,
-    infinite: false,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    responsive: [
-      { breakpoint: 1280, settings: { slidesToShow: 2, slidesToScroll: 2 } },
-      { breakpoint: 768,  settings: { slidesToShow: 1, slidesToScroll: 1 } }
-    ]
-  });
-});
-
-$('.slider--prev').prop('disabled', true);
-$('.slider--prev').click(() => $('.slider--object').slick('slickPrev'));
-$('.slider--next').click(() => $('.slider--object').slick('slickNext'));
-
-$('.slider--object').on('afterChange', function (event, slick, currentSlide) {
-  $('.slider--prev').prop('disabled', currentSlide === 0);
-  $('.slider--next').prop('disabled', currentSlide === slick.slideCount - slick.options.slidesToShow);
-});`,
-      },
-    ],
-  },
-
-  {
-    id: "decathlon-data",
-    client: "Decathlon",
-    title: "Page Données Personnelles",
-    context:
-      "Mise à jour UI d’une page légale longue pour améliorer lisibilité, hiérarchie et navigation, en restant aligné avec le design system.",
-    stack: ["HTML", "CSS", "JavaScript"],
-    year: "2025",
-    url: "https://www.decathlon.fr/landing/donnees-personnelles/_/R-a-donnees-personnelles",
-
-    after: "/projects/decathlon-data-after.jpg",
-    before: "/projects/decathlon-data-before.jpg",
-    mobile: "/projects/decathlon-data-mobile.jpg",
-
-    challenges: [
-      "Rendre un contenu légal dense lisible et scannable",
-      "Structurer l’information sans perdre en exhaustivité",
-      "Préserver le design system Decathlon",
-    ],
-    solutions: [
-      "Hiérarchie typographique + espacements pour le scan",
-      "Sections + titres plus explicites",
-      "Composants UI cohérents (blocs, séparateurs, emphases)",
-    ],
-  },
-
-  {
-    id: "ieseg-fiches",
-    client: "IÉSEG",
-    title: "Fiches Métiers (WordPress)",
-    context:
-      "Création d’un template WordPress pour afficher des fiches métiers dynamiques à partir de données structurées (JSON), avec un rendu cohérent et maintenable.",
-    stack: ["WordPress", "PHP", "ACF", "JSON", "HTML", "CSS"],
-    year: "2024",
-    url: "https://ieseg.fr/domaines-expertise/marketing-communication/analyste-cybersecurite/",
-
-    after: "/projects/ieseg-fiches-desktop.jpg",
-    mobile: "/projects/ieseg-fiches-mobile.jpg",
-
-    challenges: [
-      "Créer un template réutilisable pour 50+ métiers",
-      "Structurer des données hétérogènes (salaire, compétences, formations, missions)",
-      "Garantir un rendu cohérent malgré des contenus variables",
-      "Permettre aux équipes de mettre à jour facilement sans casser la mise en page",
-    ],
-    solutions: [
-      "Template PHP modulaire (sections/blocs) basé sur un modèle de contenu",
-      "Données structurées (JSON + champs) pour fiabiliser l’affichage",
-      "Composants réutilisables : cards, listes, CTA",
-      "Règles de fallback (champ vide → section masquée) pour éviter les trous",
-    ],
-    codeSnippets: [
-      {
-        title: "Template : rendu conditionnel depuis JSON",
-        language: "php",
-        code: `// Exemple : rendre une section uniquement si des données existent
-$job_data_json = get_field('job_data_json'); // ACF (texte JSON)
-$data = $job_data_json ? json_decode($job_data_json, true) : [];
-
-$skills = $data['skills'] ?? [];
-if (!empty($skills)) : ?>
-  <section class="job-section">
-    <h2>Compétences clés</h2>
-    <ul>
-      <?php foreach ($skills as $skill) : ?>
-        <li><?php echo esc_html($skill); ?></li>
-      <?php endforeach; ?>
-    </ul>
-  </section>
-<?php endif; ?>`,
-      },
-    ],
-  },
-
-  {
-    id: "ieseg-datalayers",
-    client: "IÉSEG",
-    title: "DataLayer & Tracking (GTM/GA)",
-    context:
-      "Mise en place d’une dataLayer robuste sur WordPress multi-langue : événements standardisés, contexte programme/spécialité, et tracking fiable des CTA et formulaires.",
-    stack: ["WordPress", "PHP", "JavaScript", "GTM/GA"],
-    year: "2025",
-
-    after: "/projects/ieseg-datalayers-desktop.jpg",
-
-    challenges: [
-      "Standardiser les événements sur un site WordPress multi-langue",
-      "Déduire programme/spécialité à partir d’URLs hétérogènes",
-      "Gérer du DOM dynamique (CTA injectés, formulaires)",
-      "Assurer un tracking formulaire fiable (succès réel) + anti-doublon + hash",
-    ],
-    solutions: [
-      "Core mutualisé : init event + logger + utilitaires + observeDOM",
-      "Script spécifique : tracking CTA/brochure + rules par page + redirection safe",
-      "Mapping JSON maintenable (program/speciality) basé sur URL",
-      "Tracking Ninja Forms : snapshot + hooks + MutationObserver + SHA-256",
-    ],
-    codeSnippets: [
-      {
-        title: "Init dataLayer + logger unifié",
-        language: "javascript",
-        code: `window.dataLayer = window.dataLayer || [];
-document.addEventListener('DOMContentLoaded', function () {
-  const initEvent = {
-    event: "initialization_page",
-    page_language: wpDataLayer.page_language || '',
-    page_type: wpDataLayer.page_type || '',
-    page_program: wpDataLayer.page_program || '',
-    page_speciality: wpDataLayer.page_speciality || ''
-  };
-  window.dataLayer.push(initEvent);
-  console.log('✅ Event - initialization_page (core):', initEvent);
-});
-
-window.logDataLayerEvent = function(label, data) {
-  console.log(\`✅ Event - \${label}:\`, data);
-  window.dataLayer.push(data);
-};`,
-      },
-      {
-        title: "Tracking formulaire : succès réel + anti-doublon",
-        language: "javascript",
-        code: `let sentOnce = false;
-
-async function pushAfterSuccess() {
-  if (sentOnce) return;
-  // ... lecture email + hash SHA-256 ...
-  const eventData = { event: 'contact_form_submitted', /* ... */ };
-  window.logDataLayerEvent('contact_form_submitted', eventData);
-  sentOnce = true;
-}
-
-document.addEventListener('nfFormSubmitResponse', () => pushAfterSuccess());
-
-const mo = new MutationObserver(() => {
-  // ... msgShown || formHidden ...
-  pushAfterSuccess();
-});
-
-// mo.observe(formContainer, { subtree: true, childList: true, attributes: true });`,
-      },
-    ],
-  },
-
-  {
     id: "decathlon-rappels",
     client: "Decathlon",
     title: "Page Rappels Produits",
@@ -296,6 +96,320 @@ const mo = new MutationObserver(() => {
       { label: "Rôle", value: "Dev front + UX" },
     ],
   },
+  {
+    id: "decathlon-app",
+    client: "Decathlon",
+    title: "Landing Page — Decathlon App",
+    context:
+      "Création d’une landing page marketing pour promouvoir l’app Decathlon : structure claire, sections éditoriales, et preuve sociale (avis) via slider.",
+    stack: ["HTML", "CSS", "JavaScript", "Slick.js"],
+    year: "2023",
+    url: "https://www.decathlon.fr/landing/application-decathlon-decathlon/_/R-a-appli-decathlon",
+
+    after: "/projects/decathlon-app-desktop.jpg",
+    mobile: "/projects/decathlon-app-mobile.jpg",
+
+    challenges: [
+      "Présenter une proposition de valeur claire (app + bénéfices) en quelques sections",
+      "Maintenir une bonne lisibilité sur une page longue (scan rapide)",
+      "Adapter le contenu mobile (ordre, CTA, blocs) sans perdre d’information",
+      "Ajouter une preuve sociale (avis) sans alourdir la page",
+    ],
+    solutions: [
+      "Hero orienté conversion (stores + QR code) + rappel CTA en bas de page",
+      "Sections alternées (media/texte) pour rythmer la lecture",
+      "Responsive : réorganisation des blocs et simplification sur mobile",
+      "Slider d’avis avec pagination et navigation",
+    ],
+    codeSnippets: [
+      {
+        title: "Slider d’avis (Slick) + navigation",
+        language: "javascript",
+        code: `$(document).ready(function () {
+  $('.slider--object').slick({
+    dots: true,
+    dotsClass: 'slick-pastilles slick-pastilles-circles',
+    arrows: false,
+    infinite: false,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    responsive: [
+      { breakpoint: 1280, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+      { breakpoint: 768,  settings: { slidesToShow: 1, slidesToScroll: 1 } }
+    ]
+  });
+});
+
+$('.slider--prev').prop('disabled', true);
+$('.slider--prev').click(() => $('.slider--object').slick('slickPrev'));
+$('.slider--next').click(() => $('.slider--object').slick('slickNext'));
+
+$('.slider--object').on('afterChange', function (event, slick, currentSlide) {
+  $('.slider--prev').prop('disabled', currentSlide === 0);
+  $('.slider--next').prop('disabled', currentSlide === slick.slideCount - slick.options.slidesToShow);
+});`,
+      },
+    ],
+  },
+  {
+    id: "decathlon-data",
+    client: "Decathlon",
+    title: "Page Données Personnelles",
+    context:
+      "Mise à jour UI d’une page légale longue pour améliorer lisibilité, hiérarchie et navigation, en restant aligné avec le design system.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    year: "2025",
+    url: "https://www.decathlon.fr/landing/donnees-personnelles/_/R-a-donnees-personnelles",
+
+    after: "/projects/decathlon-data-after.jpg",
+    before: "/projects/decathlon-data-before.jpg",
+    mobile: "/projects/decathlon-data-mobile.jpg",
+
+    challenges: [
+      "Rendre un contenu légal dense lisible et scannable",
+      "Structurer l’information sans perdre en exhaustivité",
+      "Préserver le design system Decathlon",
+    ],
+    solutions: [
+      "Hiérarchie typographique + espacements pour le scan",
+      "Sections + titres plus explicites",
+      "Composants UI cohérents (blocs, séparateurs, emphases)",
+    ],
+  },
+  {
+    id: "ieseg-fiches",
+    client: "IÉSEG",
+    title: "Fiches métiers dynamiques (WordPress)",
+    context:
+      "Développement d’un template WordPress pour générer 50+ fiches métiers à partir de données JSON structurées (FR/EN). Objectif : un rendu robuste malgré des contenus variables, et une mise à jour simple côté équipes.",
+
+    stack: ["WordPress", "PHP", "JSON", "HTML", "CSS"],
+    year: "2025",
+    url: "https://ieseg.fr/domaines-expertise/marketing-communication/analyste-cybersecurite/",
+
+    after: "/projects/ieseg-fiches-desktop.jpg",
+    mobile: "/projects/ieseg-fiches-mobile.jpg",
+
+    challenges: [
+      "Industrialiser la génération de 50+ fiches à partir de structures hétérogènes",
+      "Gérer le multilingue (FR/EN) et la cohérence des slugs / URLs",
+      "Garantir un rendu propre même si certaines sections sont absentes (données incomplètes)",
+      "Rendre l’édition maintenable : contenu dans les JSON, affichage dans le template",
+    ],
+
+    solutions: [
+      "Template PHP découpé en blocs (missions, compétences, formations, CTA, etc.) alimentés par JSON",
+      "Système de fallback : section masquée si vide, valeurs par défaut, labels centralisés (common.json)",
+      "Mapping des slugs FR/EN pour des URLs stables et des liens de traduction cohérents",
+      "Contenus partagés (ex : contacts) référencés par ID pour éviter les duplications",
+    ],
+
+    codeSnippets: [
+    {
+      title: "Chargement JSON + rendu conditionnel (sans ACF)",
+      language: "php",
+      code: `// Déterminer la langue (ex : via WPML/Polylang ou une règle maison)
+  $lang = function_exists('pll_current_language') ? pll_current_language('slug') : 'fr';
+
+  // Exemple : URL -> .../marketing-communication/analyste-cybersecurite/
+  // $category_slug et $job_slug proviennent du routage/template
+  $category_slug = get_query_var('category_slug');
+  $job_slug      = get_query_var('job_slug');
+
+  // Charger le JSON de la catégorie (fr/categories/<slug>.json)
+  $json_path = get_stylesheet_directory() . "/fiches-metiers/{$lang}/categories/{$category_slug}.json";
+  $items = file_exists($json_path) ? json_decode(file_get_contents($json_path), true) : [];
+
+  // Retrouver la fiche par slug
+  $job = null;
+  foreach ($items as $item) {
+    if (($item['slug'] ?? '') === $job_slug) {
+      $job = $item;
+      break;
+    }
+  }
+  if (!$job) {
+    // 404 si fiche introuvable
+    status_header(404);
+    nocache_headers();
+    include get_404_template();
+    exit;
+  }
+
+  // Exemple : rendre une section uniquement si la donnée existe
+  $skills = $job['competences_block']['items'] ?? [];
+  if (!empty($skills)) : ?>
+    <section class="job-section">
+      <h2>Compétences clés</h2>
+      <ul>
+        <?php foreach ($skills as $skill) : ?>
+          <li><?php echo esc_html($skill); ?></li>
+        <?php endforeach; ?>
+      </ul>
+    </section>
+  <?php endif; ?>`,
+    },
+  ],
+  },
+  {
+    id: "ieseg-datalayers",
+    client: "IÉSEG",
+    title: "DataLayer & Tracking (GTM/GA)",
+    context:
+      "Mise en place d’une dataLayer robuste sur WordPress multi-langue : événements standardisés, contexte programme/spécialité, et tracking fiable des CTA et formulaires.",
+    stack: ["WordPress", "PHP", "JavaScript", "GTM/GA"],
+    year: "2025",
+    url: "https://www.ieseg.fr/programmes/bachelor-international-business/",
+    
+    after: "/projects/ieseg-datalayers-desktop.jpg",
+
+    challenges: [
+      "Standardiser les événements sur un site WordPress multi-langue",
+      "Déduire programme/spécialité à partir d’URLs hétérogènes",
+      "Gérer du DOM dynamique (CTA injectés, formulaires)",
+      "Assurer un tracking formulaire fiable (succès réel) + anti-doublon + hash",
+    ],
+    solutions: [
+      "Core mutualisé : init event + logger + utilitaires + observeDOM",
+      "Script spécifique : tracking CTA/brochure + rules par page + redirection safe",
+      "Mapping JSON maintenable (program/speciality) basé sur URL",
+      "Tracking Ninja Forms : snapshot + hooks + MutationObserver + SHA-256",
+    ],
+    codeSnippets: [
+      {
+        title: "Init dataLayer + logger unifié",
+        language: "javascript",
+        code: `window.dataLayer = window.dataLayer || [];
+document.addEventListener('DOMContentLoaded', function () {
+  const initEvent = {
+    event: "initialization_page",
+    page_language: wpDataLayer.page_language || '',
+    page_type: wpDataLayer.page_type || '',
+    page_program: wpDataLayer.page_program || '',
+    page_speciality: wpDataLayer.page_speciality || ''
+  };
+  window.dataLayer.push(initEvent);
+  console.log('✅ Event - initialization_page (core):', initEvent);
+});
+
+window.logDataLayerEvent = function(label, data) {
+  console.log(\`✅ Event - \${label}:\`, data);
+  window.dataLayer.push(data);
+};`,
+      },
+      {
+        title: "Tracking formulaire : succès réel + anti-doublon",
+        language: "javascript",
+        code: `let sentOnce = false;
+
+async function pushAfterSuccess() {
+  if (sentOnce) return;
+  // ... lecture email + hash SHA-256 ...
+  const eventData = { event: 'contact_form_submitted', /* ... */ };
+  window.logDataLayerEvent('contact_form_submitted', eventData);
+  sentOnce = true;
+}
+
+document.addEventListener('nfFormSubmitResponse', () => pushAfterSuccess());
+
+const mo = new MutationObserver(() => {
+  // ... msgShown || formHidden ...
+  pushAfterSuccess();
+});
+
+// mo.observe(formContainer, { subtree: true, childList: true, attributes: true });`,
+      },
+    ],
+  },
+  {
+  id: "ieseg-notable-alumni",
+  client: "IÉSEG",
+  title: "Notable Alumni (module filtrable, WP + WPML)",
+  context:
+    "Développement d’un module “Notable Alumni” filtrable par catégories : grille dynamique côté front (fetch/AJAX), contenu piloté par un custom post type et une taxonomie, compatible WPML (FR/EN).",
+
+  stack: ["WordPress", "PHP", "WP_Query", "WPML", "JavaScript", "Fetch/AJAX", "CSS"],
+  year: "2025",
+  url: "https://www.ieseg.fr/lecole/a-propos/diplomes-emblematiques/",
+
+  after: "/projects/notable-alumni-desktop.jpg",
+  mobile: "/projects/notable-alumni-mobile.jpg",
+
+  challenges: [
+    "Créer un filtre par taxonomie avec chargement dynamique (sans recharger la page)",
+    "Gérer correctement le multilingue (WPML) : termes traduits + requêtes cohérentes",
+    "Garantir un rendu propre même si certains champs sont vides (photo, bio, société, etc.)",
+    "Trier les résultats de manière fiable (ordre alphabétique sur le nom)",
+  ],
+
+  solutions: [
+    "Endpoint PHP qui renvoie les alumni en JSON via WP_Query (CPT + tax_query)",
+    "Switch de langue WPML côté endpoint + récupération du term_id traduit pour filtrer correctement",
+    "Rendu front en JS (fetch) avec fallback d’affichage si champ absent",
+    "Persistance du filtre via le hash d’URL pour garder l’état au refresh / partage de lien",
+  ],
+
+  codeSnippets: [
+    {
+      title: "Endpoint AJAX : WPML + tax_query + JSON",
+      language: "php",
+      code: `<?php
+require_once('../../../wp-load.php');
+header('Content-Type: application/json');
+
+$lang = isset($_GET['lang']) ? sanitize_text_field($_GET['lang']) : 'fr';
+$category = isset($_GET['category']) ? sanitize_text_field($_GET['category']) : '';
+
+do_action('wpml_switch_language', $lang);
+
+$args = [
+  'post_type'      => 'notable-alumnus',
+  'posts_per_page' => -1,
+  'post_status'    => 'publish',
+  'orderby'        => 'title',
+  'order'          => 'ASC',
+];
+
+// Filtre par catégorie (taxonomie) avec traduction WPML
+if (!empty($category)) {
+  $term = get_term_by('slug', $category, 'notable-alumni-category');
+  if ($term && function_exists('apply_filters')) {
+    $translated_term_id = apply_filters('wpml_object_id', $term->term_id, 'notable-alumni-category', true, $lang);
+    if ($translated_term_id) {
+      $args['tax_query'] = [[
+        'taxonomy' => 'notable-alumni-category',
+        'field'    => 'term_id',
+        'terms'    => $translated_term_id,
+      ]];
+    }
+  }
+}
+
+$q = new WP_Query($args);
+$out = [];
+
+while ($q->have_posts()) {
+  $q->the_post();
+  $id = get_the_ID();
+
+  $out[] = [
+    'title'     => get_the_title(),
+    'thumbnail' => get_the_post_thumbnail_url($id, 'full'),
+    'poste'     => get_post_meta($id, 'wpcf-poste', true),
+    'societe'   => get_post_meta($id, 'wpcf-societe', true),
+    'annee'     => get_post_meta($id, 'wpcf-annee-diplomation', true),
+    'bio_url'   => get_post_meta($id, 'wpcf-biographie', true),
+    'categories'=> wp_get_post_terms($id, 'notable-alumni-category', ['fields' => 'names']),
+  ];
+}
+
+wp_reset_postdata();
+echo json_encode($out);
+exit;`,
+    },
+  ],
+}
+
 ];
 
 export default projects;
