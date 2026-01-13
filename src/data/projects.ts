@@ -16,10 +16,182 @@ export type Project = {
   challenges?: string[];
   solutions?: string[];
   codeSnippets?: { title: string; language: string; code: string }[];
-  facts?: { label: string; value: string }[];
 };
 
 const projects: Project[] = [
+  {
+    id: "jules-bulant",
+    client: "Jules Bulant",
+    title: "Portfolio Artistique — Nuxt 3 + Sanity CMS",
+    context:
+      "Création d'un portfolio artistique complet pour un artiste peintre : galerie responsive avec modal viewer, gestion des expositions, et studio CMS privé pour gérer les œuvres. Architecture monorepo avec frontend Nuxt 3 et backend Sanity Studio.",
+    stack: ["Nuxt 3", "Sanity CMS", "TypeScript", "CSS", "React 19"],
+    year: "2026",
+    url: "https://julesbulant.fr",
+
+    // À compléter avec tes captures d'écran
+    after: "/projects/jules-bulant-desktop.jpg",
+    mobile: "/projects/jules-bulant-mobile.jpg",
+    // before: "/projects/jules-bulant-before.jpg", // Si tu as un avant/après
+
+    tagline:
+      "Portfolio artistique moderne avec galerie interactive, modal viewer plein écran, navigation tactile mobile, et CMS headless pour gérer les œuvres.",
+
+    challenges: [
+      "Créer une expérience galerie immersive avec navigation fluide entre les œuvres",
+      "Gérer une architecture monorepo (site public + studio CMS privé)",
+      "Permettre une gestion simple des œuvres et expositions sans compétences techniques",
+      "Assurer une navigation tactile optimale sur mobile (swipe entre œuvres)",
+      "Optimiser le chargement d'images haute résolution (œuvres d'art)",
+    ],
+
+    solutions: [
+      "Modal viewer plein écran avec navigation clavier/swipe et préchargement",
+      "Monorepo organisé : site/ (Nuxt SSR) + studio/ (Sanity CMS)",
+      "Schémas Sanity typés : Paintings, Exhibitions, Profile avec images multiples",
+      "Swipe mobile natif avec détection de gestes et animations fluides",
+      "SSR Nuxt + lazy loading + images optimisées Sanity (hotspot, crop)",
+    ],
+
+    codeSnippets: [
+      {
+        title: "Modal viewer avec navigation et swipe mobile",
+        language: "typescript",
+        code: `// Composables/useModal.ts - Gestion du modal avec navigation
+  const currentIndex = ref(0);
+  const paintings = ref<Painting[]>([]);
+
+  function openModal(index: number) {
+    currentIndex.value = index;
+    document.body.style.overflow = 'hidden';
+    
+    // Précharger images adjacentes
+    preloadAdjacentImages(index);
+  }
+
+  function navigate(direction: 'prev' | 'next') {
+    if (direction === 'prev' && currentIndex.value > 0) {
+      currentIndex.value--;
+    } else if (direction === 'next' && currentIndex.value < paintings.value.length - 1) {
+      currentIndex.value++;
+    }
+    preloadAdjacentImages(currentIndex.value);
+  }
+
+  // Support navigation clavier
+  onMounted(() => {
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') navigate('prev');
+      if (e.key === 'ArrowRight') navigate('next');
+      if (e.key === 'Escape') closeModal();
+    });
+  });`,
+      },
+      {
+        title: "Requête GROQ pour récupérer les œuvres depuis Sanity",
+        language: "typescript",
+        code: `// server/api/paintings.get.ts
+  import { sanityClient } from '~/utils/sanity';
+
+  export default defineEventHandler(async () => {
+    const query = \`
+      *[_type == "painting"] | order(order asc) {
+        _id,
+        title,
+        slug,
+        year,
+        technique,
+        dimensions,
+        availability,
+        price,
+        "coverImage": images[isCover == true][0]{
+          "url": asset->url,
+          hotspot
+        },
+        "allImages": images[]{
+          "url": asset->url,
+          hotspot,
+          caption
+        }
+      }
+    \`;
+    
+    try {
+      const paintings = await sanityClient.fetch(query);
+      return { paintings };
+    } catch (error) {
+      throw createError({
+        statusCode: 500,
+        message: 'Erreur lors de la récupération des œuvres'
+      });
+    }
+  });`,
+      },
+      {
+        title: "Schéma Sanity pour les œuvres",
+        language: "typescript",
+        code: `// studio/schemas/painting.ts
+  export default {
+    name: 'painting',
+    title: 'Œuvres',
+    type: 'document',
+    fields: [
+      {
+        name: 'title',
+        title: 'Titre',
+        type: 'string',
+        validation: Rule => Rule.required()
+      },
+      {
+        name: 'images',
+        title: 'Images',
+        type: 'array',
+        of: [{
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            {
+              name: 'isCover',
+              title: 'Image de couverture',
+              type: 'boolean'
+            },
+            {
+              name: 'caption',
+              title: 'Légende',
+              type: 'string'
+            }
+          ]
+        }],
+        validation: Rule => Rule.required().min(1)
+      },
+      {
+        name: 'technique',
+        title: 'Technique',
+        type: 'string'
+      },
+      {
+        name: 'dimensions',
+        title: 'Dimensions',
+        type: 'string',
+        description: 'Ex: 100 × 80 cm'
+      },
+      {
+        name: 'availability',
+        title: 'Disponibilité',
+        type: 'string',
+        options: {
+          list: [
+            { title: 'Disponible', value: 'available' },
+            { title: 'Vendue', value: 'sold' },
+            { title: 'Sur demande', value: 'on_request' }
+          ]
+        }
+      }
+    ]
+  }`,
+      },
+    ],
+  },
   {
     id: "decathlon-rappels",
     client: "Decathlon",
@@ -86,14 +258,6 @@ const projects: Project[] = [
   });
 }`,
       },
-    ],
-    facts: [
-      { label: "Client", value: "Decathlon" },
-      { label: "Année", value: "2025" },
-      { label: "Stack", value: "HTML / CSS / JavaScript" },
-      { label: "Volume", value: "48+ produits, multi-années" },
-      { label: "Livrables", value: "UI + logique recherche/filtre" },
-      { label: "Rôle", value: "Dev front + UX" },
     ],
   },
   {
