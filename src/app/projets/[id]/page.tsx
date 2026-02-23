@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
   const ogUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
 
   return {
-    title: `${project.title} | Louis Rotellini`,
+    title: `${project.title}`,
     description,
     alternates: { canonical: url },
     openGraph: {
