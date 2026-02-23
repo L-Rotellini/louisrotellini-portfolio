@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
     };
   }
 
-  const baseUrl = "https://louisrotellini.fr";
+  const baseUrl = "https://www.louisrotellini.fr";
   const url = `${baseUrl}/projets/${project.id}`;
 
   const description =
