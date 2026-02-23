@@ -20,6 +20,85 @@ export type Project = {
 
 const projects: Project[] = [
   {
+  id: "damart-landing-pages",
+  client: "Damart",
+  title: "Landing Pages Éditoriales — Magento Page Builder",
+  context:
+    "Mission de renfort : prise en charge de la création de 6 landing pages éditoriales (blogs tendance, guides d'achat) sur un environnement Magento avec Page Builder natif. Composants interactifs (carousel morpho, FAQ accordéon) développés en JS vanilla et greffés sur un CMS aux contraintes fortes.",
+  stack: ["HTML", "CSS", "JavaScript", "Magento"],
+  year: "2026",
+  url: "https://www.damart.fr/guide-pantalon",
+
+  after: "/projects/damart-guide-pantalon-desktop.jpg",
+  mobile: "/projects/damart-guide-pantalon-mobile.jpg",
+
+  tagline:
+    "6 landing pages éditoriales livrées en autonomie sur Magento : blogs tendance, guides d'achat, carousel morpho interactif et FAQ — dans un environnement CMS contraint.",
+
+  challenges: [
+    "Reprendre un projet en cours sur un environnement inconnu (mission de renfort)",
+    "Contourner les limitations du Page Builder Magento pour des mises en page éditoriales riches",
+    "Intégrer des composants interactifs (carousel, FAQ) dans un CMS non prévu pour du JS custom",
+    "Assurer une cohérence visuelle sur 6 pages aux contenus hétérogènes (blogs, guides)",
+  ],
+
+  solutions: [
+    "Prise en main rapide de l'environnement Magento et des conventions du projet",
+    "Utilisation des blocs HTML natifs du Page Builder comme points d'injection pour le JS custom",
+    "Carousel morpho en JS vanilla avec filtres par silhouette et navigation tactile en popup",
+    "FAQ accordéon en JS vanilla : toggle exclusif, fermeture automatique des autres items",
+  ],
+
+  codeSnippets: [
+    {
+      title: "Carousel morpho — navigation + filtres par silhouette",
+      language: "javascript",
+      code: `const slides = document.querySelectorAll('.slide');
+const filterButtons = document.querySelectorAll('.filter-button');
+let currentIndex = 0;
+
+function showSlide(index) {
+  slides.forEach(s => s.classList.remove('active'));
+  filterButtons.forEach(b => b.classList.remove('active'));
+  slides[index].classList.add('active');
+  filterButtons[index].classList.add('active');
+  currentIndex = index;
+}
+
+document.getElementById('prev').addEventListener('click', () => {
+  showSlide((currentIndex - 1 + slides.length) % slides.length);
+});
+document.getElementById('next').addEventListener('click', () => {
+  showSlide((currentIndex + 1) % slides.length);
+});
+filterButtons.forEach(btn => {
+  btn.addEventListener('click', () => showSlide(+btn.dataset.index));
+});`,
+    },
+    {
+      title: "FAQ accordéon — toggle exclusif",
+      language: "javascript",
+      code: `document.querySelectorAll('.faq-question').forEach(button => {
+  button.addEventListener('click', (e) => {
+    e.preventDefault();
+    const faqItem = button.parentElement;
+    const isActive = faqItem.classList.contains('active');
+
+    // Ferme tous les autres items
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.classList.remove('active');
+    });
+
+    // Toggle l'item actuel
+    if (!isActive) {
+      faqItem.classList.add('active');
+    }
+  });
+});`,
+    },
+  ],
+},
+  {
     id: "jules-bulant",
     client: "Jules Bulant",
     title: "Portfolio Artistique — Nuxt 3 + Sanity CMS",
