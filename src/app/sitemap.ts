@@ -3,7 +3,7 @@ import projects from "@/data/projects";
 
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://louisrotellini.fr";
+  const baseUrl = "https://www.louisrotellini.fr";
 
   const staticRoutes: MetadataRoute.Sitemap = [
     {
