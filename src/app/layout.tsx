@@ -106,70 +106,39 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `
         }}
       >
-        {/* Données structurées Person + offre de services */}
-        <Script
-          id="ld-json-person"
-          type="application/ld+json"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              name: "Louis Rotellini",
-              jobTitle: "Développeur front-end freelance",
-              url: "https://www.louisrotellini.fr",
-              sameAs: [
-                "https://www.malt.fr/profile/louisrotellini", // ajuste si besoin
-                "https://www.linkedin.com/in/louis-rotellini/"
-              ],
-              knowsAbout: [
-                "React",
-                "Next.js",
-                "Tailwind CSS",
-                "WordPress",
-                "SEO",
-                "Accessibilité web",
-                "Performance web",
-                "Intégration maquettes Figma",
-              ],
-              worksFor: {
-                "@type": "Organization",
-                name: "Freelance",
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Lille",
-                addressRegion: "Hauts-de-France",
-                addressCountry: "FR",
-              },
-            }),
-          }}
-        />
-        {/* Variante service (utile pour des requêtes type “prestations développeur front-end”) */}
-        <Script
-          id="ld-json-service"
-          type="application/ld+json"
-          strategy="beforeInteractive"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "ProfessionalService",
-              name:
-                "Développeur front-end & intégrateur freelance – Louis Rotellini",
-              url: "https://www.louisrotellini.fr",
-              areaServed: ["FR", "Europe"],
-              description:
-                "Intégration de maquettes Figma, développement React/Next.js et création de sites WordPress performants. Priorité à la performance, à l’accessibilité et au SEO.",
-              serviceType: [
-                "Intégration HTML/CSS/JS",
-                "Développement React/Next.js",
-                "Création/Refonte WordPress",
-                "Optimisation performance & SEO",
-                "Maintenance & débogage",
-              ],
-            }),
-          }}
-        />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Person",
+            name: "Louis Rotellini",
+            jobTitle: "Développeur front-end freelance",
+            url: "https://www.louisrotellini.fr",
+            sameAs: [
+              "https://www.malt.fr/profile/louisrotellini",
+              "https://www.linkedin.com/in/louis-rotellini/"
+            ],
+            knowsAbout: ["React", "Next.js", "Tailwind CSS", "WordPress", "SEO", "Accessibilité web", "Performance web", "Intégration maquettes Figma"],
+            worksFor: { "@type": "Organization", name: "Freelance" },
+            address: { "@type": "PostalAddress", addressLocality: "Lille", addressRegion: "Hauts-de-France", addressCountry: "FR" },
+          }),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            name: "Développeur front-end & intégrateur freelance – Louis Rotellini",
+            url: "https://www.louisrotellini.fr",
+            areaServed: ["FR", "Europe"],
+            description: "Intégration de maquettes Figma, développement React/Next.js et création de sites WordPress performants. Priorité à la performance, à l'accessibilité et au SEO.",
+            serviceType: ["Intégration HTML/CSS/JS", "Développement React/Next.js", "Création/Refonte WordPress", "Optimisation performance & SEO", "Maintenance & débogage"],
+          }),
+        }}
+      />
 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Navbar />
