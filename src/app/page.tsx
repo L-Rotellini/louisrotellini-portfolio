@@ -3,6 +3,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
 import ClientsSection from "@/components/ClientsSection";
+import SaaSSection from "@/components/SaaSSection";
 
 export default function Home() {
   return (
@@ -20,6 +21,11 @@ export default function Home() {
       {/* PROJETS */}
       <AnimatedSection id="projets">
         <ProjectsSection />
+      </AnimatedSection>
+
+      {/* SAAS */}
+      <AnimatedSection id="saas">
+        <SaaSSection />
       </AnimatedSection>
 
       {/* CONTACT */}
