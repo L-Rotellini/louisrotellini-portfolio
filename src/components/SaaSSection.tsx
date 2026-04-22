@@ -36,7 +36,7 @@ const products = [
     image: null,
   },
   {
-    name: "Relancio",
+    name: "RelancIA",
     number: "02",
     year: "2026",
     status: "En développement",
