@@ -64,8 +64,7 @@ export default function SaaSSection() {
           </h2>
         </div>
         <p className="text-sm text-[--muted] max-w-xs">
-          En parallèle de mes missions front-end, j&apos;identifie des problèmes terrain dans les
-          PME et je construis des outils simples pour les résoudre.
+          J&apos;identifie des tâches répétitives dans les équipes PME et je construis des outils SaaS pour les éliminer.
         </p>
       </div>
 

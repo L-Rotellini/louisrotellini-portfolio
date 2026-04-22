@@ -45,7 +45,7 @@ export default function HeroSection() {
               Louis <span className="font-bold">ROTELLINI</span>
             </span>
             <span className="block font-normal text-[clamp(1.5rem,5vw,2.8rem)]">
-              Développeur front-end freelance
+              Développeur front-end & automatisation IA pour PME
             </span>
           </h1>
 
