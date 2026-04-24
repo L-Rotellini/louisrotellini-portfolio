@@ -83,8 +83,6 @@ export const metadata: Metadata = {
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
-  // (optionnel) : vérifs Search Console, etc.
-  // verification: { google: "..." },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
