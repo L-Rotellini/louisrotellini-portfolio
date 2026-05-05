@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     template: "%s | Louis Rotellini",
   },
   description:
-    "Développeur front-end & intégrateur freelance. J’aide les entreprises et agences à transformer leurs maquettes en sites rapides, accessibles et SEO-friendly. Spécialiste React, Next.js, Tailwind et WordPress.",
+    "Développeur front-end & intégrateur freelance basé à Lille / Paris. J'aide les agences et entreprises à transformer leurs maquettes en sites rapides, accessibles et SEO-friendly. Spécialiste React, Next.js, Tailwind et WordPress.",
   keywords: [
     "Louis Rotellini",
     "développeur front-end freelance",
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title:
       "Développeur Front-End & Intégrateur Freelance | React, Next.js & WordPress – Louis Rotellini",
     description:
-      "Intégration pixel-perfect, performance et accessibilité. React/Next.js, Tailwind et WordPress.",
+      "Intégration pixel-perfect, performance et accessibilité. React/Next.js, Tailwind et WordPress. Disponible pour des projets one-shot et missions d'agences.",
     images: [
       {
         url: "/og-image.jpg",

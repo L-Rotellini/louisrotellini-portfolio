@@ -44,13 +44,23 @@ export default function ProjectsSection() {
               </div>
 
               {/* Content */}
-              <div className="flex-1 min-w-0">
-                <p className="text-xs text-[--muted] uppercase tracking-wider">
+              <div className="flex-1 min-w-0 space-y-2">
+                <span className="inline-block text-[11px] text-[--muted] border border-[--surface-border] rounded-full px-2 py-0.5">
                   {project.client}
-                </p>
-                <h3 className="text-lg md:text-2xl font-semibold truncate group-hover:text-[--muted] transition-colors">
+                </span>
+                <h3 className="text-lg md:text-2xl font-semibold leading-snug group-hover:text-[--muted] transition-colors">
                   {project.title}
                 </h3>
+                <div className="flex flex-wrap items-center gap-2 md:hidden">
+                  {project.stack.slice(0, 3).map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[11px] text-[--muted] border border-[--surface-border] px-2 py-0.5 rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
 
               {/* Stack - desktop only */}

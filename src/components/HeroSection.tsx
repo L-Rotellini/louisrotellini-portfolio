@@ -18,14 +18,14 @@ export default function HeroSection() {
       className="pt-16 sm:pt-20 space-y-8"
     >
       {/* Badges méta + dispo */}
-      <div className="inline-flex flex-wrap items-center gap-2 text-sm text-[--muted]">
+      <div className="flex flex-wrap items-center gap-2 text-sm text-[--muted]">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
           <MapPin className="size-3 text-rose-500" aria-hidden="true" />
           <span>{profile.location}</span>
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
           <Globe className="size-3 text-emerald-500" aria-hidden="true" />
-          <span>Disponible</span>
+          <span>Disponible pour projets one-shot et missions d&apos;agences</span>
         </span>
         <span className="inline-flex items-center gap-1.5 rounded-full border border-[--surface-border] px-2 py-0.5">
           <Zap className="size-3 text-amber-500" aria-hidden="true" />
@@ -45,7 +45,7 @@ export default function HeroSection() {
               Louis <span className="font-bold">ROTELLINI</span>
             </span>
             <span className="block font-normal text-[clamp(1.5rem,5vw,2.8rem)]">
-              Développeur front-end & automatisation IA pour PME
+              Développeur front-end & intégrateur freelance
             </span>
           </h1>
 

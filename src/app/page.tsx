@@ -3,7 +3,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
 import ClientsSection from "@/components/ClientsSection";
-import AuditSection from "@/components/AuditSection";
+import WorkProcessSection from "@/components/WorkProcessSection";
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
       <AnimatedSection immediate>
         <HeroSection />
       </AnimatedSection>
-      
+
       {/* CLIENTS */}
       <AnimatedSection>
         <ClientsSection />
@@ -23,9 +23,9 @@ export default function Home() {
         <ProjectsSection />
       </AnimatedSection>
 
-      {/* AUDIT */}
-      <AnimatedSection id="audit">
-        <AuditSection />
+      {/* COMMENT JE TRAVAILLE */}
+      <AnimatedSection id="process">
+        <WorkProcessSection />
       </AnimatedSection>
 
       {/* CONTACT */}
