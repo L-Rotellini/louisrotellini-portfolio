@@ -1,15 +1,15 @@
 const items = [
   {
-    title: "Intégration de maquettes",
-    text: "Figma vers React, Next.js, WordPress, Magento ou Prestashop.",
+    title: "Construction de produits AI-assisted",
+    text: "MVP livrés en 2-4 semaines. Next.js, TypeScript, intégration LLM si pertinent.",
   },
   {
-    title: "Projets one-shot d'agences",
-    text: "Refontes, landing pages, modules sur mesure.",
+    title: "Intégration LLM dans vos produits",
+    text: "Agents, OCR, RAG, pour vos workflows internes ou produits clients.",
   },
   {
-    title: "Renforts d'équipe",
-    text: "Missions où vos équipes sont en sous-effectif.",
+    title: "Missions front-end / fullstack confirmées",
+    text: "Refontes, modules, intégrations modernes pour agences et grands comptes. React, Next.js, TypeScript.",
   },
 ];
 
@@ -32,8 +32,8 @@ export default function WorkProcessSection() {
       </h2>
 
       <p className="text-base text-[--muted] max-w-2xl">
-        Je suis dev front-end freelance basé à Lille, je travaille en distanciel
-        partout en France et au Benelux, ou en présentiel sur Paris et Lille.
+        Basé à Lille, je travaille en distanciel partout en France
+        et au Benelux, ou en présentiel sur Paris et Lille.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 mt-4 border-t border-[--surface-border]">

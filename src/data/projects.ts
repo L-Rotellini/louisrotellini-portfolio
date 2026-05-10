@@ -13,6 +13,7 @@ export type Project = {
   mobile?: string; // optionnel = aperçu mobile
 
   tagline?: string;
+  status?: string; // ex: "MVP terminé" | "En production" | "En développement"
   challenges?: string[];
   solutions?: string[];
   codeSnippets?: { title: string; language: string; code: string }[];
@@ -352,6 +353,9 @@ filterButtons.forEach(btn => {
     after: "/projects/decathlon-app-desktop.jpg",
     mobile: "/projects/decathlon-app-mobile.jpg",
 
+    tagline:
+      "Landing page marketing pour l'app Decathlon : hero conversion, sections éditoriales et slider d'avis pour soutenir l'acquisition.",
+
     challenges: [
       "Présenter une proposition de valeur claire (app + bénéfices) en quelques sections",
       "Maintenir une bonne lisibilité sur une page longue (scan rapide)",
@@ -408,6 +412,9 @@ $('.slider--object').on('afterChange', function (event, slick, currentSlide) {
     before: "/projects/decathlon-data-before.jpg",
     mobile: "/projects/decathlon-data-mobile.jpg",
 
+    tagline:
+      "Refonte UI d'une page légale dense : hiérarchie typographique et navigation pour rendre le contenu scannable, sans dévier du design system.",
+
     challenges: [
       "Rendre un contenu légal dense lisible et scannable",
       "Structurer l’information sans perdre en exhaustivité",
@@ -432,6 +439,9 @@ $('.slider--object').on('afterChange', function (event, slick, currentSlide) {
 
     after: "/projects/ieseg-fiches-desktop.jpg",
     mobile: "/projects/ieseg-fiches-mobile.jpg",
+
+    tagline:
+      "Template WordPress qui génère 50+ fiches métiers FR/EN à partir de JSON structurés, avec rendu robuste sur des contenus variables.",
 
     challenges: [
       "Industrialiser la génération de 50+ fiches à partir de structures hétérogènes",
@@ -506,6 +516,9 @@ $('.slider--object').on('afterChange', function (event, slick, currentSlide) {
     
     after: "/projects/ieseg-datalayers-desktop.jpg",
 
+    tagline:
+      "DataLayer GTM/GA standardisée pour un site WordPress multi-langue : événements unifiés, tracking CTA et formulaires fiable.",
+
     challenges: [
       "Standardiser les événements sur un site WordPress multi-langue",
       "Déduire programme/spécialité à partir d’URLs hétérogènes",
@@ -577,6 +590,9 @@ const mo = new MutationObserver(() => {
 
   after: "/projects/notable-alumni-desktop.jpg",
   mobile: "/projects/notable-alumni-mobile.jpg",
+
+  tagline:
+    "Module “Notable Alumni” filtrable par taxonomie sur WP + WPML : grille dynamique en fetch/AJAX, état persistant via hash d'URL, multilingue FR/EN.",
 
   challenges: [
     "Créer un filtre par taxonomie avec chargement dynamique (sans recharger la page)",

@@ -1,5 +1,5 @@
 import { profile } from "@/data/profile";
-import { Github, Linkedin } from "lucide-react";
+import { Linkedin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,11 +10,6 @@ export default function Footer() {
         </p>
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
-            {profile.githubUrl && (
-              <a href={profile.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hover:text-[--foreground] transition-colors">
-                <Github className="size-4" />
-              </a>
-            )}
             {profile.linkedinUrl && (
               <a href={profile.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hover:text-[--foreground] transition-colors">
                 <Linkedin className="size-4" />

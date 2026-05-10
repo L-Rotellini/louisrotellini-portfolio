@@ -20,7 +20,12 @@ export default function ProjectsSection() {
 
   return (
     <section id="projets" aria-labelledby="projets-title" className="space-y-8">
-      <h2 id="projets-title">Projets</h2>
+      <div className="space-y-2">
+        <h2 id="projets-title">Projets</h2>
+        <p className="text-base text-[--muted] max-w-2xl">
+          Sélection de projets clients récents en intégration et développement front-end.
+        </p>
+      </div>
 
       <div className="relative" onMouseMove={handleMouseMove}>
         {/* Liste */}

@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
 import projects from "@/data/projects";
+import sideProjects from "@/data/sideProjects";
 import Link from "next/link";
+
+const allProjects = [...projects, ...sideProjects];
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import DeviceMockup from "@/components/DeviceMockup";
 import CodeBlock from "@/components/CodeBlock";
@@ -15,7 +18,7 @@ type MetadataProps = { params: Params };
 export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
   const { id } = await params;
 
-  const project = projects.find((p) => p.id === id);
+  const project = allProjects.find((p) => p.id === id);
 
   if (!project) {
     return {
@@ -63,7 +66,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
 export default async function ProjectPage({ params }: PageProps) {
   const { id } = await params;
 
-  const project = projects.find((p) => p.id === id);
+  const project = allProjects.find((p) => p.id === id);
   if (!project) return notFound();
 
   // ---- Nouveau modèle media ----
@@ -128,12 +131,13 @@ export default async function ProjectPage({ params }: PageProps) {
               {[
                 { k: "Année", v: project.year },
                 { k: "Stack", v: project.stack?.join(" · ") },
+                { k: "Statut", v: project.status },
                 {
                   k: "Type",
                   v: hasBeforeAfter ? "Refonte (avant / après)" : "Réalisation",
                 },
                 { k: "Rôle", v: "Dev front + UX" },
-              ].map((item, i) => (
+              ].filter((item) => Boolean(item.v)).map((item, i) => (
                 <div
                   key={item.k}
                   className={`grid grid-cols-[96px,1fr] gap-4 py-2 min-w-0 ${
@@ -278,7 +282,9 @@ export default async function ProjectPage({ params }: PageProps) {
                 </div>
               ) : (
                 <p className="text-sm text-muted-foreground max-w-2xl">
-                  Code non affiché pour le moment (refacto / optimisation en cours).
+                  {project.client === "Side project"
+                    ? "Code non public — projet personnel."
+                    : "Code non affiché pour le moment (refacto / optimisation en cours)."}
                 </p>
               )}
             </div>

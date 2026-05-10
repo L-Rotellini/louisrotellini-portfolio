@@ -14,25 +14,23 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.louisrotellini.fr"),
   title: {
     default:
-      "Développeur Front-End & Intégrateur Freelance | React, Next.js & WordPress – Louis Rotellini",
+      "Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted – Louis Rotellini",
     template: "%s | Louis Rotellini",
   },
   description:
-    "Développeur front-end & intégrateur freelance basé à Lille / Paris. J'aide les agences et entreprises à transformer leurs maquettes en sites rapides, accessibles et SEO-friendly. Spécialiste React, Next.js, Tailwind et WordPress.",
+    "Développeur Full-stack freelance basé à Lille. Je construis des produits web (Next.js, TypeScript) en mode AI-assisted. Ex-Decathlon, Damart, IÉSEG.",
   keywords: [
-    "Louis Rotellini",
-    "développeur front-end freelance",
-    "intégrateur web",
-    "intégration maquettes Figma",
-    "React",
+    "Développeur Full-stack freelance",
+    "AI-assisted",
     "Next.js",
-    "Tailwind CSS",
-    "WordPress",
-    "SEO",
-    "accessibilité",
-    "performance web",
+    "TypeScript",
+    "React",
+    "Node.js",
+    "agents IA",
+    "intégration LLM",
     "Lille",
     "Paris",
+    "freelance",
   ],
   authors: [{ name: "Louis Rotellini", url: "https://www.louisrotellini.fr" }],
   alternates: {
@@ -56,15 +54,15 @@ export const metadata: Metadata = {
     url: "https://www.louisrotellini.fr",
     siteName: "Louis Rotellini",
     title:
-      "Développeur Front-End & Intégrateur Freelance | React, Next.js & WordPress – Louis Rotellini",
+      "Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted – Louis Rotellini",
     description:
-      "Intégration pixel-perfect, performance et accessibilité. React/Next.js, Tailwind et WordPress. Disponible pour des projets one-shot et missions d'agences.",
+      "Développeur Full-stack freelance basé à Lille. Je construis des produits web (Next.js, TypeScript) en mode AI-assisted. Ex-Decathlon, Damart, IÉSEG.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Portfolio de Louis Rotellini – développeur front-end & intégrateur freelance",
+        alt: "Portfolio de Louis Rotellini – développeur Full-stack freelance · Next.js, TypeScript, AI-assisted",
       },
     ],
   },
@@ -73,9 +71,9 @@ export const metadata: Metadata = {
     site: "@louisrotellini",
     creator: "@louisrotellini",
     title:
-      "Développeur Front-End & Intégrateur Freelance – Louis Rotellini",
+      "Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted – Louis Rotellini",
     description:
-      "React/Next.js, WordPress, performance, accessibilité & SEO.",
+      "Développeur Full-stack freelance basé à Lille. Je construis des produits web (Next.js, TypeScript) en mode AI-assisted. Ex-Decathlon, Damart, IÉSEG.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -111,13 +109,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Louis Rotellini",
-            jobTitle: "Développeur front-end freelance",
+            jobTitle: "Développeur Full-stack freelance",
             url: "https://www.louisrotellini.fr",
             sameAs: [
               "https://www.malt.fr/profile/louisrotellini",
               "https://www.linkedin.com/in/louis-rotellini/"
             ],
-            knowsAbout: ["React", "Next.js", "Tailwind CSS", "WordPress", "SEO", "Accessibilité web", "Performance web", "Intégration maquettes Figma"],
+            knowsAbout: ["Next.js", "TypeScript", "React", "Node.js", "Intégration LLM", "Agents IA", "AI-assisted development", "Tailwind CSS"],
             worksFor: { "@type": "Organization", name: "Freelance" },
             address: { "@type": "PostalAddress", addressLocality: "Lille", addressRegion: "Hauts-de-France", addressCountry: "FR" },
           }),
@@ -129,11 +127,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "Développeur front-end & intégrateur freelance – Louis Rotellini",
+            name: "Développeur Full-stack freelance – Louis Rotellini",
             url: "https://www.louisrotellini.fr",
             areaServed: ["FR", "Europe"],
-            description: "Intégration de maquettes Figma, développement React/Next.js et création de sites WordPress performants. Priorité à la performance, à l'accessibilité et au SEO.",
-            serviceType: ["Intégration HTML/CSS/JS", "Développement React/Next.js", "Création/Refonte WordPress", "Optimisation performance & SEO", "Maintenance & débogage"],
+            description: "Construction de produits web Full-stack (Next.js, TypeScript) en mode AI-assisted, intégration LLM et missions front-end / fullstack pour agences et grands comptes.",
+            serviceType: ["Construction de produits AI-assisted", "Intégration LLM", "Développement Next.js / TypeScript", "Missions front-end / fullstack"],
           }),
         }}
       />
@@ -164,9 +162,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "font-size: 13px",
             ].join(";");
 
-            console.log("%cLouis Rotellini — Développeur Front-End Freelance", styleHeader);
+            console.log("%cLouis Rotellini — Développeur Full-stack Freelance", styleHeader);
             console.log("%cPortfolio : https://www.louisrotellini.fr", styleBody);
-            console.log("%cSpécialités : React · Next.js · WordPress · Performance · Accessibilité", styleBody);
+            console.log("%cSpécialités : Next.js · TypeScript · AI-assisted · Agents IA", styleBody);
           `}
        </Script>
     </html>

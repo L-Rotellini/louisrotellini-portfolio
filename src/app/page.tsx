@@ -1,4 +1,6 @@
 import ProjectsSection from "@/components/ProjectsSection";
+import SideProjectsSection from "@/components/SideProjectsSection";
+import WorkflowSection from "@/components/WorkflowSection";
 import AnimatedSection from "@/components/AnimatedSection";
 import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
@@ -18,6 +20,11 @@ export default function Home() {
         <ClientsSection />
       </AnimatedSection>
 
+      {/* SIDE PROJECTS */}
+      <AnimatedSection id="side-projects">
+        <SideProjectsSection />
+      </AnimatedSection>
+
       {/* PROJETS */}
       <AnimatedSection id="projets">
         <ProjectsSection />
@@ -28,6 +35,11 @@ export default function Home() {
         <WorkProcessSection />
       </AnimatedSection>
 
+      {/* WORKFLOW AI-ASSISTED */}
+      <AnimatedSection id="workflow">
+        <WorkflowSection />
+      </AnimatedSection>
+
       {/* CONTACT */}
       <AnimatedSection id="contact">
         <ContactSection />
@@ -35,4 +47,3 @@ export default function Home() {
     </div>
   );
 }
-

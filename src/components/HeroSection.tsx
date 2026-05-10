@@ -45,13 +45,18 @@ export default function HeroSection() {
               Louis <span className="font-bold">ROTELLINI</span>
             </span>
             <span className="block font-normal text-[clamp(1.5rem,5vw,2.8rem)]">
-              Développeur front-end & intégrateur freelance
+              Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted
             </span>
           </h1>
 
+          <p className="text-base md:text-lg text-[--muted] max-w-2xl">
+            Je construis des produits web modernes (Next.js, TypeScript)
+            en mode AI-assisted, en m&apos;appuyant sur 5 ans d&apos;expérience front-end.
+          </p>
+
           {/* Stack */}
           <ul className="flex flex-wrap gap-2 text-sm text-[--muted]">
-            {["React", "Next.js", "Vue", "Nuxt", "Tailwind", "WordPress", "Prestashop", "Figma"].map(
+            {["React", "Next.js", "TypeScript", "Node.js", "Tailwind"].map(
               (tag) => (
                 <li
                   key={tag}
