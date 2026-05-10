@@ -90,17 +90,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={[
           GeistSans.variable,
           GeistMono.variable,
-          "min-h-dvh bg-[--background] text-[--foreground] antialiased transition-colors duration-500",
+          "min-h-dvh bg-[--paper] text-[--ink] antialiased transition-colors duration-500",
         ].join(" ")}
-        style={{
-          background: `
-            radial-gradient(circle at 10% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
-            radial-gradient(circle at 90% 30%, rgba(244, 63, 94, 0.08) 0%, transparent 40%),
-            radial-gradient(circle at 20% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
-            radial-gradient(circle at 85% 70%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
-            radial-gradient(circle at 15% 90%, rgba(168, 85, 247, 0.08) 0%, transparent 40%)
-          `
-        }}
       >
       <script
         type="application/ld+json"
@@ -139,7 +130,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <Navbar />
             <ScrollProgressBar placeBelowHeader />
-            <main className="mx-auto max-w-5xl px-4 md:px-6 pb-24">{children}</main>
+            <main className="mx-auto max-w-[1080px] px-8 pb-24">{children}</main>
             <Footer />
             <BackToTop />
         </ThemeProvider>

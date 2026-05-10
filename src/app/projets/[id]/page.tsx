@@ -14,30 +14,23 @@ type Params = Promise<{ id: string }>;
 type PageProps = { params: Params };
 type MetadataProps = { params: Params };
 
-
 export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
   const { id } = await params;
-
   const project = allProjects.find((p) => p.id === id);
 
   if (!project) {
     return {
       title: "Projet introuvable",
-      description: "Ce projet n’existe pas ou a été supprimé.",
+      description: "Ce projet n'existe pas ou a été supprimé.",
       robots: { index: false, follow: false },
     };
   }
 
   const baseUrl = "https://www.louisrotellini.fr";
   const url = `${baseUrl}/projets/${project.id}`;
-
   const description =
-    project.tagline ??
-    project.context ??
-    `Étude de cas du projet ${project.title}.`;
-
+    project.tagline ?? project.context ?? `Étude de cas du projet ${project.title}.`;
   const ogImage = project.after;
-
   const ogUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
 
   return {
@@ -61,274 +54,196 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
   };
 }
 
-
-
 export default async function ProjectPage({ params }: PageProps) {
   const { id } = await params;
 
   const project = allProjects.find((p) => p.id === id);
   if (!project) return notFound();
 
-  // ---- Nouveau modèle media ----
-  const after = project.after; // obligatoire
-  const before = project.before ?? null; // optionnel
-  const mobile = project.mobile ?? null; // optionnel
-
+  const after = project.after;
+  const before = project.before ?? null;
   const hasBeforeAfter = Boolean(before);
-  const hasMobileAside = Boolean(mobile);
 
   const problems = project.challenges ?? [];
   const actions = project.solutions ?? [];
   const mainSnippet = project.codeSnippets?.[0] ?? null;
 
+  // Suite : 2 autres projets (suivants dans la liste, ou les 2 premiers à défaut)
+  const currentIndex = allProjects.findIndex((p) => p.id === id);
+  const others = [
+    allProjects[(currentIndex + 1) % allProjects.length],
+    allProjects[(currentIndex + 2) % allProjects.length],
+  ].filter((p) => p && p.id !== id);
+
   return (
-    <article className="pt-32 pb-20 overflow-x-hidden">
-      {/* ================= HERO ================= */}
-      <section className="mx-auto  pb-10 overflow-x-hidden">
-        <div className="grid grid-cols-12 gap-4 sm:gap-6 lg:gap-8 min-w-0">
-          <div className="col-span-12 md:col-span-8 min-w-0">
-            <p className="text-sm mb-2 text-muted-foreground">
-              {project.client}
-              {project.url && (
-                <>
-                  {" · "}
-                  <a
-                    href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline hover:text-foreground"
-                  >
-                    Voir en ligne
-                  </a>
-                </>
-              )}
-            </p>
+    <article className="pt-[120px] pb-20">
+      <Link
+        href="/#projets"
+        className="inline-flex items-center gap-2 font-mono text-[12px] text-[--muted] hover:text-[--ink] transition-colors mb-9"
+      >
+        ← Retour aux projets
+      </Link>
 
-            <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-              {project.title}
-            </h1>
-
-            <p className="mt-4 text-base md:text-lg text-muted-foreground max-w-2xl">
-              {project.tagline ?? project.context}
-            </p>
-
-            {!!project.stack?.length && (
-              <div className="mt-5 flex flex-wrap gap-2">
-                {project.stack.map((t) => (
-                  <span
-                    key={t}
-                    className="text-xs px-2.5 py-1 rounded-full border border-[--surface-border] text-muted-foreground"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="col-span-12 md:col-span-4 min-w-0">
-            <dl className="rounded-2xl border border-[--surface-border] bg-[--foreground]/[0.02] p-5 min-w-0">
-              {[
-                { k: "Année", v: project.year },
-                { k: "Stack", v: project.stack?.join(" · ") },
-                { k: "Statut", v: project.status },
-                {
-                  k: "Type",
-                  v: hasBeforeAfter ? "Refonte (avant / après)" : "Réalisation",
-                },
-                { k: "Rôle", v: "Dev front + UX" },
-              ].filter((item) => Boolean(item.v)).map((item, i) => (
-                <div
-                  key={item.k}
-                  className={`grid grid-cols-[96px,1fr] gap-4 py-2 min-w-0 ${
-                    i !== 0 ? "border-t border-[--surface-border]/70" : ""
-                  }`}
-                >
-                  <dt className="text-sm text-muted-foreground">{item.k}</dt>
-                  <dd className="text-sm font-medium text-right leading-snug min-w-0 break-words">
-                    {item.v}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+      <header className="mb-12">
+        <div className="flex flex-wrap gap-x-6 gap-y-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[--muted] border-b border-[--rule] pb-3.5 mb-6">
+          <span className="text-[--ink] font-medium">{project.client}</span>
+          {project.year && <span>· {project.year}</span>}
+          {project.status && <span>· {project.status}</span>}
+          {project.url && (
+            <a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="ml-auto inline-flex items-center gap-1 hover:text-[--ink] transition-colors"
+            >
+              {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
+            </a>
+          )}
         </div>
-      </section>
 
-      {/* ================= MEDIA PRINCIPALE ================= */}
-      {hasBeforeAfter ? (
-        <section className="mx-auto  pb-14 overflow-x-hidden">
-          <h2 className="text-2xl font-semibold mb-4">Avant / Après</h2>
+        <h1 className="text-[clamp(2rem,6.5vw,64px)] font-medium tracking-[-0.04em] leading-[0.95] m-0 mb-[18px] max-w-[18ch]">
+          {project.title}.
+        </h1>
 
-          {/* Desktop : slider */}
-          <div className="hidden lg:block max-w-full overflow-hidden min-w-0">
-            <BeforeAfterSlider
-              before={before as string}
-              after={after}
-              alt={`${project.title} — avant / après`}
-            />
+        <p className="text-[clamp(1rem,2vw,20px)] leading-[1.4] text-[--muted] max-w-[64ch] m-0">
+          {project.tagline ?? project.context}
+        </p>
+
+        {!!project.stack?.length && (
+          <div className="mt-6 flex flex-wrap gap-1.5">
+            {project.stack.map((t) => (
+              <span
+                key={t}
+                className="font-mono text-[11.5px] text-[--muted] border border-[--rule] rounded-full px-2.5 py-1"
+              >
+                {t.toLowerCase()}
+              </span>
+            ))}
+          </div>
+        )}
+      </header>
+
+      {/* Media principal */}
+      <div className="my-12">
+        {hasBeforeAfter ? (
+          <>
+            <div className="hidden lg:block">
+              <BeforeAfterSlider
+                before={before as string}
+                after={after}
+                alt={`${project.title} — avant / après`}
+              />
+            </div>
+            <div className="lg:hidden">
+              <DeviceMockup type="desktop" src={after} alt={`Après — ${project.title}`} />
+            </div>
+          </>
+        ) : (
+          <DeviceMockup type="desktop" src={after} alt={project.title} />
+        )}
+      </div>
+
+      {/* Challenges / Solutions */}
+      {(problems.length > 0 || actions.length > 0) && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mt-16">
+          {problems.length > 0 && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] m-0 mb-[18px] font-medium">
+                Challenges
+              </h2>
+              <ol className="list-none p-0 m-0 [counter-reset:li]">
+                {problems.map((p, i) => (
+                  <li
+                    key={i}
+                    className="grid grid-cols-[28px_1fr] gap-2 py-3.5 border-b border-[--rule] text-[15.5px] leading-[1.5] [counter-increment:li]"
+                  >
+                    <span className="font-mono text-[11px] text-[--muted] pt-[3px]">
+                      {String(i + 1).padStart(2, "0")}.
+                    </span>
+                    <span>{p}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+
+          {actions.length > 0 && (
+            <section>
+              <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] m-0 mb-[18px] font-medium">
+                Solutions
+              </h2>
+              <ol className="list-none p-0 m-0">
+                {actions.map((a, i) => (
+                  <li
+                    key={i}
+                    className="grid grid-cols-[28px_1fr] gap-2 py-3.5 border-b border-[--rule] text-[15.5px] leading-[1.5]"
+                  >
+                    <span className="font-mono text-[11px] text-[--muted] pt-[3px]">
+                      {String(i + 1).padStart(2, "0")}.
+                    </span>
+                    <span>{a}</span>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          )}
+        </div>
+      )}
+
+      {/* Code snippet */}
+      {mainSnippet && (
+        <div className="mt-16">
+          <CodeBlock
+            title={mainSnippet.title}
+            language={mainSnippet.language as Parameters<typeof CodeBlock>[0]["language"]}
+            code={mainSnippet.code}
+          />
+        </div>
+      )}
+
+      {/* Suite — autres projets */}
+      {others.length > 0 && (
+        <section className="mt-24 pt-16 border-t border-[--rule]">
+          <div className="flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] border-b border-[--rule] pb-3.5 mb-12">
+            <span className="text-[--ink]">→ Suite</span>
+            <span>Autres projets</span>
           </div>
 
-          {/* Mobile : uniquement "Après" */}
-          <div className="lg:hidden min-w-0 max-w-full overflow-hidden">
-            <DeviceMockup type="desktop" src={after} alt={`Après — ${project.title}`} />
-          </div>
-        </section>
-      ) : (
-        <section className="mx-auto  pb-14 overflow-x-hidden">
-          <h2 className="text-2xl font-semibold mb-4">Aperçu</h2>
-          <div className="min-w-0 max-w-full overflow-hidden">
-            <DeviceMockup type="desktop" src={after} alt={project.title} />
+          <div className="border-t border-[--rule]">
+            {others.map((p) => (
+              <Link
+                key={p.id}
+                href={`/projets/${p.id}`}
+                className="group grid grid-cols-[auto_1fr_auto_auto] gap-6 py-7 border-b border-[--rule] items-center"
+              >
+                <span className="font-mono text-[12px] text-[--muted] w-7">→</span>
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[--muted]">
+                    {p.client}
+                    {p.year ? ` · ${p.year}` : ""}
+                  </span>
+                  <h3 className="text-[clamp(1.125rem,2.4vw,24px)] font-medium tracking-[-0.018em] leading-[1.15] m-0">
+                    {p.title}
+                  </h3>
+                </div>
+                <div className="hidden md:flex items-center gap-1.5">
+                  {p.stack.slice(0, 2).map((tech) => (
+                    <span
+                      key={tech}
+                      className="font-mono text-[11px] text-[--muted] border border-[--rule] rounded-full px-[9px] py-[3px]"
+                    >
+                      {tech.toLowerCase()}
+                    </span>
+                  ))}
+                </div>
+                <span className="font-mono text-[14px] text-[--muted] w-6 text-right transition-transform duration-250 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[--accent]">
+                  ↗
+                </span>
+              </Link>
+            ))}
           </div>
         </section>
       )}
-
-      {/* ================= CONCEPTION & RÉALISATION ================= */}
-      <section className="mx-auto  pt-20 pb-14 overflow-x-hidden">
-        <div className="mb-8 flex items-end justify-between gap-6">
-          <div>
-            <h2 className="text-2xl md:text-3xl font-semibold">
-              Conception & réalisation
-            </h2>
-            <p className="text-sm text-muted-foreground mt-2">
-              Problèmes rencontrés, décisions UX et livrables.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-12 gap-6 md:gap-8 items-start min-w-0">
-          {/* Colonne gauche (optionnelle) */}
-          {hasMobileAside && (
-            <aside className="col-span-12 md:col-span-4 min-w-0">
-              <h3 className="text-sm uppercase tracking-widest text-muted-foreground mb-4">
-                Aperçu mobile
-              </h3>
-
-              <div className="flex justify-center md:justify-start">
-                <div className="w-full max-w-[280px] min-w-0 overflow-hidden">
-                  <DeviceMockup type="phone" src={mobile as string} alt={`Mobile — ${project.title}`} />
-                </div>
-              </div>
-            </aside>
-          )}
-
-          {/* Colonne droite */}
-          <div
-            className={`col-span-12 min-w-0 space-y-12 ${
-              hasMobileAside ? "md:col-span-8" : "md:col-span-12"
-            }`}
-          >
-            {/* Problèmes */}
-            <div className="min-w-0">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-xl font-semibold">Problèmes identifiés</h3>
-                <span className="text-xs text-muted-foreground">
-                  {problems.length} point{problems.length > 1 ? "s" : ""}
-                </span>
-              </div>
-              <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
-                {problems.map((p, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="font-medium text-foreground/60">
-                      {i + 1}.
-                    </span>
-                    <span className="min-w-0 break-words">
-                      {p}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-
-            </div>
-
-            {/* Actions */}
-            <div className="min-w-0">
-              <div className="flex items-baseline justify-between gap-4">
-                <h3 className="text-xl font-semibold">Actions réalisées</h3>
-                <span className="text-xs text-muted-foreground">
-                  {actions.length} livrable{actions.length > 1 ? "s" : ""}
-                </span>
-              </div>
-              <ol className="mt-5 space-y-3 text-sm text-muted-foreground">
-                {actions.map((a, i) => (
-                  <li key={i} className="flex gap-3">
-                    <span className="font-medium text-foreground/60">
-                      {i + 1}.
-                    </span>
-                    <span className="min-w-0 break-words">
-                      {a}
-                    </span>
-                  </li>
-                ))}
-              </ol>
-            </div>
-
-            {/* Code */}
-            <div className="min-w-0">
-              <div className="flex items-baseline justify-between gap-4 mb-3">
-                <h3 className="text-xl font-semibold">Code</h3>
-                <span className="text-xs text-muted-foreground uppercase">
-                  {mainSnippet?.language ?? ""}
-                </span>
-              </div>
-
-              {mainSnippet ? (
-                <div className="min-w-0 max-w-full overflow-x-hidden">
-                  <CodeBlock
-                    title={mainSnippet.title}
-                    language={mainSnippet.language}
-                    code={mainSnippet.code}
-                  />
-                </div>
-              ) : (
-                <p className="text-sm text-muted-foreground max-w-2xl">
-                  {project.client === "Side project"
-                    ? "Code non public — projet personnel."
-                    : "Code non affiché pour le moment (refacto / optimisation en cours)."}
-                </p>
-              )}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ================= NAV FIN (style contact) ================= */}
-      <section className="mx-auto  pt-12 overflow-x-hidden">
-        <div className="space-y-6 text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold">Suite du parcours</h2>
-          <p className="text-sm text-muted-foreground">
-            Accéder aux autres projets ou me contacter.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            href="/#projets"
-            className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
-          >
-            Retour aux projets
-          </Link>
-
-          <Link
-            href="/#contact"
-            className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
-          >
-            Me contacter
-          </Link>
-
-
-            {project.url && (
-              <a
-                href={project.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-[--surface-border] bg-[--foreground]/5 px-6 py-3 text-sm font-medium transition-all hover:bg-[--foreground] hover:text-[--background]"
-              >
-                Voir en ligne
-              </a>
-            )}
-          </div>
-        </div>
-      </section>
     </article>
   );
 }

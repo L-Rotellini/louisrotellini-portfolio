@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
@@ -18,33 +17,25 @@ export default function Navbar() {
   useEffect(() => setMounted(true), []);
 
   const currentTheme = theme === "system" ? systemTheme : theme;
-  const logoSrc = currentTheme === "dark" ? "/logo-w.png" : "/logo-b.png";
   const activeId = useActiveSection(NAV_ITEMS.map((n) => n.id));
 
   return (
     <header
       data-header
-      className="fixed top-0 left-0 w-full border-b border-[--surface-border] z-50"
+      className="fixed top-0 left-0 w-full border-b border-[--rule] z-50 bg-[color-mix(in_oklab,var(--paper)_78%,transparent)]"
     >
-      {/* === HEADER ROW === */}
-      <div className="mx-auto max-w-5xl px-4 md:px-6 flex items-center justify-between h-16">
-        <Link href="/" scroll className="flex items-center gap-2">
-          {mounted && (
-            <Image
-              key={logoSrc}
-              src={logoSrc}
-              alt="Louis Rotellini"
-              width={36}
-              height={36}
-              priority
-              className="transition-opacity duration-300"
-            />
-          )}
+      <div className="mx-auto max-w-[1080px] px-8 flex items-center justify-between h-[60px]">
+        <Link
+          href="/"
+          scroll
+          className="font-mono text-[13px] font-medium tracking-[-0.01em] text-[--ink]"
+          aria-label="Louis Rotellini — accueil"
+        >
+          LR
         </Link>
 
-        <div className="flex items-center gap-4">
-          {/* Navigation principale (desktop) */}
-          <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
+        <div className="flex items-center gap-7">
+          <nav className="hidden sm:flex items-center gap-7 font-mono text-[12px]">
             {NAV_ITEMS.map((item) => {
               const isActive = activeId === item.id;
               return (
@@ -54,11 +45,11 @@ export default function Navbar() {
                   scroll
                   aria-current={isActive ? "page" : undefined}
                   className={[
-                    "relative inline-block py-2 transition-colors duration-200",
+                    "relative inline-block py-[6px] transition-colors duration-200",
                     isActive
-                      ? "text-[--foreground]"
-                      : "text-[--muted] hover:text-[--foreground]",
-                    "after:absolute after:left-0 after:-bottom-[2px] after:h-[2px] after:bg-[--link-underline]",
+                      ? "text-[--ink]"
+                      : "text-[--muted] hover:text-[--ink]",
+                    "after:absolute after:left-0 after:-bottom-[2px] after:h-[1px] after:bg-[--ink]",
                     "after:w-0 hover:after:w-full after:transition-[width] after:duration-300",
                     isActive ? "after:w-full" : "",
                   ].join(" ")}
@@ -69,7 +60,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Toggle thème */}
           {mounted && (
             <button
               type="button"
@@ -77,21 +67,20 @@ export default function Navbar() {
                 setTheme(currentTheme === "dark" ? "light" : "dark")
               }
               aria-label="Basculer le thème"
-              className="p-2 rounded-md border border-[--surface-border] hover:bg-[--foreground]/5 transition-colors"
+              className="w-8 h-8 rounded-full border border-[--rule-strong] inline-flex items-center justify-center text-[--ink] hover:bg-[--paper-2] transition-colors"
             >
               {currentTheme === "dark" ? (
-                <Sun className="size-4 transition-transform duration-200" />
+                <Sun className="size-3.5" />
               ) : (
-                <Moon className="size-4 transition-transform duration-200" />
+                <Moon className="size-3.5" />
               )}
             </button>
           )}
         </div>
       </div>
 
-      {/* === NAV MOBILE === */}
       <nav
-        className="sm:hidden -mx-2 overflow-x-auto border-t border-[--surface-border] bg-[--background]/95"
+        className="sm:hidden overflow-x-auto border-t border-[--rule]"
         aria-label="Navigation mobile"
       >
         <ul className="flex items-center gap-2 px-4 py-2 justify-center">
@@ -104,10 +93,10 @@ export default function Navbar() {
                   scroll
                   aria-current={isActive ? "page" : undefined}
                   className={[
-                    "whitespace-nowrap px-3 py-2 text-sm",
+                    "whitespace-nowrap px-3 py-2 font-mono text-[12px]",
                     isActive
-                      ? "border-[--foreground] text-[--foreground]"
-                      : "border-[--surface-border] text-[--muted] hover:text-[--foreground]",
+                      ? "text-[--ink]"
+                      : "text-[--muted] hover:text-[--ink]",
                   ].join(" ")}
                 >
                   {item.label}

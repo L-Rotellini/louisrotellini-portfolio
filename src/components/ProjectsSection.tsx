@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
 import projects from "@/data/projects";
-import { ArrowUpRight } from "lucide-react";
+import SectionEyebrow from "./SectionEyebrow";
 
 export default function ProjectsSection() {
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
@@ -19,74 +19,64 @@ export default function ProjectsSection() {
     : null;
 
   return (
-    <section id="projets" aria-labelledby="projets-title" className="space-y-8">
-      <div className="space-y-2">
-        <h2 id="projets-title">Projets</h2>
-        <p className="text-base text-[--muted] max-w-2xl">
-          Sélection de projets clients récents en intégration et développement front-end.
-        </p>
-      </div>
+    <section
+      id="projets"
+      aria-labelledby="projets-title"
+      className="py-24"
+    >
+      <SectionEyebrow idx="03" label="Projets" meta="Sélection 2025-2026" />
+
+      <h2
+        id="projets-title"
+        className="text-[clamp(2.25rem,6vw,56px)] font-medium tracking-[-0.035em] leading-[0.95] m-0 max-w-[18ch]"
+      >
+        Sélection clients récents.
+      </h2>
+      <p className="mt-4 text-[16px] text-[--muted] max-w-[48ch] mb-12">
+        Front-end et intégration sur des produits à fort trafic — Magento,
+        WordPress, environnements contraints.
+      </p>
 
       <div className="relative" onMouseMove={handleMouseMove}>
-        {/* Liste */}
-        <div className="divide-y divide-[--surface-border]">
-          {projects.map((project) => (
+        <div className="border-t border-[--rule]">
+          {projects.map((project, i) => (
             <Link
               key={project.id}
               href={`/projets/${project.id}`}
-              className="group flex items-center gap-4 py-6 cursor-pointer"
+              className="group grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_auto_auto] gap-4 md:gap-6 py-7 border-b border-[--rule] items-center"
               onMouseEnter={() => setHoveredProjectId(project.id)}
               onMouseLeave={() => setHoveredProjectId(null)}
             >
-              {/* Thumbnail mobile */}
-              <div className="relative w-16 h-12 flex-shrink-0 rounded-lg overflow-hidden border border-[--surface-border] md:hidden">
-                <Image
-                  src={project.after}
-                  alt={project.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="flex-1 min-w-0 space-y-2">
-                <span className="inline-block text-[11px] text-[--muted] border border-[--surface-border] rounded-full px-2 py-0.5">
+              <span className="font-mono text-[12px] text-[--muted] w-7">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="flex flex-col gap-1 min-w-0">
+                <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[--muted]">
                   {project.client}
+                  {project.year ? ` · ${project.year}` : ""}
                 </span>
-                <h3 className="text-lg md:text-2xl font-semibold leading-snug group-hover:text-[--muted] transition-colors">
+                <h3 className="text-[clamp(1.125rem,2.4vw,24px)] font-medium tracking-[-0.018em] leading-[1.15] m-0 truncate">
                   {project.title}
                 </h3>
-                <div className="flex flex-wrap items-center gap-2 md:hidden">
-                  {project.stack.slice(0, 3).map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-[11px] text-[--muted] border border-[--surface-border] px-2 py-0.5 rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
               </div>
-
-              {/* Stack - desktop only */}
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden md:flex items-center gap-1.5">
                 {project.stack.slice(0, 3).map((tech) => (
                   <span
                     key={tech}
-                    className="text-xs text-[--muted] border border-[--surface-border] px-2 py-1 rounded-full"
+                    className="font-mono text-[11px] text-[--muted] border border-[--rule] rounded-full px-[9px] py-[3px]"
                   >
-                    {tech}
+                    {tech.toLowerCase()}
                   </span>
                 ))}
               </div>
-
-              {/* Arrow */}
-              <ArrowUpRight className="size-5 text-[--muted] flex-shrink-0 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              <span className="font-mono text-[14px] text-[--muted] w-6 text-right transition-transform duration-250 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[--accent]">
+                ↗
+              </span>
             </Link>
           ))}
         </div>
 
-        {/* Image flottante (desktop only) */}
+        {/* Hover preview cursor-follow — RÈGLE 0 : ne pas toucher */}
         {hoveredProject && (
           <div
             className="fixed pointer-events-none z-[9999] w-80 aspect-video rounded-xl overflow-hidden border border-[--surface-border] shadow-2xl hidden md:block"

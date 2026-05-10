@@ -9,7 +9,7 @@ import WorkProcessSection from "@/components/WorkProcessSection";
 
 export default function Home() {
   return (
-    <div className="py-16 space-y-32">
+    <div>
       {/* HERO */}
       <AnimatedSection immediate>
         <HeroSection />

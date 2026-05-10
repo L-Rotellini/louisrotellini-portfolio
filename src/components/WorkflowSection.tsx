@@ -1,10 +1,10 @@
-import { Fragment } from "react";
+import SectionEyebrow from "./SectionEyebrow";
 
-const steps = [
-  { label: "Specs + contexte", note: "humain" },
-  { label: "Claude Code", note: "génération" },
-  { label: "Revue + tests", note: "humain" },
-  { label: "Production", note: "livraison" },
+const rows = [
+  { num: "01", step: "Specs · contexte", role: "humain" as const, pct: "—" },
+  { num: "02", step: "Claude Code · génération", role: "agent" as const, pct: "~70%" },
+  { num: "03", step: "Revue · tests", role: "humain" as const, pct: "100%" },
+  { num: "04", step: "Production · livraison", role: "humain" as const, pct: "—" },
 ];
 
 const tools = ["claude-code", "cursor", "next.js 15", "typescript", "git"];
@@ -14,89 +14,79 @@ export default function WorkflowSection() {
     <section
       id="workflow"
       aria-labelledby="workflow-title"
-      className="flex flex-col gap-6 sm:gap-9"
+      className="py-24"
     >
-      {/* Eyebrow */}
-      <div className="flex items-baseline gap-4">
-        <span className="text-xs uppercase tracking-[0.18em] text-[--muted]">
-          Workflow
-        </span>
-        <span className="flex-1 h-px bg-[--surface-border]" />
-        <span className="font-mono text-[0.72rem] text-[--muted]">
-          ai-assisted
-        </span>
-      </div>
+      <SectionEyebrow
+        idx="05"
+        label="Workflow"
+        meta="ai-assisted, human-led"
+      />
 
-      {/* Manifesto (2-col) */}
-      <div className="grid grid-cols-1 sm:grid-cols-[1fr_2.2fr] gap-6 sm:gap-12 items-start">
-        <div className="flex flex-col gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-start">
+        <div>
           <h2
             id="workflow-title"
-            className="text-[clamp(1.4rem,1.8vw,1.6rem)] font-semibold tracking-[-0.02em] leading-[1.15]"
+            className="text-[32px] font-medium tracking-[-0.025em] leading-[1.05] m-0 mb-3"
           >
             Mon workflow AI-assisted
           </h2>
-          <p className="text-[0.92rem] text-[--muted] max-w-[32ch]">
-            Je pilote Claude Code et les outils IA équivalents sur l&apos;ensemble du
-            cycle de développement.
+          <p className="text-[16px] text-[--muted] max-w-[36ch] m-0">
+            Je pilote Claude Code et les outils IA équivalents sur
+            l&apos;ensemble du cycle de développement.
           </p>
         </div>
 
-        <div className="relative">
-          <span
-            aria-hidden="true"
-            className="absolute -top-8 -left-3 text-[5.5rem] leading-none text-[--surface-border] font-serif"
-          >
-            &ldquo;
-          </span>
-          <p className="text-[clamp(1.6rem,2.4vw,2.05rem)] font-normal leading-[1.25] tracking-[-0.02em] text-balance">
-            L&apos;IA accélère l&apos;écriture du code.
+        <div>
+          <blockquote className="text-[clamp(1.5rem,3.4vw,36px)] font-medium tracking-[-0.025em] leading-[1.05] max-w-[22ch] m-0">
+            L&apos;IA accélère le code.
             <br />
             <span className="text-[--muted]">
-              La structuration du contexte, la validation et les décisions critiques{" "}
-              <span className="text-[--foreground]">restent humaines.</span>
+              Le contexte, la validation et les décisions critiques restent
+              humains.
             </span>
-          </p>
-        </div>
-      </div>
+          </blockquote>
 
-      {/* Pipeline */}
-      <div className="border border-[--surface-border] rounded-[10px] px-5 sm:px-6 py-5 flex flex-col sm:flex-row sm:items-center gap-3 font-mono text-[0.78rem]">
-        {steps.map((s, i) => (
-          <Fragment key={s.label}>
-            <div className="flex flex-col gap-1 flex-1 min-w-0">
-              <span className="text-[--muted] text-[0.65rem] uppercase tracking-[0.14em]">
-                {String(i + 1).padStart(2, "0")} · {s.note}
-              </span>
-              <span className="text-[--foreground] font-medium">{s.label}</span>
-            </div>
-            {i < steps.length - 1 && (
-              <span
-                aria-hidden="true"
-                className="text-[--muted] text-[0.85rem] self-start sm:self-center pl-2 sm:pl-0"
+          <div className="mt-9 border-t border-[--rule]">
+            {rows.map((r) => (
+              <div
+                key={r.num}
+                className="grid grid-cols-[40px_1fr_auto_60px] md:grid-cols-[48px_1fr_140px_80px] gap-[18px] py-[18px] border-b border-[--rule] items-center font-mono text-[12px] text-[--muted]"
               >
-                <span className="sm:hidden">↓</span>
-                <span className="hidden sm:inline">→</span>
-              </span>
-            )}
-          </Fragment>
-        ))}
-      </div>
+                <span>{r.num}</span>
+                <span className="font-sans text-[15px] md:text-[17px] font-medium tracking-[-0.005em] text-[--ink]">
+                  {r.step}
+                </span>
+                {r.role === "humain" ? (
+                  <span className="inline-flex items-center gap-2 text-[--ink]">
+                    <span aria-hidden="true">●</span>humain
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-2 text-[--accent]">
+                    <span aria-hidden="true">◆</span>agent
+                  </span>
+                )}
+                <span className="text-right">{r.pct}</span>
+              </div>
+            ))}
+          </div>
 
-      {/* Stack */}
-      <div className="flex items-center gap-2.5 flex-wrap">
-        <span className="text-[0.7rem] uppercase tracking-[0.18em] text-[--muted]">
-          Stack
-        </span>
-        <span className="w-6 h-px bg-[--surface-border]" />
-        {tools.map((t) => (
-          <span
-            key={t}
-            className="font-mono text-[0.74rem] text-[--muted] px-2 py-[3px] border border-[--surface-border] rounded"
-          >
-            {t}
-          </span>
-        ))}
+          <div className="mt-8 flex items-center gap-3.5 flex-wrap font-mono text-[11px] uppercase tracking-[0.1em] text-[--muted]">
+            <span className="inline-flex items-center gap-2.5">
+              Stack
+              <span aria-hidden="true" className="w-6 h-px bg-[--rule-strong]" />
+            </span>
+            <div className="flex flex-wrap gap-1.5 normal-case tracking-normal">
+              {tools.map((t) => (
+                <span
+                  key={t}
+                  className="border border-[--rule] rounded px-2 py-[3px]"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

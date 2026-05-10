@@ -82,7 +82,7 @@ export default function ScrollProgressBar({
       aria-hidden
     >
       <div
-        className="h-full bg-[var(--progress-bar,_currentColor)]"
+        className="h-full bg-[--ink]"
         style={{
           width: `${progress * 100}%`,
           transition: "width 120ms linear",

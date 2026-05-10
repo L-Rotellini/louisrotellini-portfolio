@@ -17,25 +17,19 @@ export default function BeforeAfterSlider({
   const [position, setPosition] = useState(50);
 
   return (
-    <div className="rounded-xl overflow-hidden bg-[#1a1a1a]">
-      {/* Browser bar */}
-      <div className="flex items-center gap-2 px-4 py-3 bg-[#2d2d2d] border-b border-[#3d3d3d]">
+    <div className="rounded-[12px] overflow-hidden bg-[--paper] border border-[--rule]">
+      <div className="flex items-center gap-2 px-4 h-[38px] bg-[--paper-2] border-b border-[--rule]">
         <div className="flex gap-1.5">
-          <span className="w-3 h-3 rounded-full bg-[#ff5f56]" />
-          <span className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
-          <span className="w-3 h-3 rounded-full bg-[#27ca40]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[--rule-strong]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[--rule-strong]" />
+          <span className="w-2.5 h-2.5 rounded-full bg-[--rule-strong]" />
         </div>
-
         <div className="flex-1 mx-4">
-          <div className="bg-[#1e1e1e] rounded-md px-3 py-1 text-xs text-gray-500 max-w-md">
-            {/* volontairement vide : style only */}
-          </div>
+          <div className="bg-[--paper] border border-[--rule] rounded-md px-3 py-1 text-[11px] font-mono text-[--muted] max-w-md mx-auto" />
         </div>
       </div>
 
-      {/* Slider */}
-      <div className="relative aspect-video cursor-ew-resize select-none">
-        {/* After image (background) */}
+      <div className="relative aspect-video cursor-ew-resize select-none bg-[--paper]">
         <Image
           src={after}
           alt={`${alt ?? ""} après`}
@@ -44,7 +38,6 @@ export default function BeforeAfterSlider({
           sizes="(min-width: 1024px) 900px, 100vw"
         />
 
-        {/* Before image (clipped) */}
         <div
           className="absolute inset-0 overflow-hidden"
           style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
@@ -58,15 +51,13 @@ export default function BeforeAfterSlider({
           />
         </div>
 
-        {/* Slider line */}
         <div
-          className="absolute top-0 bottom-0 w-1 bg-white shadow-lg"
+          className="absolute top-0 bottom-0 w-px bg-[--paper] shadow-[0_0_0_1px_var(--rule-strong)]"
           style={{ left: `${position}%`, transform: "translateX(-50%)" }}
         >
-          {/* Handle */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 bg-[--paper] border border-[--rule-strong] rounded-full shadow-lg flex items-center justify-center">
             <svg
-              className="w-5 h-5 text-gray-800"
+              className="w-4 h-4 text-[--ink]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -81,15 +72,13 @@ export default function BeforeAfterSlider({
           </div>
         </div>
 
-        {/* Labels */}
-        <span className="absolute top-4 left-4 text-xs font-medium bg-black/70 text-white px-3 py-1.5 rounded-full">
+        <span className="absolute top-3 left-3 font-mono text-[10.5px] uppercase tracking-[0.12em] bg-[--ink]/85 text-[--paper] px-2.5 py-1 rounded-full">
           Avant
         </span>
-        <span className="absolute top-4 right-4 text-xs font-medium bg-black/70 text-white px-3 py-1.5 rounded-full">
+        <span className="absolute top-3 right-3 font-mono text-[10.5px] uppercase tracking-[0.12em] bg-[--ink]/85 text-[--paper] px-2.5 py-1 rounded-full">
           Après
         </span>
 
-        {/* Invisible slider input */}
         <input
           type="range"
           min="0"
@@ -97,6 +86,7 @@ export default function BeforeAfterSlider({
           value={position}
           onChange={(e) => setPosition(Number(e.target.value))}
           className="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize"
+          aria-label="Comparer avant/après"
         />
       </div>
     </div>
