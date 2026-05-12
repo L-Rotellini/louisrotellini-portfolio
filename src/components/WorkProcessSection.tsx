@@ -12,8 +12,8 @@ const items = [
     metaEnd: "↳ Régie / forfait",
   },
   {
-    title: "Missions front-end / fullstack confirmées",
-    text: "Refontes, modules, intégrations modernes pour agences et grands comptes. React, Next.js, TypeScript.",
+    title: "Missions AI Product Engineer / front-end confirmées",
+    text: "Refontes, modules, intégrations modernes IA pour agences et grands comptes. React, Next.js, TypeScript, intégration LLM.",
     metaEnd: "↳ Agences · grands comptes",
   },
 ];

@@ -13,14 +13,14 @@ export default function SideProjectsSection() {
       <SectionEyebrow
         idx="02"
         label="Side projects"
-        meta={`${sideProjects.length} produits perso`}
+        meta={`${sideProjects.length} produits IA`}
       />
 
       <h2
         id="side-projects-title"
         className="text-[clamp(2.25rem,6vw,56px)] font-medium tracking-[-0.035em] leading-[0.95] m-0 max-w-[18ch]"
       >
-        Mes produits perso, en autonomie.
+        Mes produits IA, en autonomie.
       </h2>
       <p className="mt-4 text-[16px] text-[--muted] max-w-[48ch] mb-12">
         Construits en mode AI-assisted, du cadrage à la mise en prod. Stack :
@@ -45,7 +45,7 @@ export default function SideProjectsSection() {
             </div>
             <div className="flex flex-col gap-2.5 p-5 flex-1">
               <div className="flex items-center justify-between font-mono text-[10.5px] uppercase tracking-[0.1em] text-[--muted]">
-                <span>SIDE PROJECT</span>
+                <span>PRODUIT</span>
                 <span className="font-mono text-[13px] text-[--muted] transition-transform duration-250 group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:text-[--accent]">
                   ↗
                 </span>

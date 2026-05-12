@@ -14,20 +14,24 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.louisrotellini.fr"),
   title: {
     default:
-      "Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted – Louis Rotellini",
+      "Louis Rotellini · AI Product Engineer freelance Next.js",
     template: "%s | Louis Rotellini",
   },
   description:
-    "Développeur Full-stack freelance basé à Lille. Je construis des produits web (Next.js, TypeScript) en mode AI-assisted. Ex-Decathlon, Damart, IÉSEG.",
+    "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
   keywords: [
-    "Développeur Full-stack freelance",
+    "AI Product Engineer",
+    "Développeur freelance",
+    "Claude Code",
     "AI-assisted",
     "Next.js",
     "TypeScript",
     "React",
     "Node.js",
     "agents IA",
-    "intégration LLM",
+    "RAG",
+    "MCP",
+    "Mistral",
     "Lille",
     "Paris",
     "freelance",
@@ -54,15 +58,15 @@ export const metadata: Metadata = {
     url: "https://www.louisrotellini.fr",
     siteName: "Louis Rotellini",
     title:
-      "Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted – Louis Rotellini",
+      "AI Product Engineer freelance · Next.js, Claude Code, agents IA",
     description:
-      "Développeur Full-stack freelance basé à Lille. Je construis des produits web (Next.js, TypeScript) en mode AI-assisted. Ex-Decathlon, Damart, IÉSEG.",
+      "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Portfolio de Louis Rotellini – développeur Full-stack freelance · Next.js, TypeScript, AI-assisted",
+        alt: "Portfolio de Louis Rotellini – AI Product Engineer freelance · Next.js, Claude Code",
       },
     ],
   },
@@ -71,9 +75,9 @@ export const metadata: Metadata = {
     site: "@louisrotellini",
     creator: "@louisrotellini",
     title:
-      "Développeur Full-stack freelance · Next.js, TypeScript, AI-assisted – Louis Rotellini",
+      "AI Product Engineer freelance · Next.js, Claude Code, agents IA",
     description:
-      "Développeur Full-stack freelance basé à Lille. Je construis des produits web (Next.js, TypeScript) en mode AI-assisted. Ex-Decathlon, Damart, IÉSEG.",
+      "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -100,13 +104,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Louis Rotellini",
-            jobTitle: "Développeur Full-stack freelance",
+            jobTitle: "AI Product Engineer",
+            description: "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
             url: "https://www.louisrotellini.fr",
             sameAs: [
               "https://www.malt.fr/profile/louisrotellini",
               "https://www.linkedin.com/in/louis-rotellini/"
             ],
-            knowsAbout: ["Next.js", "TypeScript", "React", "Node.js", "Intégration LLM", "Agents IA", "AI-assisted development", "Tailwind CSS"],
+            knowsAbout: ["Next.js", "TypeScript", "React", "Node.js", "Claude Code", "Agents IA", "RAG", "MCP", "Mistral", "Intégration LLM", "AI-assisted development", "Tailwind CSS"],
             worksFor: { "@type": "Organization", name: "Freelance" },
             address: { "@type": "PostalAddress", addressLocality: "Lille", addressRegion: "Hauts-de-France", addressCountry: "FR" },
           }),
@@ -118,11 +123,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "Développeur Full-stack freelance – Louis Rotellini",
+            name: "AI Product Engineer freelance – Louis Rotellini",
             url: "https://www.louisrotellini.fr",
             areaServed: ["FR", "Europe"],
-            description: "Construction de produits web Full-stack (Next.js, TypeScript) en mode AI-assisted, intégration LLM et missions front-end / fullstack pour agences et grands comptes.",
-            serviceType: ["Construction de produits AI-assisted", "Intégration LLM", "Développement Next.js / TypeScript", "Missions front-end / fullstack"],
+            description: "Pilotage de Claude Code pour livrer des produits IA en autonomie (Next.js, TypeScript), intégration LLM et missions AI Product Engineer / front-end pour agences et grands comptes.",
+            serviceType: ["Construction de produits IA en autonomie", "Pilotage Claude Code", "Intégration LLM", "Développement Next.js / TypeScript", "Missions AI Product Engineer / front-end"],
           }),
         }}
       />
@@ -153,9 +158,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "font-size: 13px",
             ].join(";");
 
-            console.log("%cLouis Rotellini — Développeur Full-stack Freelance", styleHeader);
+            console.log("%cLouis Rotellini — AI Product Engineer freelance", styleHeader);
             console.log("%cPortfolio : https://www.louisrotellini.fr", styleBody);
-            console.log("%cSpécialités : Next.js · TypeScript · AI-assisted · Agents IA", styleBody);
+            console.log("%cSpécialités : Claude Code · Next.js · TypeScript · Agents IA", styleBody);
           `}
        </Script>
     </html>

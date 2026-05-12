@@ -14,7 +14,7 @@ export interface Profile {
 
 export const profile = {
   name: "Louis Rotellini",
-  title: "Développeur Full-stack freelance",
+  title: "AI Product Engineer freelance",
   location: "Lille / Paris",
   email: "louis.rotellini@gmail.com",
   phone: "",

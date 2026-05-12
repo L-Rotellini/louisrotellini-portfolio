@@ -5,7 +5,7 @@ const sideProjects: Project[] = [
     id: "doctap",
     client: "Side project",
     title: "DocTap",
-    tagline: "PWA + OCR · MVP terminé",
+    tagline: "PWA OCR documents · En production publique",
     context:
       "Application web qui transforme des photos de documents en PDF organisés et recherchables. Stockage local-first, déployée sur Vercel.",
     stack: ["Next.js", "TypeScript", "OCR", "Vercel", "PWA"],
@@ -28,7 +28,7 @@ const sideProjects: Project[] = [
     id: "rekap",
     client: "Side project",
     title: "Rekap",
-    tagline: "Agent IA pour équipes commerciales · En développement",
+    tagline: "Agent IA pour équipes commerciales · POC en cadrage",
     context:
       "Agent IA qui génère des fiches client synthétiques avant les visites commerciales. Réduit le temps de préparation de plusieurs minutes par visite.",
     stack: ["Next.js", "TypeScript", "agents IA"],
@@ -50,7 +50,7 @@ const sideProjects: Project[] = [
     id: "relancia",
     client: "Side project",
     title: "RelancIA",
-    tagline: "Agent de relance facturation · En développement",
+    tagline: "Agent de relance facturation · MVP en déploiement chez un client",
     context:
       "Agent IA qui automatise la relance des factures impayées pour les PME. Tonalité personnalisable, suivi des relances.",
     stack: ["Next.js", "TypeScript", "agents IA"],
