@@ -36,7 +36,7 @@ export default function HeroSection() {
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2 font-mono text-[11.5px] text-[--muted]">
-            {["react", "next.js", "typescript", "node.js", "tailwind"].map(
+            {["claude code", "next.js", "typescript", "agents ia", "rag", "react", "node.js"].map(
               (tag) => (
                 <li
                   key={tag}
