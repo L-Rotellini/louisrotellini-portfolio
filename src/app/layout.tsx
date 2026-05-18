@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.louisrotellini.fr"),
   title: {
     default:
-      "Louis Rotellini · AI Product Engineer freelance Next.js",
+      "Louis Rotellini · Développeur Senior React / Next.js · AI-Native workflow",
     template: "%s | Louis Rotellini",
   },
   description:
-    "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
+    "Développeur Senior freelance à Lille. React, Next.js, TypeScript. Workflow AI-Native avec Claude Code. 10 ans XP grands comptes.",
   keywords: [
     "AI Product Engineer",
     "Développeur freelance",
@@ -58,9 +58,9 @@ export const metadata: Metadata = {
     url: "https://www.louisrotellini.fr",
     siteName: "Louis Rotellini",
     title:
-      "AI Product Engineer freelance · Next.js, Claude Code, agents IA",
+      "Développeur Senior React / Next.js · AI-Native workflow · Claude Code",
     description:
-      "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
+      "Développeur Senior freelance à Lille. React, Next.js, TypeScript. Workflow AI-Native avec Claude Code. 10 ans XP grands comptes.",
     images: [
       {
         url: "/og-image.jpg",
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
     site: "@louisrotellini",
     creator: "@louisrotellini",
     title:
-      "AI Product Engineer freelance · Next.js, Claude Code, agents IA",
+      "Développeur Senior React / Next.js · AI-Native workflow · Claude Code",
     description:
-      "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
+      "Développeur Senior freelance à Lille. React, Next.js, TypeScript. Workflow AI-Native avec Claude Code. 10 ans XP grands comptes.",
     images: ["/og-image.jpg"],
   },
   icons: {

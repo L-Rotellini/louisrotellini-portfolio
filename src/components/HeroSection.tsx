@@ -29,10 +29,10 @@ export default function HeroSection() {
           </h1>
 
           <p className="mt-8 text-[clamp(1.125rem,2.4vw,24px)] leading-[1.3] tracking-[-0.005em] text-[--muted] max-w-[36ch]">
-            AI Product Engineer freelance. Je pilote{" "}
-            <b className="text-[--ink] font-medium">Claude Code</b> pour livrer
-            des produits IA en autonomie, de l&apos;idée à la prod. Next.js,
-            TypeScript, agents IA. Ex-Decathlon, Damart, IÉSEG.
+            Développeur Senior freelance · React, Next.js, TypeScript · 10 ans
+            XP. Workflow AI-Native avec{" "}
+            <b className="text-[--ink] font-medium">Claude Code</b>. Je cadre, je
+            valide, je livre vite et proprement. Ex-Decathlon, Damart, IÉSEG.
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2 font-mono text-[11.5px] text-[--muted]">
