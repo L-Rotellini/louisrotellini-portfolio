@@ -16,6 +16,7 @@ export default function Footer() {
               className="hover:text-[--ink] transition-colors"
             >
               LinkedIn
+              <span className="sr-only"> (nouvel onglet)</span>
             </a>
           )}
           {profile.maltUrl && (
@@ -26,6 +27,7 @@ export default function Footer() {
               className="hover:text-[--ink] transition-colors"
             >
               Malt
+              <span className="sr-only"> (nouvel onglet)</span>
             </a>
           )}
           <a

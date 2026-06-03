@@ -50,7 +50,7 @@ const sideProjects: Project[] = [
     id: "relancia",
     client: "Side project",
     title: "RelancIA",
-    tagline: "Agent de relance facturation · MVP en déploiement chez un client",
+    tagline: "Agent de relance facturation · Prototype testé sur un premier cas",
     context:
       "Agent IA qui automatise la relance des factures impayées pour les PME. Tonalité personnalisable, suivi des relances.",
     stack: ["Next.js", "TypeScript", "agents IA"],

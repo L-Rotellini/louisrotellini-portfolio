@@ -3,18 +3,18 @@ import SectionEyebrow from "./SectionEyebrow";
 const items = [
   {
     title: "Construction de produits AI-assisted",
-    text: "MVP livrés en 2-4 semaines. Next.js, TypeScript, intégration LLM si pertinent.",
-    metaEnd: "↳ Mission cadrée",
+    text: "Du cadrage au produit fonctionnel, en pilotant des agents IA pour avancer vite sans sacrifier la qualité. Next.js, TypeScript, intégration LLM quand elle apporte de la valeur.",
+    metaEnd: "↳ Produit",
   },
   {
-    title: "Intégration LLM dans vos produits",
-    text: "Agents, OCR, RAG, pour vos workflows internes ou produits clients.",
-    metaEnd: "↳ Régie / forfait",
+    title: "Intégration LLM",
+    text: "Connecter des modèles de langage à des interfaces et des workflows concrets : agents, OCR, RAG.",
+    metaEnd: "↳ IA appliquée",
   },
   {
-    title: "Missions AI Product Engineer / front-end confirmées",
-    text: "Refontes, modules, intégrations modernes IA pour agences et grands comptes. React, Next.js, TypeScript, intégration LLM.",
-    metaEnd: "↳ Agences · grands comptes",
+    title: "Front-end React/Next.js moderne",
+    text: "Refontes, modules et intégrations : interfaces rapides, accessibles et maintenables en React, Next.js, TypeScript.",
+    metaEnd: "↳ Front-end",
   },
 ];
 
@@ -27,15 +27,15 @@ export default function WorkProcessSection() {
     >
       <SectionEyebrow
         idx="04"
-        label="Comment je travaille"
-        meta="3 missions-types"
+        label="Comment j'aborde un projet"
+        meta="approche & expertise"
       />
 
       <h2
         id="process-title"
         className="text-[clamp(2.25rem,6vw,56px)] font-medium tracking-[-0.035em] leading-[0.95] m-0 max-w-[18ch]"
       >
-        Comment je travaille.
+        Comment j&apos;aborde un projet.
       </h2>
       <p className="mt-4 text-[16px] text-[--muted] max-w-[48ch] mb-12">
         Basé à Lille, je travaille en distanciel partout en France et au
@@ -68,9 +68,7 @@ export default function WorkProcessSection() {
       </div>
 
       <p className="mt-8 text-[14px] text-[--muted] max-w-[64ch]">
-        Mes clients récents : Decathlon, Damart, IÉSEG. En général, je rentre
-        sur un projet en moins d&apos;une semaine et je livre dans les délais
-        convenus.
+        Mes clients récents : Decathlon, Damart, IÉSEG.
       </p>
     </section>
   );

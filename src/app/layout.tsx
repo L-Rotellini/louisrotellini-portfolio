@@ -14,15 +14,16 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.louisrotellini.fr"),
   title: {
     default:
-      "Louis Rotellini · Développeur Senior React / Next.js · AI-Native workflow",
+      "Louis Rotellini · Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
     template: "%s | Louis Rotellini",
   },
   description:
-    "Développeur Senior freelance à Lille. React, Next.js, TypeScript. Workflow AI-Native avec Claude Code. 10 ans XP grands comptes.",
+    "Développeur Front-End Senior. 10 ans de dev web, React/Next.js/TypeScript, workflow AI-Native avec Claude Code. Produits IA et références grands comptes.",
   keywords: [
-    "AI Product Engineer",
-    "Développeur freelance",
+    "Développeur Front-End Senior",
+    "Développeur React / Next.js",
     "Claude Code",
+    "AI-Native",
     "AI-assisted",
     "Next.js",
     "TypeScript",
@@ -34,7 +35,6 @@ export const metadata: Metadata = {
     "Mistral",
     "Lille",
     "Paris",
-    "freelance",
   ],
   authors: [{ name: "Louis Rotellini", url: "https://www.louisrotellini.fr" }],
   alternates: {
@@ -58,15 +58,15 @@ export const metadata: Metadata = {
     url: "https://www.louisrotellini.fr",
     siteName: "Louis Rotellini",
     title:
-      "Développeur Senior React / Next.js · AI-Native workflow · Claude Code",
+      "Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
     description:
-      "Développeur Senior freelance à Lille. React, Next.js, TypeScript. Workflow AI-Native avec Claude Code. 10 ans XP grands comptes.",
+      "Développeur Front-End Senior. 10 ans de dev web, React/Next.js/TypeScript, workflow AI-Native avec Claude Code. Produits IA et références grands comptes.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Portfolio de Louis Rotellini – AI Product Engineer freelance · Next.js, Claude Code",
+        alt: "Portfolio de Louis Rotellini – Développeur Front-End Senior · React / Next.js · Claude Code",
       },
     ],
   },
@@ -75,9 +75,9 @@ export const metadata: Metadata = {
     site: "@louisrotellini",
     creator: "@louisrotellini",
     title:
-      "Développeur Senior React / Next.js · AI-Native workflow · Claude Code",
+      "Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
     description:
-      "Développeur Senior freelance à Lille. React, Next.js, TypeScript. Workflow AI-Native avec Claude Code. 10 ans XP grands comptes.",
+      "Développeur Front-End Senior. 10 ans de dev web, React/Next.js/TypeScript, workflow AI-Native avec Claude Code. Produits IA et références grands comptes.",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -104,15 +104,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Louis Rotellini",
-            jobTitle: "AI Product Engineer",
-            description: "AI Product Engineer freelance à Lille. Je pilote Claude Code pour livrer des produits IA en autonomie. Ex-Decathlon, Damart, IÉSEG.",
+            jobTitle: "Développeur Front-End Senior",
+            description: "Développeur Front-End Senior à Lille. React, Next.js, TypeScript, workflow AI-Native avec Claude Code. Ex-Decathlon, Damart, IÉSEG.",
             url: "https://www.louisrotellini.fr",
             sameAs: [
               "https://www.malt.fr/profile/louisrotellini",
               "https://www.linkedin.com/in/louis-rotellini/"
             ],
             knowsAbout: ["Next.js", "TypeScript", "React", "Node.js", "Claude Code", "Agents IA", "RAG", "MCP", "Mistral", "Intégration LLM", "AI-assisted development", "Tailwind CSS"],
-            worksFor: { "@type": "Organization", name: "Freelance" },
             address: { "@type": "PostalAddress", addressLocality: "Lille", addressRegion: "Hauts-de-France", addressCountry: "FR" },
           }),
         }}
@@ -123,11 +122,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "AI Product Engineer freelance – Louis Rotellini",
+            name: "Louis Rotellini – Développeur Front-End Senior",
             url: "https://www.louisrotellini.fr",
             areaServed: ["FR", "Europe"],
-            description: "Pilotage de Claude Code pour livrer des produits IA en autonomie (Next.js, TypeScript), intégration LLM et missions AI Product Engineer / front-end pour agences et grands comptes.",
-            serviceType: ["Construction de produits IA en autonomie", "Pilotage Claude Code", "Intégration LLM", "Développement Next.js / TypeScript", "Missions AI Product Engineer / front-end"],
+            description: "Construction de produits AI-assisted (Next.js, TypeScript), intégration LLM et développement front-end React / Next.js, avec un workflow AI-Native piloté par Claude Code.",
+            serviceType: ["Construction de produits AI-assisted", "Pilotage Claude Code", "Intégration LLM", "Développement front-end React / Next.js / TypeScript"],
           }),
         }}
       />
@@ -158,7 +157,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "font-size: 13px",
             ].join(";");
 
-            console.log("%cLouis Rotellini — AI Product Engineer freelance", styleHeader);
+            console.log("%cLouis Rotellini — Développeur Front-End Senior", styleHeader);
             console.log("%cPortfolio : https://www.louisrotellini.fr", styleBody);
             console.log("%cSpécialités : Claude Code · Next.js · TypeScript · Agents IA", styleBody);
           `}

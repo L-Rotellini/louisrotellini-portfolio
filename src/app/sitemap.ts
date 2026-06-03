@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import projects from "@/data/projects";
+import sideProjects from "@/data/sideProjects";
 
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -28,5 +29,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
-  return [...staticRoutes, ...projectRoutes];
+  const sideProjectRoutes: MetadataRoute.Sitemap = sideProjects.map((p) => ({
+    url: `${baseUrl}/projets/${p.id}`,
+    lastModified: new Date("2025-01-01"),
+    changeFrequency: "yearly",
+    priority: 0.5,
+  }));
+
+  return [...staticRoutes, ...projectRoutes, ...sideProjectRoutes];
 }

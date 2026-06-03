@@ -13,10 +13,6 @@ export default function HeroSection() {
       {/* Meta header */}
       <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-[--muted] mb-16">
         <span>Lille · France · LR—2026</span>
-        <span className="inline-flex items-center gap-2 text-[--ink]">
-          <span className="pulse-dot" aria-hidden="true" />
-          Disponible · réponse 24h
-        </span>
       </div>
 
       <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-12">
@@ -29,10 +25,10 @@ export default function HeroSection() {
           </h1>
 
           <p className="mt-8 text-[clamp(1.125rem,2.4vw,24px)] leading-[1.3] tracking-[-0.005em] text-[--muted] max-w-[36ch]">
-            Développeur Senior freelance · React, Next.js, TypeScript · 10 ans
-            XP. Workflow AI-Native avec{" "}
-            <b className="text-[--ink] font-medium">Claude Code</b>. Je cadre, je
-            valide, je livre vite et proprement. Ex-Decathlon, Damart, IÉSEG.
+            Développeur Front-End Senior · React / Next.js · Workflow AI-Native
+            avec <b className="text-[--ink] font-medium">Claude Code</b>. 10 ans
+            de dev web · aujourd&apos;hui React, Next.js, TypeScript.
+            Ex-Decathlon, Damart, IÉSEG.
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2 font-mono text-[11.5px] text-[--muted]">
@@ -53,19 +49,9 @@ export default function HeroSection() {
               href={mailtoHref()}
               className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] bg-[--ink] text-[--paper] border border-[--ink] hover:bg-[--accent] hover:border-[--accent] transition-colors"
             >
-              Discuter d&apos;un projet
-              <span className="font-mono text-[12px]">→</span>
+              Me contacter
+              <span aria-hidden="true" className="font-mono text-[12px]">→</span>
             </a>
-            {profile.maltUrl && (
-              <Link
-                href={profile.maltUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] border border-[--rule-strong] text-[--ink] hover:bg-[--ink] hover:text-[--paper] hover:border-[--ink] transition-colors"
-              >
-                Malt
-              </Link>
-            )}
             {profile.linkedinUrl && (
               <Link
                 href={profile.linkedinUrl}
@@ -74,6 +60,7 @@ export default function HeroSection() {
                 className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] border border-[--rule-strong] text-[--ink] hover:bg-[--ink] hover:text-[--paper] hover:border-[--ink] transition-colors"
               >
                 LinkedIn
+                <span className="sr-only"> (nouvel onglet)</span>
               </Link>
             )}
           </div>

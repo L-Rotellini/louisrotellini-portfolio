@@ -14,11 +14,11 @@ export interface Profile {
 
 export const profile = {
   name: "Louis Rotellini",
-  title: "AI Product Engineer freelance",
+  title: "Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
   location: "Lille / Paris",
   email: "louis.rotellini@gmail.com",
   phone: "",
-  availability: "Disponible pour missions freelance",
+  availability: "",
   maltUrl: "https://www.malt.fr/profile/louisrotellini",
   linkedinUrl: "https://www.linkedin.com/in/louis-rotellini/",
 } satisfies Profile;

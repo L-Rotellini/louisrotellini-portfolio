@@ -4,6 +4,8 @@ export const metadata = {
   title: "Mentions légales",
   description:
     "Informations légales relatives au site louisrotellini.fr, conformément à la loi pour la confiance dans l'économie numérique.",
+  alternates: { canonical: "/mentions-legales" },
+  robots: { index: false, follow: true },
 };
 
 export default function MentionsLegales() {
@@ -29,7 +31,7 @@ export default function MentionsLegales() {
         01 / Éditeur
       </h2>
       <p className="text-[15.5px] leading-[1.65] m-0">
-        Louis Rotellini — AI Product Engineer.
+        Louis Rotellini — Développeur Front-End Senior.
         <br />
         Lille / Paris, France.
         <br />

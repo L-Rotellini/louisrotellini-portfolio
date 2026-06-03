@@ -1,15 +1,11 @@
 import { profile } from "@/data/profile";
 
 export function mailtoHref(subject?: string, body?: string) {
-  const defaultSubject = "Nouveau projet — prise de contact";
-  
+  const defaultSubject = "Prise de contact";
+
   const defaultBody = `Bonjour Louis,
 
-Je vous contacte pour discuter d'un projet.
-
-Contexte :
-Délais :
-Budget :
+Je vous contacte suite à la consultation de votre portfolio.
 
 Merci !`;
 

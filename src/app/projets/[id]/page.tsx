@@ -43,7 +43,14 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
       url,
       siteName: "Louis Rotellini",
       type: "article",
-      images: [{ url: ogUrl }],
+      images: [
+        {
+          url: ogUrl,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} — étude de cas · Louis Rotellini`,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -59,6 +66,47 @@ export default async function ProjectPage({ params }: PageProps) {
 
   const project = allProjects.find((p) => p.id === id);
   if (!project) return notFound();
+
+  const baseUrl = "https://www.louisrotellini.fr";
+  const url = `${baseUrl}/projets/${project.id}`;
+  const projectImage = project.after.startsWith("http")
+    ? project.after
+    : `${baseUrl}${project.after}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "CreativeWork",
+        name: project.title,
+        headline: project.title,
+        description: project.tagline ?? project.context,
+        url,
+        image: projectImage,
+        inLanguage: "fr-FR",
+        keywords: project.stack,
+        creator: {
+          "@type": "Person",
+          name: "Louis Rotellini",
+          url: baseUrl,
+        },
+        about: project.client,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Accueil", item: baseUrl },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Projets",
+            item: `${baseUrl}/#projets`,
+          },
+          { "@type": "ListItem", position: 3, name: project.title, item: url },
+        ],
+      },
+    ],
+  };
 
   const after = project.after;
   const before = project.before ?? null;
@@ -77,6 +125,10 @@ export default async function ProjectPage({ params }: PageProps) {
 
   return (
     <article className="pt-[120px] pb-20">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <Link
         href="/#projets"
         className="inline-flex items-center gap-2 font-mono text-[12px] text-[--muted] hover:text-[--ink] transition-colors mb-9"
@@ -96,7 +148,9 @@ export default async function ProjectPage({ params }: PageProps) {
               rel="noopener noreferrer"
               className="ml-auto inline-flex items-center gap-1 hover:text-[--ink] transition-colors"
             >
-              {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")} ↗
+              {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+              <span aria-hidden="true">↗</span>
+              <span className="sr-only">(nouvel onglet)</span>
             </a>
           )}
         </div>
@@ -216,7 +270,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 href={`/projets/${p.id}`}
                 className="group grid grid-cols-[auto_1fr_auto_auto] gap-6 py-7 border-b border-[--rule] items-center"
               >
-                <span className="font-mono text-[12px] text-[--muted] w-7">→</span>
+                <span aria-hidden="true" className="font-mono text-[12px] text-[--muted] w-7">→</span>
                 <div className="flex flex-col gap-1 min-w-0">
                   <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-[--muted]">
                     {p.client}
@@ -236,7 +290,7 @@ export default async function ProjectPage({ params }: PageProps) {
                     </span>
                   ))}
                 </div>
-                <span className="font-mono text-[14px] text-[--muted] w-6 text-right transition-transform duration-250 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[--accent]">
+                <span aria-hidden="true" className="font-mono text-[14px] text-[--muted] w-6 text-right transition-transform duration-250 group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-[--accent]">
                   ↗
                 </span>
               </Link>
