@@ -14,7 +14,7 @@ export interface Profile {
 
 export const profile = {
   name: "Louis Rotellini",
-  title: "Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
+  title: "AI Product Builder · React · Next.js · TypeScript",
   location: "Lille / Paris",
   email: "louis.rotellini@gmail.com",
   phone: "",

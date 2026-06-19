@@ -31,7 +31,7 @@ export default function ContactSection() {
       className="py-24 pb-32"
     >
       <SectionEyebrow
-        idx="06"
+        idx="05"
         label="Contact"
         meta="email · linkedin"
       />

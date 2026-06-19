@@ -11,7 +11,7 @@ export default function SideProjectsSection() {
       className="py-24"
     >
       <SectionEyebrow
-        idx="02"
+        idx="01"
         label="Side projects"
         meta={`${sideProjects.length} produits IA`}
       />
@@ -23,7 +23,7 @@ export default function SideProjectsSection() {
         Mes produits IA, en autonomie.
       </h2>
       <p className="mt-4 text-[16px] text-[--muted] max-w-[48ch] mb-12">
-        Construits en mode AI-assisted, du cadrage à la mise en prod. Stack :
+        Construits en pilotant l&apos;IA, du cadrage à la mise en prod. Stack :
         Next.js, TypeScript, agents IA.
       </p>
 

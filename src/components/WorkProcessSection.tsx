@@ -2,8 +2,8 @@ import SectionEyebrow from "./SectionEyebrow";
 
 const items = [
   {
-    title: "Construction de produits AI-assisted",
-    text: "Du cadrage au produit fonctionnel, en pilotant des agents IA pour avancer vite sans sacrifier la qualité. Next.js, TypeScript, intégration LLM quand elle apporte de la valeur.",
+    title: "Construction de produits en pilotant l'IA",
+    text: "De l'idée à la production, je pilote des agents IA pour avancer vite sans sacrifier la qualité. Next.js, TypeScript, intégration LLM quand elle apporte de la valeur.",
     metaEnd: "↳ Produit",
   },
   {
@@ -26,7 +26,7 @@ export default function WorkProcessSection() {
       className="py-24"
     >
       <SectionEyebrow
-        idx="04"
+        idx="03"
         label="Comment j'aborde un projet"
         meta="approche & expertise"
       />

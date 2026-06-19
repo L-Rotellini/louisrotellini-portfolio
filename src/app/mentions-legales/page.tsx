@@ -31,7 +31,7 @@ export default function MentionsLegales() {
         01 / Éditeur
       </h2>
       <p className="text-[15.5px] leading-[1.65] m-0">
-        Louis Rotellini — Développeur Front-End Senior.
+        Louis Rotellini — AI Product Builder.
         <br />
         Lille / Paris, France.
         <br />

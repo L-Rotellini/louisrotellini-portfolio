@@ -15,17 +15,17 @@ export default function Home() {
         <HeroSection />
       </AnimatedSection>
 
-      {/* CLIENTS */}
-      <AnimatedSection>
-        <ClientsSection />
-      </AnimatedSection>
-
-      {/* SIDE PROJECTS */}
+      {/* PRODUITS IA — preuve centrale du positionnement builder */}
       <AnimatedSection id="side-projects">
         <SideProjectsSection />
       </AnimatedSection>
 
-      {/* PROJETS */}
+      {/* CLIENTS (logos) */}
+      <AnimatedSection>
+        <ClientsSection />
+      </AnimatedSection>
+
+      {/* PROJETS — sélection clients récents */}
       <AnimatedSection id="projets">
         <ProjectsSection />
       </AnimatedSection>
@@ -35,7 +35,7 @@ export default function Home() {
         <WorkProcessSection />
       </AnimatedSection>
 
-      {/* WORKFLOW AI-ASSISTED */}
+      {/* WORKFLOW — je pilote l'IA */}
       <AnimatedSection id="workflow">
         <WorkflowSection />
       </AnimatedSection>

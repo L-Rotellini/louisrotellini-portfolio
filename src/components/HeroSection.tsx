@@ -24,15 +24,17 @@ export default function HeroSection() {
             Louis<br />Rotellini.
           </h1>
 
-          <p className="mt-8 text-[clamp(1.125rem,2.4vw,24px)] leading-[1.3] tracking-[-0.005em] text-[--muted] max-w-[36ch]">
-            Développeur Front-End Senior · React / Next.js · Workflow AI-Native
+          <p className="mt-8 text-[clamp(1.125rem,2.4vw,24px)] leading-[1.3] tracking-[-0.005em] text-[--muted] max-w-[38ch]">
+            AI Product Builder · je construis des produits en{" "}
+            <b className="text-[--ink] font-medium">pilotant l&apos;IA</b>, de
+            l&apos;idée à la production. React, Next.js, TypeScript et agents IA
             avec <b className="text-[--ink] font-medium">Claude Code</b>. 10 ans
-            de dev web · aujourd&apos;hui React, Next.js, TypeScript.
-            Ex-Decathlon, Damart, IÉSEG.
+            de dev web, aujourd&apos;hui au service du produit. Ex-Decathlon,
+            Damart, IÉSEG.
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2 font-mono text-[11.5px] text-[--muted]">
-            {["claude code", "next.js", "typescript", "agents ia", "rag", "react", "node.js"].map(
+            {["ai product builder", "claude code", "agents ia", "next.js", "typescript", "react", "rag"].map(
               (tag) => (
                 <li
                   key={tag}

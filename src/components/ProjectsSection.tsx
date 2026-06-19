@@ -24,7 +24,7 @@ export default function ProjectsSection() {
       aria-labelledby="projets-title"
       className="py-24"
     >
-      <SectionEyebrow idx="03" label="Projets" meta="Sélection 2025-2026" />
+      <SectionEyebrow idx="02" label="Projets" meta="Sélection 2025-2026" />
 
       <h2
         id="projets-title"

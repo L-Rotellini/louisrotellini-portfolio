@@ -17,9 +17,9 @@ export default function WorkflowSection() {
       className="py-24"
     >
       <SectionEyebrow
-        idx="05"
+        idx="04"
         label="Workflow"
-        meta="ai-assisted, human-led"
+        meta="je pilote l'IA · décisions humaines"
       />
 
       <div className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-12 items-start">
@@ -28,11 +28,11 @@ export default function WorkflowSection() {
             id="workflow-title"
             className="text-[32px] font-medium tracking-[-0.025em] leading-[1.05] m-0 mb-3"
           >
-            Mon workflow AI-assisted
+            Mon workflow : je pilote l&apos;IA
           </h2>
           <p className="text-[16px] text-[--muted] max-w-[36ch] m-0">
             Je pilote Claude Code et les outils IA équivalents sur
-            l&apos;ensemble du cycle de développement.
+            l&apos;ensemble du cycle de développement, avec jugement.
           </p>
         </div>
 
@@ -42,7 +42,7 @@ export default function WorkflowSection() {
             <br />
             <span className="text-[--muted]">
               Le contexte, la validation et les décisions critiques restent
-              humains.
+              sous mon contrôle.
             </span>
           </blockquote>
 

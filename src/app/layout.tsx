@@ -14,25 +14,24 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.louisrotellini.fr"),
   title: {
     default:
-      "Louis Rotellini · Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
+      "Louis Rotellini · AI Product Builder · React / Next.js / TypeScript",
     template: "%s | Louis Rotellini",
   },
   description:
-    "Développeur Front-End Senior. 10 ans de dev web, React/Next.js/TypeScript, workflow AI-Native avec Claude Code. Produits IA et références grands comptes.",
+    "AI Product Builder. Je construis des produits en pilotant l'IA, de l'idée à la production — React, Next.js, TypeScript, agents IA avec Claude Code. Produits IA et références grands comptes (Decathlon, Damart, IÉSEG).",
   keywords: [
-    "Développeur Front-End Senior",
-    "Développeur React / Next.js",
+    "AI Product Builder",
+    "Product Builder",
+    "AI Product Engineer",
+    "construire des produits IA",
+    "piloter l'IA",
+    "agents IA",
     "Claude Code",
-    "AI-Native",
-    "AI-assisted",
     "Next.js",
     "TypeScript",
     "React",
     "Node.js",
-    "agents IA",
     "RAG",
-    "MCP",
-    "Mistral",
     "Lille",
     "Paris",
   ],
@@ -58,15 +57,15 @@ export const metadata: Metadata = {
     url: "https://www.louisrotellini.fr",
     siteName: "Louis Rotellini",
     title:
-      "Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
+      "AI Product Builder · React / Next.js / TypeScript · Je construis des produits en pilotant l'IA",
     description:
-      "Développeur Front-End Senior. 10 ans de dev web, React/Next.js/TypeScript, workflow AI-Native avec Claude Code. Produits IA et références grands comptes.",
+      "AI Product Builder. Je construis des produits en pilotant l'IA, de l'idée à la production — React, Next.js, TypeScript, agents IA avec Claude Code. Produits IA et références grands comptes (Decathlon, Damart, IÉSEG).",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Portfolio de Louis Rotellini – Développeur Front-End Senior · React / Next.js · Claude Code",
+        alt: "Portfolio de Louis Rotellini – AI Product Builder · React / Next.js · Claude Code",
       },
     ],
   },
@@ -75,9 +74,9 @@ export const metadata: Metadata = {
     site: "@louisrotellini",
     creator: "@louisrotellini",
     title:
-      "Développeur Front-End Senior · React / Next.js · Workflow AI-Native",
+      "AI Product Builder · React / Next.js / TypeScript · Je construis des produits en pilotant l'IA",
     description:
-      "Développeur Front-End Senior. 10 ans de dev web, React/Next.js/TypeScript, workflow AI-Native avec Claude Code. Produits IA et références grands comptes.",
+      "AI Product Builder. Je construis des produits en pilotant l'IA, de l'idée à la production — React, Next.js, TypeScript, agents IA avec Claude Code. Produits IA et références grands comptes (Decathlon, Damart, IÉSEG).",
     images: ["/og-image.jpg"],
   },
   icons: {
@@ -104,14 +103,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Louis Rotellini",
-            jobTitle: "Développeur Front-End Senior",
-            description: "Développeur Front-End Senior à Lille. React, Next.js, TypeScript, workflow AI-Native avec Claude Code. Ex-Decathlon, Damart, IÉSEG.",
+            jobTitle: "AI Product Builder",
+            description: "AI Product Builder à Lille. Je construis des produits en pilotant l'IA — React, Next.js, TypeScript, agents IA avec Claude Code. Ex-Decathlon, Damart, IÉSEG.",
             url: "https://www.louisrotellini.fr",
             sameAs: [
               "https://www.malt.fr/profile/louisrotellini",
               "https://www.linkedin.com/in/louis-rotellini/"
             ],
-            knowsAbout: ["Next.js", "TypeScript", "React", "Node.js", "Claude Code", "Agents IA", "RAG", "MCP", "Mistral", "Intégration LLM", "AI-assisted development", "Tailwind CSS"],
+            knowsAbout: ["Next.js", "TypeScript", "React", "Node.js", "Claude Code", "Agents IA", "RAG", "MCP", "Mistral", "Intégration LLM", "Construction de produits en pilotant l'IA", "Tailwind CSS"],
             address: { "@type": "PostalAddress", addressLocality: "Lille", addressRegion: "Hauts-de-France", addressCountry: "FR" },
           }),
         }}
@@ -122,11 +121,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
-            name: "Louis Rotellini – Développeur Front-End Senior",
+            name: "Louis Rotellini – AI Product Builder",
             url: "https://www.louisrotellini.fr",
             areaServed: ["FR", "Europe"],
-            description: "Construction de produits AI-assisted (Next.js, TypeScript), intégration LLM et développement front-end React / Next.js, avec un workflow AI-Native piloté par Claude Code.",
-            serviceType: ["Construction de produits AI-assisted", "Pilotage Claude Code", "Intégration LLM", "Développement front-end React / Next.js / TypeScript"],
+            description: "Construction de produits en pilotant l'IA (Next.js, TypeScript), intégration LLM et développement front-end React / Next.js, avec un workflow piloté par Claude Code.",
+            serviceType: ["Construction de produits en pilotant l'IA", "Pilotage Claude Code", "Intégration LLM", "Développement front-end React / Next.js / TypeScript"],
           }),
         }}
       />
@@ -157,7 +156,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               "font-size: 13px",
             ].join(";");
 
-            console.log("%cLouis Rotellini — Développeur Front-End Senior", styleHeader);
+            console.log("%cLouis Rotellini — AI Product Builder", styleHeader);
             console.log("%cPortfolio : https://www.louisrotellini.fr", styleBody);
             console.log("%cSpécialités : Claude Code · Next.js · TypeScript · Agents IA", styleBody);
           `}
