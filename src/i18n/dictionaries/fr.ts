@@ -3,7 +3,7 @@
 
 export const fr = {
   nav: {
-    homeAria: "Louis Rotellini — accueil",
+    homeAria: "Louis Rotellini, accueil",
     projets: "Projets",
     contact: "Contact",
     themeToggle: "Basculer le thème",
@@ -13,7 +13,7 @@ export const fr = {
   },
 
   hero: {
-    metaHeader: "Lille · France · LR—2026",
+    metaHeader: "Lille · France · LR-2026",
     signature: {
       pre: "Je construis des produits en ",
       bold: "pilotant l'IA",
@@ -91,10 +91,10 @@ export const fr = {
     quoteLine2:
       "Je ne livre pas ce que je ne contrôle pas : contexte, validation et décisions critiques restent sous mon contrôle.",
     rows: [
-      { num: "01", step: "Specs · contexte", role: "humain", pct: "—" },
+      { num: "01", step: "Specs · contexte", role: "humain", pct: "100%" },
       { num: "02", step: "Claude Code · génération", role: "agent", pct: "~70%" },
       { num: "03", step: "Revue · tests", role: "humain", pct: "100%" },
-      { num: "04", step: "Production · livraison", role: "humain", pct: "—" },
+      { num: "04", step: "Production · livraison", role: "humain", pct: "100%" },
     ],
     roleHuman: "humain",
     roleAgent: "agent",
@@ -146,11 +146,11 @@ export const fr = {
     intro:
       "Informations légales relatives au site louisrotellini.fr, conformément à la loi pour la confiance dans l'économie numérique.",
     publisherTitle: "01 / Éditeur",
-    publisherRole: "Louis Rotellini — AI Product Engineer.",
+    publisherRole: "Louis Rotellini, AI Product Engineer.",
     publisherLocation: "Lille / Paris, France.",
     contactPrefix: "Contact : ",
     hostTitle: "02 / Hébergeur",
-    hostBody: "Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, USA.",
+    hostBody: "Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.",
     ipTitle: "03 / Propriété intellectuelle",
     ipBody:
       "L'ensemble des contenus présents sur ce site (textes, code, images, structure) est protégé par le droit d'auteur. Toute reproduction, même partielle, est soumise à autorisation préalable.",
@@ -229,7 +229,7 @@ Merci !`,
       "Intégration LLM",
       "Développement front-end React / Next.js / TypeScript",
     ],
-    consoleTitle: "Louis Rotellini — AI Product Engineer",
+    consoleTitle: "Louis Rotellini, AI Product Engineer",
     consolePortfolio: "Portfolio : https://www.louisrotellini.fr",
     consoleSpecialties: "Spécialités : Claude Code · Next.js · TypeScript · Agents IA",
   },

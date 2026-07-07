@@ -23,7 +23,7 @@ const projects: Project[] = [
   {
   id: "damart-landing-pages",
   client: "Damart",
-  title: "Landing Pages Éditoriales — Magento Page Builder",
+  title: "Landing Pages Éditoriales : Magento Page Builder",
   context:
     "Mission de renfort : prise en charge de la création de 6 landing pages éditoriales (blogs tendance, guides d'achat) sur un environnement Magento avec Page Builder natif. Composants interactifs (carousel morpho, FAQ accordéon) développés en JS vanilla et greffés sur un CMS aux contraintes fortes.",
   stack: ["HTML", "CSS", "JavaScript", "Magento"],
@@ -34,7 +34,7 @@ const projects: Project[] = [
   mobile: "/projects/damart-guide-pantalon-mobile.jpg",
 
   tagline:
-    "6 landing pages éditoriales livrées en autonomie sur Magento : blogs tendance, guides d'achat, carousel morpho interactif et FAQ — dans un environnement CMS contraint.",
+    "6 landing pages éditoriales livrées en autonomie sur Magento : blogs tendance, guides d'achat, carousel morpho interactif et FAQ, dans un environnement CMS contraint.",
 
   challenges: [
     "Reprendre un projet en cours sur un environnement inconnu (mission de renfort)",
@@ -52,7 +52,7 @@ const projects: Project[] = [
 
   codeSnippets: [
     {
-      title: "Carousel morpho — navigation + filtres par silhouette",
+      title: "Carousel morpho : navigation + filtres par silhouette",
       language: "javascript",
       code: `const slides = document.querySelectorAll('.slide');
 const filterButtons = document.querySelectorAll('.filter-button');
@@ -77,7 +77,7 @@ filterButtons.forEach(btn => {
 });`,
     },
     {
-      title: "FAQ accordéon — toggle exclusif",
+      title: "FAQ accordéon : toggle exclusif",
       language: "javascript",
       code: `document.querySelectorAll('.faq-question').forEach(button => {
   button.addEventListener('click', (e) => {
@@ -102,7 +102,7 @@ filterButtons.forEach(btn => {
   {
     id: "jules-bulant",
     client: "Jules Bulant",
-    title: "Portfolio Artistique — Nuxt 3 + Sanity CMS",
+    title: "Portfolio Artistique : Nuxt 3 + Sanity CMS",
     context:
       "Création d'un portfolio artistique complet pour un artiste peintre : galerie responsive avec modal viewer, gestion des expositions, et studio CMS privé pour gérer les œuvres. Architecture monorepo avec frontend Nuxt 3 et backend Sanity Studio.",
     stack: ["Nuxt 3", "Sanity CMS", "TypeScript", "CSS", "React 19"],
@@ -343,7 +343,7 @@ filterButtons.forEach(btn => {
   {
     id: "decathlon-app",
     client: "Decathlon",
-    title: "Landing Page — Decathlon App",
+    title: "Landing Page : Decathlon App",
     context:
       "Création d’une landing page marketing pour promouvoir l’app Decathlon : structure claire, sections éditoriales, et preuve sociale (avis) via slider.",
     stack: ["HTML", "CSS", "JavaScript", "Slick.js"],

@@ -3,7 +3,7 @@ import type { ProjectOverlay } from "./overlay";
 // Traductions EN des projets clients (par id). Voir src/data/projects.ts pour le FR.
 export const projectsEn: Record<string, ProjectOverlay> = {
   "damart-landing-pages": {
-    title: "Editorial Landing Pages — Magento Page Builder",
+    title: "Editorial Landing Pages: Magento Page Builder",
     context:
       "Reinforcement mission: took over the creation of 6 editorial landing pages (trend blogs, buying guides) on a Magento environment with the native Page Builder. Interactive components (morpho carousel, accordion FAQ) built in vanilla JS and grafted onto a CMS with strong constraints.",
     tagline:
@@ -21,13 +21,13 @@ export const projectsEn: Record<string, ProjectOverlay> = {
       "Accordion FAQ in vanilla JS: exclusive toggle, other items close automatically",
     ],
     codeSnippetTitles: [
-      "Morpho carousel — navigation + silhouette filters",
-      "Accordion FAQ — exclusive toggle",
+      "Morpho carousel: navigation + silhouette filters",
+      "Accordion FAQ: exclusive toggle",
     ],
   },
 
   "jules-bulant": {
-    title: "Artist Portfolio — Nuxt 3 + Sanity CMS",
+    title: "Artist Portfolio: Nuxt 3 + Sanity CMS",
     context:
       "Full artist portfolio for a painter: responsive gallery with a modal viewer, exhibition management, and a private CMS studio to manage the artworks. Monorepo architecture with a Nuxt 3 front-end and a Sanity Studio back-end.",
     tagline:
@@ -75,7 +75,7 @@ export const projectsEn: Record<string, ProjectOverlay> = {
   },
 
   "decathlon-app": {
-    title: "Landing Page — Decathlon App",
+    title: "Landing Page: Decathlon App",
     context:
       "Marketing landing page to promote the Decathlon app: clear structure, editorial sections, and social proof (reviews) via a slider.",
     tagline:
