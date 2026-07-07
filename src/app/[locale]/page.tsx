@@ -6,18 +6,35 @@ import ContactSection from "@/components/ContactSection";
 import HeroSection from "@/components/HeroSection";
 import ClientsSection from "@/components/ClientsSection";
 import WorkProcessSection from "@/components/WorkProcessSection";
+import { getDictionary } from "@/i18n/getDictionary";
+import { getProjects, getSideProjects } from "@/data/getProjects";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/config";
 
-export default function Home() {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale: raw } = await params;
+  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  const dict = getDictionary(locale);
+  const projects = getProjects(locale);
+  const sideProjects = getSideProjects(locale);
+
   return (
     <div>
       {/* HERO */}
       <AnimatedSection immediate>
-        <HeroSection />
+        <HeroSection dict={dict.hero} mail={dict.mail} />
       </AnimatedSection>
 
-      {/* PRODUITS IA — preuve centrale du positionnement builder */}
+      {/* PRODUITS IA — preuve centrale du positionnement */}
       <AnimatedSection id="side-projects">
-        <SideProjectsSection />
+        <SideProjectsSection
+          dict={dict.sideProjects}
+          projects={sideProjects}
+          locale={locale}
+        />
       </AnimatedSection>
 
       {/* CLIENTS (logos) */}
@@ -27,22 +44,22 @@ export default function Home() {
 
       {/* PROJETS — sélection clients récents */}
       <AnimatedSection id="projets">
-        <ProjectsSection />
+        <ProjectsSection dict={dict.projects} projects={projects} locale={locale} />
       </AnimatedSection>
 
       {/* COMMENT JE TRAVAILLE */}
       <AnimatedSection id="process">
-        <WorkProcessSection />
+        <WorkProcessSection dict={dict.process} />
       </AnimatedSection>
 
       {/* WORKFLOW — je pilote l'IA */}
       <AnimatedSection id="workflow">
-        <WorkflowSection />
+        <WorkflowSection dict={dict.workflow} />
       </AnimatedSection>
 
       {/* CONTACT */}
       <AnimatedSection id="contact">
-        <ContactSection />
+        <ContactSection dict={dict.contact} mail={dict.mail} />
       </AnimatedSection>
     </div>
   );

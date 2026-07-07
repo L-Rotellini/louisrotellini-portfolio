@@ -5,19 +5,29 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Moon, Sun } from "lucide-react";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import LanguageSwitcher from "./LanguageSwitcher";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/getDictionary";
 
-const NAV_ITEMS = [
-  { id: "projets", label: "Projets" },
-  { id: "contact", label: "Contact" },
-];
+type Props = {
+  locale: Locale;
+  dict: Dictionary["nav"];
+  home: string;
+};
 
-export default function Navbar() {
+export default function Navbar({ locale, dict, home }: Props) {
   const { theme, setTheme, systemTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
   const currentTheme = theme === "system" ? systemTheme : theme;
-  const activeId = useActiveSection(NAV_ITEMS.map((n) => n.id));
+
+  const navItems = [
+    { id: "projets", label: dict.projets },
+    { id: "contact", label: dict.contact },
+  ];
+  const activeId = useActiveSection(navItems.map((n) => n.id));
+  const anchor = (id: string) => `${home}#${id}`;
 
   return (
     <header
@@ -26,22 +36,22 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-[1080px] px-8 flex items-center justify-between h-[60px]">
         <Link
-          href="/"
+          href={home}
           scroll
           className="font-mono text-[13px] font-medium tracking-[-0.01em] text-[--ink]"
-          aria-label="Louis Rotellini — accueil"
+          aria-label={dict.homeAria}
         >
           LR
         </Link>
 
         <div className="flex items-center gap-7">
           <nav className="hidden sm:flex items-center gap-7 font-mono text-[12px]">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const isActive = activeId === item.id;
               return (
                 <Link
                   key={item.id}
-                  href={`/#${item.id}`}
+                  href={anchor(item.id)}
                   scroll
                   aria-current={isActive ? "page" : undefined}
                   className={[
@@ -60,13 +70,19 @@ export default function Navbar() {
             })}
           </nav>
 
+          <LanguageSwitcher
+            locale={locale}
+            label={dict.switchLabel}
+            ariaLabel={dict.switchAria}
+          />
+
           {mounted && (
             <button
               type="button"
               onClick={() =>
                 setTheme(currentTheme === "dark" ? "light" : "dark")
               }
-              aria-label="Basculer le thème"
+              aria-label={dict.themeToggle}
               className="w-8 h-8 rounded-full border border-[--rule-strong] inline-flex items-center justify-center text-[--ink] hover:bg-[--paper-2] transition-colors"
             >
               {currentTheme === "dark" ? (
@@ -81,15 +97,15 @@ export default function Navbar() {
 
       <nav
         className="sm:hidden overflow-x-auto border-t border-[--rule]"
-        aria-label="Navigation mobile"
+        aria-label={dict.mobileNav}
       >
         <ul className="flex items-center gap-2 px-4 py-2 justify-center">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const isActive = activeId === item.id;
             return (
               <li key={item.id}>
                 <Link
-                  href={`/#${item.id}`}
+                  href={anchor(item.id)}
                   scroll
                   aria-current={isActive ? "page" : undefined}
                   className={[

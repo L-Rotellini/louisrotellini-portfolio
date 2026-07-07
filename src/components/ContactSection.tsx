@@ -1,29 +1,35 @@
 import { profile } from "@/data/profile";
 import { mailtoHref } from "@/lib/mailto";
 import SectionEyebrow from "./SectionEyebrow";
+import type { Dictionary } from "@/i18n/getDictionary";
 
-const links = [
-  {
-    label: profile.email,
-    href: mailtoHref(),
-    meta: "EMAIL · DIRECT",
-    external: false,
-  },
-  {
-    label: "LinkedIn",
-    href: profile.linkedinUrl,
-    meta: "RÉSEAU · MESSAGE",
-    external: true,
-  },
-  {
-    label: "Profil Malt",
-    href: profile.maltUrl,
-    meta: "PROFIL",
-    external: true,
-  },
-];
+type Props = {
+  dict: Dictionary["contact"];
+  mail: Dictionary["mail"];
+};
 
-export default function ContactSection() {
+export default function ContactSection({ dict, mail }: Props) {
+  const links = [
+    {
+      label: profile.email,
+      href: mailtoHref(mail.subject, mail.body),
+      meta: dict.emailMeta,
+      external: false,
+    },
+    {
+      label: "LinkedIn",
+      href: profile.linkedinUrl,
+      meta: dict.linkedinMeta,
+      external: true,
+    },
+    {
+      label: dict.maltLabel,
+      href: profile.maltUrl,
+      meta: dict.maltMeta,
+      external: true,
+    },
+  ];
+
   return (
     <section
       id="contact"
@@ -32,8 +38,8 @@ export default function ContactSection() {
     >
       <SectionEyebrow
         idx="05"
-        label="Contact"
-        meta="email · linkedin"
+        label={dict.eyebrowLabel}
+        meta={dict.eyebrowMeta}
       />
 
       <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr] gap-14 items-end">
@@ -41,7 +47,7 @@ export default function ContactSection() {
           id="contact-title"
           className="font-medium tracking-[-0.045em] leading-[0.92] max-w-[12ch] text-[clamp(2.5rem,9vw,88px)] m-0"
         >
-          Me contacter.
+          {dict.title}
         </h2>
 
         <div className="border-t border-[--rule]">
@@ -57,7 +63,7 @@ export default function ContactSection() {
                 <span className="flex flex-col gap-0.5 min-w-0 truncate">
                   <span className="truncate">
                     {l.label}
-                    {l.external && <span className="sr-only"> (nouvel onglet)</span>}
+                    {l.external && <span className="sr-only"> {dict.newTab}</span>}
                   </span>
                   <small className="block font-mono text-[11px] uppercase tracking-[0.06em] text-[--muted]">
                     {l.meta}

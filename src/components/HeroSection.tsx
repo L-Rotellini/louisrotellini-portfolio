@@ -2,8 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { profile } from "@/data/profile";
 import { mailtoHref } from "@/lib/mailto";
+import type { Dictionary } from "@/i18n/getDictionary";
 
-export default function HeroSection() {
+type Props = {
+  dict: Dictionary["hero"];
+  mail: Dictionary["mail"];
+};
+
+export default function HeroSection({ dict, mail }: Props) {
   return (
     <section
       id="hero"
@@ -12,7 +18,7 @@ export default function HeroSection() {
     >
       {/* Meta header */}
       <div className="flex flex-wrap items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-[--muted] mb-16">
-        <span>Lille · France · LR—2026</span>
+        <span>{dict.metaHeader}</span>
       </div>
 
       <div className="flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-12">
@@ -24,34 +30,35 @@ export default function HeroSection() {
             Louis<br />Rotellini.
           </h1>
 
-          <p className="mt-8 text-[clamp(1.125rem,2.4vw,24px)] leading-[1.3] tracking-[-0.005em] text-[--muted] max-w-[38ch]">
-            AI Product Builder · je construis des produits en{" "}
-            <b className="text-[--ink] font-medium">pilotant l&apos;IA</b>, de
-            l&apos;idée à la production. React, Next.js, TypeScript et agents IA
-            avec <b className="text-[--ink] font-medium">Claude Code</b>. 10 ans
-            de dev web, aujourd&apos;hui au service du produit. Ex-Decathlon,
-            Damart, IÉSEG.
+          <p className="mt-8 text-[clamp(1.125rem,2.4vw,24px)] leading-[1.3] tracking-[-0.005em] text-[--ink] font-medium max-w-[38ch]">
+            {dict.signature.pre}
+            <b className="font-medium">{dict.signature.bold}</b>
+            {dict.signature.post}
+          </p>
+
+          <p className="mt-4 text-[clamp(1rem,2vw,19px)] leading-[1.4] tracking-[-0.005em] text-[--muted] max-w-[42ch]">
+            {dict.subtitle.pre}
+            <b className="text-[--ink] font-medium">{dict.subtitle.bold}</b>
+            {dict.subtitle.post}
           </p>
 
           <ul className="mt-9 flex flex-wrap gap-2 font-mono text-[11.5px] text-[--muted]">
-            {["ai product builder", "claude code", "agents ia", "next.js", "typescript", "react", "rag"].map(
-              (tag) => (
-                <li
-                  key={tag}
-                  className="border border-[--rule] rounded-full px-2.5 py-1"
-                >
-                  {tag}
-                </li>
-              )
-            )}
+            {dict.tags.map((tag) => (
+              <li
+                key={tag}
+                className="border border-[--rule] rounded-full px-2.5 py-1"
+              >
+                {tag}
+              </li>
+            ))}
           </ul>
 
           <div className="mt-9 flex flex-wrap items-center gap-2">
             <a
-              href={mailtoHref()}
+              href={mailtoHref(mail.subject, mail.body)}
               className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] bg-[--ink] text-[--paper] border border-[--ink] hover:bg-[--accent] hover:border-[--accent] transition-colors"
             >
-              Me contacter
+              {dict.contactCta}
               <span aria-hidden="true" className="font-mono text-[12px]">→</span>
             </a>
             {profile.linkedinUrl && (
@@ -61,8 +68,8 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] border border-[--rule-strong] text-[--ink] hover:bg-[--ink] hover:text-[--paper] hover:border-[--ink] transition-colors"
               >
-                LinkedIn
-                <span className="sr-only"> (nouvel onglet)</span>
+                {dict.linkedin}
+                <span className="sr-only"> {dict.newTab}</span>
               </Link>
             )}
           </div>

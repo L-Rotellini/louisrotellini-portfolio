@@ -1,9 +1,17 @@
 import Link from "next/link";
 import Image from "next/image";
-import sideProjects from "@/data/sideProjects";
+import type { Project } from "@/data/projects";
 import SectionEyebrow from "./SectionEyebrow";
+import { localizedHref, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/getDictionary";
 
-export default function SideProjectsSection() {
+type Props = {
+  dict: Dictionary["sideProjects"];
+  projects: Project[];
+  locale: Locale;
+};
+
+export default function SideProjectsSection({ dict, projects, locale }: Props) {
   return (
     <section
       id="side-projects"
@@ -12,26 +20,25 @@ export default function SideProjectsSection() {
     >
       <SectionEyebrow
         idx="01"
-        label="Side projects"
-        meta={`${sideProjects.length} produits IA`}
+        label={dict.eyebrowLabel}
+        meta={`${projects.length} ${dict.productsWord}`}
       />
 
       <h2
         id="side-projects-title"
         className="text-[clamp(2.25rem,6vw,56px)] font-medium tracking-[-0.035em] leading-[0.95] m-0 max-w-[18ch]"
       >
-        Mes produits IA, en autonomie.
+        {dict.title}
       </h2>
-      <p className="mt-4 text-[16px] text-[--muted] max-w-[48ch] mb-12">
-        Construits en pilotant l&apos;IA, du cadrage à la mise en prod. Stack :
-        Next.js, TypeScript, agents IA.
+      <p className="mt-4 text-[16px] text-[--muted] max-w-[52ch] mb-12">
+        {dict.intro}
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-[18px]">
-        {sideProjects.map((project) => (
+        {projects.map((project) => (
           <Link
             key={project.id}
-            href={`/projets/${project.id}`}
+            href={localizedHref(locale, `/projets/${project.id}`)}
             className="group flex flex-col bg-[--paper] border border-[--rule] rounded-[12px] overflow-hidden hover:bg-[--paper-2] transition-colors duration-300"
           >
             <div className="relative aspect-[16/10] w-full overflow-hidden border-b border-[--rule]">
@@ -45,7 +52,7 @@ export default function SideProjectsSection() {
             </div>
             <div className="flex flex-col gap-2.5 p-5 flex-1">
               <div className="flex items-center justify-between font-mono text-[10.5px] uppercase tracking-[0.1em] text-[--muted]">
-                <span>PRODUIT</span>
+                <span>{dict.cardBadge}</span>
                 <span className="font-mono text-[13px] text-[--muted] transition-transform duration-250 group-hover:translate-x-[3px] group-hover:-translate-y-[3px] group-hover:text-[--accent]">
                   ↗
                 </span>

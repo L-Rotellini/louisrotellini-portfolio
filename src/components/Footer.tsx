@@ -1,6 +1,13 @@
 import { profile } from "@/data/profile";
+import { localizedHref, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/getDictionary";
 
-export default function Footer() {
+type Props = {
+  dict: Dictionary["footer"];
+  locale: Locale;
+};
+
+export default function Footer({ dict, locale }: Props) {
   return (
     <footer className="w-full border-t border-[--rule] font-mono text-[11.5px] text-[--muted] z-40">
       <div className="mx-auto max-w-[1080px] px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -16,7 +23,7 @@ export default function Footer() {
               className="hover:text-[--ink] transition-colors"
             >
               LinkedIn
-              <span className="sr-only"> (nouvel onglet)</span>
+              <span className="sr-only"> {dict.newTab}</span>
             </a>
           )}
           {profile.maltUrl && (
@@ -27,20 +34,20 @@ export default function Footer() {
               className="hover:text-[--ink] transition-colors"
             >
               Malt
-              <span className="sr-only"> (nouvel onglet)</span>
+              <span className="sr-only"> {dict.newTab}</span>
             </a>
           )}
           <a
             href={`mailto:${profile.email}`}
             className="hover:text-[--ink] transition-colors"
           >
-            Contact
+            {dict.contact}
           </a>
           <a
-            href="/mentions-legales"
+            href={localizedHref(locale, "/mentions-legales")}
             className="hover:text-[--ink] transition-colors"
           >
-            Mentions légales
+            {dict.legal}
           </a>
         </nav>
       </div>

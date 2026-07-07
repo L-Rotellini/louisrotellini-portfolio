@@ -14,7 +14,7 @@ export interface Profile {
 
 export const profile = {
   name: "Louis Rotellini",
-  title: "AI Product Builder · React · Next.js · TypeScript",
+  title: "AI Product Engineer · React · Next.js · TypeScript",
   location: "Lille / Paris",
   email: "louis.rotellini@gmail.com",
   phone: "",

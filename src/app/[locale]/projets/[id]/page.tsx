@@ -1,42 +1,60 @@
 import { notFound } from "next/navigation";
-import projects from "@/data/projects";
-import sideProjects from "@/data/sideProjects";
 import Link from "next/link";
-
-const allProjects = [...projects, ...sideProjects];
+import type { Metadata } from "next";
+import baseProjects from "@/data/projects";
+import baseSideProjects from "@/data/sideProjects";
+import { getAllProjects, getProject } from "@/data/getProjects";
 import BeforeAfterSlider from "@/components/BeforeAfterSlider";
 import DeviceMockup from "@/components/DeviceMockup";
 import CodeBlock from "@/components/CodeBlock";
-import type { Metadata } from "next";
+import {
+  defaultLocale,
+  hreflang,
+  isLocale,
+  localePrefix,
+  localizedHref,
+  type Locale,
+} from "@/i18n/config";
+import { getDictionary } from "@/i18n/getDictionary";
 
-type Params = Promise<{ id: string }>;
+const SITE_URL = "https://www.louisrotellini.fr";
 
-type PageProps = { params: Params };
-type MetadataProps = { params: Params };
+type Params = Promise<{ locale: string; id: string }>;
 
-export async function generateMetadata({ params }: MetadataProps): Promise<Metadata> {
-  const { id } = await params;
-  const project = allProjects.find((p) => p.id === id);
+export function generateStaticParams() {
+  const ids = [...baseProjects, ...baseSideProjects].map((p) => p.id);
+  return ["fr", "en"].flatMap((locale) => ids.map((id) => ({ locale, id })));
+}
+
+export async function generateMetadata({ params }: { params: Params }): Promise<Metadata> {
+  const { locale: raw, id } = await params;
+  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  const project = getProject(locale, id);
 
   if (!project) {
     return {
-      title: "Projet introuvable",
-      description: "Ce projet n'existe pas ou a été supprimé.",
+      title: "404",
       robots: { index: false, follow: false },
     };
   }
 
-  const baseUrl = "https://www.louisrotellini.fr";
-  const url = `${baseUrl}/projets/${project.id}`;
-  const description =
-    project.tagline ?? project.context ?? `Étude de cas du projet ${project.title}.`;
+  const path = localizedHref(locale, `/projets/${project.id}`);
+  const url = `${SITE_URL}${path}`;
+  const description = project.tagline ?? project.context ?? project.title;
   const ogImage = project.after;
-  const ogUrl = ogImage.startsWith("http") ? ogImage : `${baseUrl}${ogImage}`;
+  const ogUrl = ogImage.startsWith("http") ? ogImage : `${SITE_URL}${ogImage}`;
 
   return {
-    title: `${project.title}`,
+    title: project.title,
     description,
-    alternates: { canonical: url },
+    alternates: {
+      canonical: path,
+      languages: {
+        "fr-FR": `/projets/${project.id}`,
+        "en-US": `/en/projets/${project.id}`,
+        "x-default": `/projets/${project.id}`,
+      },
+    },
     openGraph: {
       title: `${project.title} | Louis Rotellini`,
       description,
@@ -48,7 +66,7 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
           url: ogUrl,
           width: 1200,
           height: 630,
-          alt: `${project.title} — étude de cas · Louis Rotellini`,
+          alt: `${project.title} · Louis Rotellini`,
         },
       ],
     },
@@ -61,17 +79,21 @@ export async function generateMetadata({ params }: MetadataProps): Promise<Metad
   };
 }
 
-export default async function ProjectPage({ params }: PageProps) {
-  const { id } = await params;
+export default async function ProjectPage({ params }: { params: Params }) {
+  const { locale: raw, id } = await params;
+  const locale: Locale = isLocale(raw) ? raw : defaultLocale;
+  const dict = getDictionary(locale);
+  const t = dict.projectPage;
 
-  const project = allProjects.find((p) => p.id === id);
+  const allProjects = getAllProjects(locale);
+  const project = getProject(locale, id);
   if (!project) return notFound();
 
-  const baseUrl = "https://www.louisrotellini.fr";
-  const url = `${baseUrl}/projets/${project.id}`;
+  const path = localizedHref(locale, `/projets/${project.id}`);
+  const url = `${SITE_URL}${path}`;
   const projectImage = project.after.startsWith("http")
     ? project.after
-    : `${baseUrl}${project.after}`;
+    : `${SITE_URL}${project.after}`;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -83,24 +105,29 @@ export default async function ProjectPage({ params }: PageProps) {
         description: project.tagline ?? project.context,
         url,
         image: projectImage,
-        inLanguage: "fr-FR",
+        inLanguage: hreflang[locale],
         keywords: project.stack,
         creator: {
           "@type": "Person",
           name: "Louis Rotellini",
-          url: baseUrl,
+          url: SITE_URL,
         },
         about: project.client,
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Accueil", item: baseUrl },
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: t.breadcrumbHome,
+            item: `${SITE_URL}${localePrefix(locale) || "/"}`,
+          },
           {
             "@type": "ListItem",
             position: 2,
-            name: "Projets",
-            item: `${baseUrl}/#projets`,
+            name: t.breadcrumbProjects,
+            item: `${SITE_URL}${localizedHref(locale, "/#projets")}`,
           },
           { "@type": "ListItem", position: 3, name: project.title, item: url },
         ],
@@ -130,10 +157,10 @@ export default async function ProjectPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <Link
-        href="/#projets"
+        href={localizedHref(locale, "/#projets")}
         className="inline-flex items-center gap-2 font-mono text-[12px] text-[--muted] hover:text-[--ink] transition-colors mb-9"
       >
-        ← Retour aux projets
+        {t.back}
       </Link>
 
       <header className="mb-12">
@@ -150,7 +177,7 @@ export default async function ProjectPage({ params }: PageProps) {
             >
               {project.url.replace(/^https?:\/\//, "").replace(/\/$/, "")}
               <span aria-hidden="true">↗</span>
-              <span className="sr-only">(nouvel onglet)</span>
+              <span className="sr-only">{t.newTab}</span>
             </a>
           )}
         </div>
@@ -165,12 +192,12 @@ export default async function ProjectPage({ params }: PageProps) {
 
         {!!project.stack?.length && (
           <div className="mt-6 flex flex-wrap gap-1.5">
-            {project.stack.map((t) => (
+            {project.stack.map((tech) => (
               <span
-                key={t}
+                key={tech}
                 className="font-mono text-[11.5px] text-[--muted] border border-[--rule] rounded-full px-2.5 py-1"
               >
-                {t.toLowerCase()}
+                {tech.toLowerCase()}
               </span>
             ))}
           </div>
@@ -185,11 +212,11 @@ export default async function ProjectPage({ params }: PageProps) {
               <BeforeAfterSlider
                 before={before as string}
                 after={after}
-                alt={`${project.title} — avant / après`}
+                alt={project.title}
               />
             </div>
             <div className="lg:hidden">
-              <DeviceMockup type="desktop" src={after} alt={`Après — ${project.title}`} />
+              <DeviceMockup type="desktop" src={after} alt={project.title} />
             </div>
           </>
         ) : (
@@ -203,7 +230,7 @@ export default async function ProjectPage({ params }: PageProps) {
           {problems.length > 0 && (
             <section>
               <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] m-0 mb-[18px] font-medium">
-                Challenges
+                {t.challenges}
               </h2>
               <ol className="list-none p-0 m-0 [counter-reset:li]">
                 {problems.map((p, i) => (
@@ -224,7 +251,7 @@ export default async function ProjectPage({ params }: PageProps) {
           {actions.length > 0 && (
             <section>
               <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] m-0 mb-[18px] font-medium">
-                Solutions
+                {t.solutions}
               </h2>
               <ol className="list-none p-0 m-0">
                 {actions.map((a, i) => (
@@ -259,15 +286,15 @@ export default async function ProjectPage({ params }: PageProps) {
       {others.length > 0 && (
         <section className="mt-24 pt-16 border-t border-[--rule]">
           <div className="flex items-center justify-between gap-4 font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] border-b border-[--rule] pb-3.5 mb-12">
-            <span className="text-[--ink]">→ Suite</span>
-            <span>Autres projets</span>
+            <span className="text-[--ink]">{t.nextEyebrow}</span>
+            <span>{t.otherProjects}</span>
           </div>
 
           <div className="border-t border-[--rule]">
             {others.map((p) => (
               <Link
                 key={p.id}
-                href={`/projets/${p.id}`}
+                href={localizedHref(locale, `/projets/${p.id}`)}
                 className="group grid grid-cols-[auto_1fr_auto_auto] gap-6 py-7 border-b border-[--rule] items-center"
               >
                 <span aria-hidden="true" className="font-mono text-[12px] text-[--muted] w-7">→</span>

@@ -3,10 +3,18 @@
 import Link from "next/link";
 import { useState } from "react";
 import Image from "next/image";
-import projects from "@/data/projects";
+import type { Project } from "@/data/projects";
 import SectionEyebrow from "./SectionEyebrow";
+import { localizedHref, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/getDictionary";
 
-export default function ProjectsSection() {
+type Props = {
+  dict: Dictionary["projects"];
+  projects: Project[];
+  locale: Locale;
+};
+
+export default function ProjectsSection({ dict, projects, locale }: Props) {
   const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
@@ -24,17 +32,16 @@ export default function ProjectsSection() {
       aria-labelledby="projets-title"
       className="py-24"
     >
-      <SectionEyebrow idx="02" label="Projets" meta="Sélection 2025-2026" />
+      <SectionEyebrow idx="02" label={dict.eyebrowLabel} meta={dict.eyebrowMeta} />
 
       <h2
         id="projets-title"
         className="text-[clamp(2.25rem,6vw,56px)] font-medium tracking-[-0.035em] leading-[0.95] m-0 max-w-[18ch]"
       >
-        Sélection clients récents.
+        {dict.title}
       </h2>
       <p className="mt-4 text-[16px] text-[--muted] max-w-[48ch] mb-12">
-        Front-end et intégration sur des produits à fort trafic — Magento,
-        WordPress, environnements contraints.
+        {dict.intro}
       </p>
 
       <div className="relative" onMouseMove={handleMouseMove}>
@@ -42,7 +49,7 @@ export default function ProjectsSection() {
           {projects.map((project, i) => (
             <Link
               key={project.id}
-              href={`/projets/${project.id}`}
+              href={localizedHref(locale, `/projets/${project.id}`)}
               className="group grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_auto_auto] gap-4 md:gap-6 py-7 border-b border-[--rule] items-center"
               onMouseEnter={() => setHoveredProjectId(project.id)}
               onMouseLeave={() => setHoveredProjectId(null)}
