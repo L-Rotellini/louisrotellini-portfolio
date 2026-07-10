@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "../globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
@@ -29,6 +29,13 @@ const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  // Le contenu passe sous la barre de statut / l'indicateur home (iOS).
+  viewportFit: "cover",
+  // Valeur SSR = thème clair par défaut ; UiProvider la resynchronise en sombre.
+  themeColor: "#fcfbf8",
+};
 
 export function generateStaticParams() {
   return [{ locale: "fr" }, { locale: "en" }];

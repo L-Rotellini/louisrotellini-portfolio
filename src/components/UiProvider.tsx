@@ -9,6 +9,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { useTheme } from "next-themes";
 
 export const ACCENTS = ["#1E48E6", "#E5602B", "#1F9D57", "#6D4AE0"] as const;
 const DEFAULT_ACCENT = ACCENTS[0];
@@ -44,6 +45,21 @@ export default function UiProvider({ children }: { children: ReactNode }) {
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const audioCtx = useRef<AudioContext | null>(null);
   const soundRef = useRef(false);
+  const { resolvedTheme } = useTheme();
+
+  /* ----- theme-color synchro (barre de statut iOS/Android) ----- */
+  useEffect(() => {
+    const color = resolvedTheme === "dark" ? "#0d0d0b" : "#fcfbf8";
+    let meta = document.querySelector<HTMLMetaElement>(
+      'meta[name="theme-color"]:not([media])',
+    );
+    if (!meta) {
+      meta = document.createElement("meta");
+      meta.name = "theme-color";
+      document.head.appendChild(meta);
+    }
+    meta.content = color;
+  }, [resolvedTheme]);
 
   /* ----- accent (persisté) ----- */
   const applyAccent = useCallback((hex: string) => {
