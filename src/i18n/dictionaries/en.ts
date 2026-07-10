@@ -225,7 +225,7 @@ export const en: Dictionary = {
 
   notFound: {
     metaTitle: "Page not found",
-    eyebrow: "404 / Not found · Invalid route",
+    eyebrow: "Route not found · Error",
     body: "This page doesn't exist (or no longer does). You can head back home, or email me if you were looking for something specific.",
     backHome: "Back home",
     emailCta: "Email me",

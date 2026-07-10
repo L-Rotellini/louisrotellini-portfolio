@@ -225,7 +225,7 @@ export const fr = {
 
   notFound: {
     metaTitle: "Page introuvable",
-    eyebrow: "404 / Not found · Route invalide",
+    eyebrow: "Route introuvable · Erreur",
     body: "Cette page n'existe pas, ou plus. Tu peux revenir à l'accueil, ou m'écrire si tu cherchais quelque chose en particulier.",
     backHome: "Retour à l'accueil",
     emailCta: "Écrire un email",
