@@ -1,4 +1,4 @@
-import { profile } from "@/data/profile";
+const EMAIL = "louis.rotellini@gmail.com";
 
 export function mailtoHref(subject?: string, body?: string) {
   const defaultSubject = "Prise de contact";
@@ -11,5 +11,5 @@ Merci !`;
 
   const s = encodeURIComponent(subject ?? defaultSubject);
   const b = encodeURIComponent(body ?? defaultBody);
-  return `mailto:${profile.email}?subject=${s}&body=${b}`;
+  return `mailto:${EMAIL}?subject=${s}&body=${b}`;
 }

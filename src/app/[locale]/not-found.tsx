@@ -17,30 +17,27 @@ export default async function NotFound() {
   const home = localePrefix(locale) || "/";
 
   return (
-    <section className="min-h-[520px] flex flex-col items-start justify-center py-20 pt-[140px]">
-      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] mb-6">
+    <section className="wrap" style={{ minHeight: 520, display: "flex", flexDirection: "column", alignItems: "flex-start", justifyContent: "center", padding: "140px clamp(20px,5vw,64px) 80px" }}>
+      <span className="eyebrow" style={{ marginBottom: 24 }}>
         {dict.notFound.eyebrow}
       </span>
 
-      <p className="text-[clamp(5rem,18vw,160px)] font-medium tracking-[-0.06em] leading-[0.85] tabular-nums m-0">
-        404.
-      </p>
+      <h1 style={{ fontSize: "clamp(5rem,18vw,160px)", letterSpacing: "-0.04em", lineHeight: 0.9 }}>404.</h1>
 
-      <p className="text-[clamp(1.125rem,2.4vw,22px)] text-[--muted] max-w-[42ch] my-[18px] leading-[1.4]">
+      <p style={{ fontSize: "clamp(1.05rem,2.4vw,21px)", color: "var(--muted)", maxWidth: "42ch", margin: "18px 0" }}>
         {dict.notFound.body}
       </p>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
+      <div style={{ marginTop: 12, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 10 }}>
         <Link
           href={home}
-          className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] bg-[--ink] text-[--paper] border border-[--ink] hover:bg-[--accent] hover:border-[--accent] transition-colors"
+          style={{ display: "inline-flex", alignItems: "center", gap: 9, borderRadius: 100, padding: "11px 20px", fontSize: 14, background: "var(--ink)", color: "var(--paper)", border: "1px solid var(--ink)" }}
         >
-          {dict.notFound.backHome}
-          <span className="font-mono text-[12px]">→</span>
+          {dict.notFound.backHome} <span className="mono" style={{ fontSize: 12 }}>→</span>
         </Link>
         <a
           href={mailtoHref(dict.mail.subject, dict.mail.body)}
-          className="inline-flex items-center gap-2 rounded-full px-[18px] py-[11px] text-[13.5px] border border-[--rule-strong] text-[--ink] hover:bg-[--ink] hover:text-[--paper] hover:border-[--ink] transition-colors"
+          style={{ display: "inline-flex", alignItems: "center", gap: 9, borderRadius: 100, padding: "11px 20px", fontSize: 14, border: "1px solid var(--rule-2)", color: "var(--ink)" }}
         >
           {dict.notFound.emailCta}
         </a>

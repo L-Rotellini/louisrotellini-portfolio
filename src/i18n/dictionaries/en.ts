@@ -1,136 +1,231 @@
+// EN dictionary: must satisfy the `Dictionary` type defined by fr.ts.
+
 import type { Dictionary } from "./fr";
 
 export const en: Dictionary = {
   nav: {
     homeAria: "Louis Rotellini, home",
-    projets: "Projects",
-    contact: "Contact",
-    themeToggle: "Toggle theme",
+    brandRole: "AI Product Engineer",
+    skip: "Skip to content",
+    links: {
+      work: "Products",
+      live: "Live",
+      machine: "Machine",
+      approach: "Approach",
+      about: "Background",
+      contact: "Contact",
+    },
+    agentView: "Agent view",
+    agentQuit: "Exit",
+    agentAria: "Toggle agent view",
+    paletteAria: "Open the command palette",
+    menuAria: "Open the menu",
     mobileNav: "Mobile navigation",
+    search: "Search",
+    legal: "Legal notice",
     switchLabel: "FR",
     switchAria: "Passer en français",
   },
 
+  agentBanner: {
+    title: "AGENT VIEW",
+    text: "· how a machine reads this page. The dashed labels expose the semantic structure.",
+    exit: "Exit →",
+  },
+
   hero: {
-    metaHeader: "Lille · France · LR-2026",
-    signature: {
-      pre: "I build products end to end, ",
-      bold: "piloting AI",
-      post: ": I frame, I direct, I verify.",
+    eyebrow: "Louis Rotellini · AI Product Engineer",
+    h1: {
+      pre: "I design and ship ",
+      accent: "AI tools",
+      post: " for concrete business use cases.",
     },
-    subtitle: {
-      pre: "AI Product Engineer. React, Next.js, TypeScript and AI agents with ",
-      bold: "Claude Code",
-      post: ", from idea to production. Generalist developer turned AI-augmented builder: today I direct AI and audit the code it produces. Previously Decathlon, Damart, IÉSEG.",
+  },
+
+  work: {
+    num: "01",
+    label: "Products",
+    title: "My AI products, from idea to production.",
+    intro:
+      "Five products built by piloting AI. The LLM is chosen per need: often Mistral for European compliance. Claude Code is how I drive development. Filter by stage, open a card.",
+    filters: {
+      all: "All",
+      shipped: "Shipped",
+      prototype: "Prototype",
+      concept: "Scoping",
     },
-    tags: [
-      "ai product engineer",
-      "claude code",
-      "ai agents",
-      "next.js",
-      "typescript",
-      "react",
-      "rag",
-    ],
-    contactCta: "Get in touch",
-    linkedin: "LinkedIn",
-    newTab: "(new tab)",
+    cardOpenAria: "Open",
+    cardSee: "view →",
+    cardDetail: "details →",
+    drawer: {
+      sheet: "Case",
+      close: "Close",
+      problem: "Problem",
+      approach: "Approach",
+      angle: "Angle",
+      ops: "Reliability in prod",
+      metric: "Metric",
+      open: "Open",
+      noLive: "Private · no public demo",
+      ariaLabel: "Product details",
+    },
   },
 
-  sideProjects: {
-    eyebrowLabel: "Side projects",
-    productsWord: "AI products",
-    title: "My AI products, built solo.",
+  live: {
+    num: "02",
+    label: "Live demo · eval gate",
+    title: "An eval gate, before production.",
     intro:
-      "Built by piloting AI, from framing to production. I pilot Claude Code to develop; the products integrate whichever LLM fits the need, often Mistral for European compliance.",
-    cardBadge: "PRODUCT",
-  },
-
-  projects: {
-    eyebrowLabel: "Projects",
-    eyebrowMeta: "Selected 2025-2026",
-    title: "Recent client work.",
-    intro:
-      "Front-end and integration on high-traffic products: Magento, WordPress, constrained environments.",
-  },
-
-  process: {
-    eyebrowLabel: "How I approach a project",
-    eyebrowMeta: "approach & expertise",
-    title: "How I approach a project.",
-    intro:
-      "Based in Lille, I work remotely across France and the Benelux, or on site in Paris and Lille.",
-    items: [
+      "Describe an AI feature: the gate scores it against hard, eliminatory rules, an evaluation system before anything ships. My differentiator, reliability through rules, made playable.",
+    inputLabel: "Describe an AI feature",
+    placeholder: "e.g. an agent that writes refund emails…",
+    defaultInput:
+      "An agent that automatically sends refund emails to customers. The prompt lives in the UI. Shipping Friday.",
+    examples: [
       {
-        title: "Building products by piloting AI",
-        text: "From idea to production, I frame the work, I direct the AI and I audit what it produces: moving fast without ever shipping what I don't control. Next.js, TypeScript, LLM integration when it adds value.",
-        metaEnd: "↳ Product",
+        label: "→ OCR · evals · review · capped cost · retries",
+        value:
+          "OCR pipeline with a golden eval set, human review before export, cost capped per document, retries on timeout.",
       },
       {
-        title: "LLM integration",
-        text: "Wiring language models into real interfaces and workflows: agents, OCR, RAG.",
-        metaEnd: "↳ Applied AI",
-      },
-      {
-        title: "Modern React/Next.js front-end",
-        text: "Rebuilds, modules and integrations: fast, accessible and maintainable interfaces in React, Next.js, TypeScript.",
-        metaEnd: "↳ Front-end",
+        label: "→ RAG · prompts in the UI · no evals · Friday",
+        value:
+          "RAG chatbot, prompts embedded in the UI, no eval set, no review, shipping Friday.",
       },
     ],
-    clientsLine: "Recent clients: Decathlon, Damart, IÉSEG.",
+    run: "Run the gate",
+    note: "Eval gate: evals · human review · bounded cost · failure handling. The demo itself is capped (6 runs, bounded inputs).",
+    empty: "Run the gate to see a live verdict.",
+    loading: "evaluating against the gate…",
+    limitReached: "Demo limit reached (6 runs). Reload the page to start over.",
+    scoreWord: "score",
+    rules: {
+      evals: "Evals",
+      human_loop: "Human review",
+      cost: "Bounded cost",
+      failure: "Failure handling",
+    },
+    notePresent: "present",
+    noteAbsent: "missing",
+    rationalePass: "All eliminatory rules are satisfied: ready to ship.",
+    rationaleFail: "One or more eliminatory rules are missing: not ready to ship.",
+    srcMock: "simulated · offline",
   },
 
-  workflow: {
-    eyebrowLabel: "Workflow",
-    eyebrowMeta: "I pilot the AI · human decisions",
-    title: "My workflow: I pilot the AI",
+  machine: {
+    num: "03",
+    label: "Machine experience",
+    title: "Built for humans, and machines.",
     intro:
-      "I pilot Claude Code and equivalent AI tools across the whole development cycle, with judgment.",
-    quoteLine1: "AI speeds up the code.",
-    quoteLine2:
-      "I don't ship what I don't control: context, validation and critical decisions stay in my hands.",
-    rows: [
-      { num: "01", step: "Specs · context", role: "humain", pct: "100%" },
-      { num: "02", step: "Claude Code · generation", role: "agent", pct: "~70%" },
-      { num: "03", step: "Review · tests", role: "humain", pct: "100%" },
-      { num: "04", step: "Production · delivery", role: "humain", pct: "100%" },
+      "In 2026, agents read your site as much as humans do. The same content, structured so an LLM can read it without guessing. Switch views.",
+    toggleAria: "Display mode",
+    toggleHuman: "Human view",
+    toggleMachine: "Machine view",
+    panelTitle: "profile.card",
+    humanName: "Louis Rotellini",
+    humanRole: "AI Product Engineer · Full-Stack · Next.js · TypeScript · Node",
+    humanBio:
+      "Designs and ships AI products end to end: from scoping to model choice, evals, UX and production. I pilot AI; it doesn't pilot me.",
+    tags: ["next.js", "typescript", "llm", "rag", "mistral"],
+    jsonScopingKey: "scoping",
+  },
+
+  manifesto: {
+    line1: "Generation can be delegated.",
+    line2: "Judgment, never.",
+  },
+
+  approach: {
+    num: "04",
+    label: "Approach",
+    title: "Making a fallible system reliable.",
+    intro:
+      "An LLM-based system is probabilistic, therefore fallible. My job is to ship it to production anyway, without ever trusting it blindly.",
+    principles: [
+      {
+        t: "A measurable target, not a feature",
+        x: "I never start from “add AI”, but from a target: a time to cut, a cost per task to cap, a success rate to hold. Business need first, model choice after. Often Mistral to stay in Europe, sometimes no AI at all if a rule is enough.",
+      },
+      {
+        t: "Drawing the deterministic / probabilistic boundary",
+        x: "The core move of the craft: deciding where a hard rule must apply and where the model may decide. DocTap has two pipelines. A 100% local mode where no data leaves the device, and an AI mode with OCR followed by human verification before export. I deliberately refused a named patient vault to stay out of the French HDS health-data scope.",
+      },
+      {
+        t: "Reliability comes from rules and evals",
+        x: "An LLM hedges by default; for a reproducible judgment I impose hard, eliminatory rules on it. That's the principle behind my scoring engine. This site's live demo makes it playable: an eval gate that scores a feature against those rules before production.",
+      },
+      {
+        t: "Directing AI, keeping the decision",
+        x: "I direct the implementation within strict limits: types, schemas, review. I don't re-read the code by hand: I run AI-assisted audits to flush out flaws, counter-audited by a second agent when the stakes warrant it. On a recent build, that caught an API route left exposed before production. Detection can be delegated; what ships to production is my call.",
+      },
     ],
-    roleHuman: "human",
-    roleAgent: "agent",
-    stackLabel: "Stack",
+  },
+
+  about: {
+    num: "05",
+    label: "Background",
+    bio1: "~10 years of web. I started in integration, then React / Next.js / TypeScript front-end. Now a Front-end Developer, I build products by piloting AI, from idea to production.",
+    bio2: "A real developer's path turned AI-augmented builder, not a no-code convert. That's what lets me direct AI instead of enduring it, and audit what it produces.",
+    clientsLabel: "Clients",
+    clientsNote: "· freelance work · front-end integration",
+    portraitAlt: "Louis Rotellini",
   },
 
   contact: {
-    eyebrowLabel: "Contact",
-    eyebrowMeta: "email · linkedin",
-    title: "Get in touch.",
-    emailMeta: "EMAIL · DIRECT",
-    linkedinMeta: "NETWORK · MESSAGE",
-    maltLabel: "Malt profile",
-    maltMeta: "PROFILE",
+    num: "06",
+    label: "Contact",
+    title: "Let's build something.",
+    emailKey: "Email",
+    emailCopyHint: "copy ⧉",
+    emailCopyAria: "Copy email address",
+    copied: "Email copied",
+    githubKey: "GitHub",
+    linkedinKey: "LinkedIn",
     newTab: "(new tab)",
   },
 
   footer: {
-    contact: "Contact",
+    rights: "© 2026 Louis Rotellini",
     legal: "Legal notice",
-    newTab: "(new tab)",
+    madeFor: "Built for humans & machines",
+    soundOff: "Sound off",
+    soundOn: "Sound on",
+    accentAria: "Accent",
+    accents: { cobalt: "Cobalt", orange: "Orange", green: "Green", violet: "Violet" },
+    themeAria: "Theme",
+    themeLight: "Light",
+    themeDark: "Dark",
   },
 
-  projectPage: {
-    back: "← Back to projects",
-    challenges: "Challenges",
-    solutions: "Solutions",
-    nextEyebrow: "→ Next",
-    otherProjects: "Other projects",
-    breadcrumbHome: "Home",
-    breadcrumbProjects: "Projects",
-    newTab: "(new tab)",
+  palette: {
+    placeholder: "Jump to a section, or run an action…",
+    inputAria: "Command",
+    dialogAria: "Command palette",
+    groupGoto: "Go to",
+    groupActions: "Actions",
+    gotoTop: "Top of page",
+    gotoWork: "Products",
+    gotoLive: "Live demo",
+    gotoMachine: "Human / Machine",
+    gotoApproach: "Approach",
+    gotoAbout: "Background",
+    gotoContact: "Contact",
+    actAgent: "Agent view",
+    actGate: "Run the live gate",
+    actEmail: "Copy email",
+    actGithub: "GitHub",
+    actLinkedin: "LinkedIn",
+    actLegal: "Legal notice",
+    actLang: "Version française",
+    empty: "No results",
+    footNav: "navigate",
+    footOpen: "open",
+    footClose: "close",
   },
 
   notFound: {
     metaTitle: "Page not found",
-    eyebrow: "04 / Not found · Invalid route",
+    eyebrow: "404 / Not found · Invalid route",
     body: "This page doesn't exist (or no longer does). You can head back home, or email me if you were looking for something specific.",
     backHome: "Back home",
     emailCta: "Email me",
@@ -138,22 +233,22 @@ export const en: Dictionary = {
 
   legal: {
     metaTitle: "Legal notice",
-    metaDescription:
-      "Legal information for the louisrotellini.fr website.",
-    back: "← Back home",
+    metaDescription: "Legal information for the louisrotellini.fr website.",
+    eyebrow: "Legal notice",
+    back: "← Back to portfolio",
     title: "Legal notice.",
     intro:
       "Legal information for the louisrotellini.fr website, under French law on confidence in the digital economy.",
-    publisherTitle: "01 / Publisher",
+    publisherTitle: "Publisher",
     publisherRole: "Louis Rotellini, AI Product Engineer.",
     publisherLocation: "Lille / Paris, France.",
     contactPrefix: "Contact: ",
-    hostTitle: "02 / Host",
+    hostTitle: "Host",
     hostBody: "Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, USA.",
-    ipTitle: "03 / Intellectual property",
+    ipTitle: "Intellectual property",
     ipBody:
       "All content on this site (text, code, images, structure) is protected by copyright. Any reproduction, even partial, requires prior authorization.",
-    dataTitle: "04 / Personal data",
+    dataTitle: "Personal data",
     dataBody:
       "This site uses no third-party advertising cookies. Visit statistics are collected via Vercel Web Analytics, anonymously and without any transfer outside the EU.",
     dataBullets: [
@@ -161,9 +256,10 @@ export const en: Dictionary = {
       "No advertising cookies",
       "Anonymized data, kept for 30 days",
     ],
-    contactTitle: "05 / Contact",
+    contactTitle: "Contact",
     contactBody: "For any question about this legal notice or data protection: ",
-    lastUpdate: "Last updated · May 2026",
+    lastUpdate: "Last updated · July 2026",
+    homeLink: "Home",
   },
 
   mail: {
@@ -176,35 +272,33 @@ Thanks!`,
   },
 
   meta: {
-    title: "Louis Rotellini · AI Product Engineer · Full-Stack (Next.js · TypeScript · Node)",
+    title: "Louis Rotellini · AI Product Engineer",
     description:
-      "AI Product Engineer, full-stack (Next.js, TypeScript, Node). I build products end to end by piloting AI: React, Next.js, TypeScript, AI agents with Claude Code. LLM integration and RAG. Generalist developer turned AI-augmented builder.",
+      "AI Product Engineer in Lille, France. I design and ship AI tools for concrete business use cases: Next.js, TypeScript, agents, RAG. Reliability through rules, evals and judgment.",
     keywords: [
       "AI Product Engineer",
       "AI Engineer",
       "Product Engineer",
-      "AI Product Builder",
-      "LLM integration",
+      "AI tools",
+      "AI products",
+      "piloting AI",
       "AI agents",
       "Claude Code",
-      "RAG",
+      "eval gate",
+      "LLM integration",
       "Mistral",
       "Next.js",
       "TypeScript",
       "React",
-      "Node.js",
-      "full-stack developer",
-      "remote",
+      "RAG",
       "Lille",
       "Paris",
     ],
-    ogTitle:
-      "AI Product Engineer · Full-Stack (Next.js · TypeScript · Node) · I build products by piloting AI",
-    ogImageAlt:
-      "Louis Rotellini's portfolio: AI Product Engineer · React / Next.js · Claude Code",
+    ogTitle: "AI Product Engineer · I design and ship AI tools for concrete business use cases",
+    ogImageAlt: "Louis Rotellini's portfolio: AI Product Engineer · AI tools in production",
     jobTitle: "AI Product Engineer",
     personDescription:
-      "AI Product Engineer based in Lille, working remotely. I build products end to end by piloting AI: React, Next.js, TypeScript, AI agents with Claude Code. Previously Decathlon, Damart, IÉSEG.",
+      "AI Product Engineer based in Lille, France. I design and ship AI tools for concrete business use cases: Next.js, TypeScript, agents, RAG. Reliability through rules and evals.",
     knowsAbout: [
       "Next.js",
       "TypeScript",
@@ -213,24 +307,24 @@ Thanks!`,
       "Claude Code",
       "AI agents",
       "RAG",
+      "LLM evals",
       "MCP",
       "Mistral",
       "LLM integration",
       "Building products by piloting AI",
-      "Tailwind CSS",
     ],
     serviceName: "Louis Rotellini · AI Product Engineer",
     serviceDescription:
-      "Building products by piloting AI (Next.js, TypeScript), LLM integration and React / Next.js front-end development, with a Claude Code driven workflow.",
+      "Design and production delivery of AI tools for concrete business use cases (Next.js, TypeScript, agents, RAG), with a Claude Code driven workflow.",
     serviceTypes: [
-      "Building products by piloting AI",
+      "Design and delivery of AI tools",
       "Claude Code piloting",
       "LLM integration",
       "React / Next.js / TypeScript front-end development",
     ],
     consoleTitle: "Louis Rotellini, AI Product Engineer",
     consolePortfolio: "Portfolio: https://www.louisrotellini.fr",
-    consoleSpecialties: "Focus: Claude Code · Next.js · TypeScript · AI agents",
+    consoleSpecialties: "Focus: AI tools in prod · evals · Next.js · TypeScript",
   },
 };
 

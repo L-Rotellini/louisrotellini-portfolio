@@ -2,14 +2,17 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { Bricolage_Grotesque } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { notFound } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import BackToTop from "@/components/BackToTop";
-import ScrollProgressBar from "@/components/ScrollProgressBar";
-import { Analytics } from "@vercel/analytics/next";
+import { headers } from "next/headers";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
+import UiProvider from "@/components/UiProvider";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
+import CommandPalette from "@/components/CommandPalette";
+import { SITE_URL, EMAIL, GITHUB_URL, LINKEDIN_URL } from "@/lib/site";
 import {
   defaultLocale,
   htmlLang,
@@ -21,7 +24,11 @@ import {
 } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
 
-const SITE_URL = "https://www.louisrotellini.fr";
+const bricolage = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-bricolage",
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return [{ locale: "fr" }, { locale: "en" }];
@@ -72,14 +79,7 @@ export async function generateMetadata({
       siteName: "Louis Rotellini",
       title: dict.meta.ogTitle,
       description: dict.meta.description,
-      images: [
-        {
-          url: "/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: dict.meta.ogImageAlt,
-        },
-      ],
+      // og:image fourni par [locale]/opengraph-image.tsx (généré via next/og).
     },
     twitter: {
       card: "summary_large_image",
@@ -87,10 +87,13 @@ export async function generateMetadata({
       creator: "@louisrotellini",
       title: dict.meta.ogTitle,
       description: dict.meta.description,
-      images: ["/og-image.jpg"],
+      // twitter:image fourni par [locale]/twitter-image.tsx.
     },
     icons: {
-      icon: "/favicon.ico",
+      icon: [
+        { url: "/favicon.ico", sizes: "any" },
+        { url: "/icon.svg", type: "image/svg+xml" },
+      ],
       shortcut: "/favicon.ico",
       apple: "/apple-touch-icon.png",
     },
@@ -109,6 +112,7 @@ export default async function RootLayout({
   const locale = raw;
   const dict = getDictionary(locale);
   const home = localePrefix(locale) || "/";
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
 
   const personLd = {
     "@context": "https://schema.org",
@@ -117,10 +121,9 @@ export default async function RootLayout({
     jobTitle: dict.meta.jobTitle,
     description: dict.meta.personDescription,
     url: `${SITE_URL}${localePrefix(locale)}`,
-    sameAs: [
-      "https://www.malt.fr/profile/louisrotellini",
-      "https://www.linkedin.com/in/louis-rotellini/",
-    ],
+    email: `mailto:${EMAIL}`,
+    image: `${SITE_URL}/louis-rotellini.jpg`,
+    sameAs: [GITHUB_URL, LINKEDIN_URL, "https://www.malt.fr/profile/louisrotellini"],
     knowsAbout: dict.meta.knowsAbout,
     address: {
       "@type": "PostalAddress",
@@ -142,52 +145,66 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang={htmlLang[locale]} suppressHydrationWarning>
-      <body
-        className={[
-          GeistSans.variable,
-          GeistMono.variable,
-          "min-h-dvh bg-[--paper] text-[--ink] antialiased transition-colors duration-500",
-        ].join(" ")}
-      >
+    <html
+      lang={htmlLang[locale]}
+      suppressHydrationWarning
+      className={[GeistSans.variable, GeistMono.variable, bricolage.variable].join(" ")}
+    >
+      <body>
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
         />
         <script
           type="application/ld+json"
+          nonce={nonce}
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
         />
+        {/* Marque le support JS (fallback reveal no-JS) + accent persisté,
+            appliqués avant la peinture pour éviter tout flash. */}
+        <script
+          nonce={nonce}
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add("js");try{var a=localStorage.getItem("accent");if(a&&/^#[0-9A-Fa-f]{6}$/.test(a))document.documentElement.style.setProperty("--accent",a)}catch(e){}`,
+          }}
+        />
 
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar locale={locale} dict={dict.nav} home={home} />
-          <ScrollProgressBar placeBelowHeader />
-          <main className="mx-auto max-w-[1080px] px-8 pb-24">{children}</main>
-          <Footer dict={dict.footer} locale={locale} />
-          <BackToTop />
+        <ThemeProvider attribute="data-theme" defaultTheme="light" enableSystem={false} nonce={nonce}>
+          <UiProvider>
+            <SiteHeader dict={dict.nav} banner={dict.agentBanner} locale={locale} home={home} />
+            <main id="top">{children}</main>
+            <SiteFooter dict={dict.footer} locale={locale} />
+            <CommandPalette
+              dict={dict.palette}
+              copiedMsg={dict.contact.copied}
+              locale={locale}
+              home={home}
+            />
+          </UiProvider>
         </ThemeProvider>
 
         {/* Vercel Web Analytics */}
         <Analytics />
       </body>
-      <Script id="console-signature" strategy="afterInteractive">
+      <Script id="console-signature" strategy="afterInteractive" nonce={nonce}>
         {`
             const styleHeader = [
-              "color: #0f172a",
-              "background: #e2e8f0",
+              "color: #16150F",
+              "background: #ECE9DE",
               "font-size: 14px",
               "padding: 6px 10px",
               "border-radius: 4px",
               "font-weight: 600",
             ].join(";");
             const styleBody = [
-              "color: #475569",
+              "color: #6E6B60",
               "font-size: 13px",
             ].join(";");
 
-            console.log("%c${dict.meta.consoleTitle}", styleHeader);
-            console.log("%c${dict.meta.consolePortfolio}", styleBody);
-            console.log("%c${dict.meta.consoleSpecialties}", styleBody);
+            console.log("%c" + ${JSON.stringify(dict.meta.consoleTitle)}, styleHeader);
+            console.log("%c" + ${JSON.stringify(dict.meta.consolePortfolio)}, styleBody);
+            console.log("%c" + ${JSON.stringify(dict.meta.consoleSpecialties)}, styleBody);
           `}
       </Script>
     </html>

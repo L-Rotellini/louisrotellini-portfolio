@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { defaultLocale, isLocale, localePrefix, localizedHref, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/getDictionary";
+import { EMAIL } from "@/lib/site";
 
 export function generateStaticParams() {
   return [{ locale: "fr" }, { locale: "en" }];
@@ -44,86 +45,75 @@ export default async function MentionsLegales({
   const home = localePrefix(locale) || "/";
 
   return (
-    <article className="max-w-[680px] pt-[120px] pb-20">
-      <Link
-        href={home}
-        className="inline-flex items-center gap-2 font-mono text-[12px] text-[--muted] hover:text-[--ink] transition-colors mb-9"
-      >
-        {t.back}
-      </Link>
+    <>
+      <section className="legal-head">
+        <div className="wrap">
+          <div className="eyebrow" style={{ marginBottom: 20 }}>
+            <span className="n">{"//"}</span> {t.eyebrow}
+          </div>
+          <h1>{t.title}</h1>
+          <p className="legal-sub">{t.intro}</p>
+        </div>
+      </section>
 
-      <h1 className="text-[clamp(2rem,5.5vw,56px)] font-medium tracking-[-0.035em] leading-[0.95] m-0 mb-4">
-        {t.title}
-      </h1>
+      <section className="legal-doc wrap">
+        <article className="art">
+          <div className="art__n">01</div>
+          <div>
+            <h2>{t.publisherTitle}</h2>
+            <p>{t.publisherRole}</p>
+            <p>{t.publisherLocation}</p>
+            <p>
+              {t.contactPrefix}
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+          </div>
+        </article>
 
-      <p className="text-[18px] text-[--muted] leading-[1.5] m-0 mb-12">
-        {t.intro}
-      </p>
+        <article className="art">
+          <div className="art__n">02</div>
+          <div>
+            <h2>{t.hostTitle}</h2>
+            <p>{t.hostBody}</p>
+          </div>
+        </article>
 
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] mt-12 mb-3 font-medium">
-        {t.publisherTitle}
-      </h2>
-      <p className="text-[15.5px] leading-[1.65] m-0">
-        {t.publisherRole}
-        <br />
-        {t.publisherLocation}
-        <br />
-        {t.contactPrefix}
-        <a
-          href="mailto:louis.rotellini@gmail.com"
-          className="border-b border-[--rule-strong] hover:border-[--ink] hover:text-[--accent] transition-colors"
-        >
-          louis.rotellini@gmail.com
-        </a>
-      </p>
+        <article className="art">
+          <div className="art__n">03</div>
+          <div>
+            <h2>{t.ipTitle}</h2>
+            <p>{t.ipBody}</p>
+          </div>
+        </article>
 
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] mt-12 mb-3 font-medium">
-        {t.hostTitle}
-      </h2>
-      <p className="text-[15.5px] leading-[1.65] m-0">
-        {t.hostBody}
-        <br />
-        <a
-          href="https://vercel.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="border-b border-[--rule-strong] hover:border-[--ink] hover:text-[--accent] transition-colors"
-        >
-          vercel.com
-        </a>
-      </p>
+        <article className="art">
+          <div className="art__n">04</div>
+          <div>
+            <h2>{t.dataTitle}</h2>
+            <p>{t.dataBody}</p>
+            <ul>
+              {t.dataBullets.map((b) => (
+                <li key={b}>{b}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
 
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] mt-12 mb-3 font-medium">
-        {t.ipTitle}
-      </h2>
-      <p className="text-[15.5px] leading-[1.65] m-0">{t.ipBody}</p>
+        <article className="art">
+          <div className="art__n">05</div>
+          <div>
+            <h2>{t.contactTitle}</h2>
+            <p>
+              {t.contactBody}
+              <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+            </p>
+          </div>
+        </article>
 
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] mt-12 mb-3 font-medium">
-        {t.dataTitle}
-      </h2>
-      <p className="text-[15.5px] leading-[1.65] m-0">{t.dataBody}</p>
-      <ul className="text-[15.5px] leading-[1.65] mt-3 pl-5 list-disc">
-        {t.dataBullets.map((b) => (
-          <li key={b}>{b}</li>
-        ))}
-      </ul>
-
-      <h2 className="font-mono text-[11px] uppercase tracking-[0.14em] text-[--muted] mt-12 mb-3 font-medium">
-        {t.contactTitle}
-      </h2>
-      <p className="text-[15.5px] leading-[1.65] m-0">
-        {t.contactBody}
-        <a
-          href="mailto:louis.rotellini@gmail.com"
-          className="border-b border-[--rule-strong] hover:border-[--ink] hover:text-[--accent] transition-colors"
-        >
-          louis.rotellini@gmail.com
-        </a>
-      </p>
-
-      <p className="font-mono text-[11px] uppercase tracking-[0.06em] text-[--muted] mt-16 pt-6 border-t border-[--rule]">
-        {t.lastUpdate}
-      </p>
-    </article>
+        <p className="mono" style={{ fontSize: 11.5, color: "var(--muted)", padding: "26px 0 10px" }}>
+          {t.lastUpdate} · <Link href={home} style={{ textDecoration: "underline", textUnderlineOffset: 2 }}>{t.homeLink}</Link>
+        </p>
+      </section>
+    </>
   );
 }
