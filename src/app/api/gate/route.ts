@@ -37,6 +37,16 @@ function rateLimited(ip: string): boolean {
   return false;
 }
 
+/* x-vercel-forwarded-for est posé par la plateforme et écrase toute valeur
+   envoyée par le client : contrairement à x-forwarded-for, il n'est pas
+   falsifiable, donc on ne peut pas se réattribuer un quota neuf en forgeant
+   l'en-tête. Repli sur x-forwarded-for hors Vercel (dev, autre hébergeur). */
+function clientIp(req: Request): string {
+  const platform = req.headers.get("x-vercel-forwarded-for")?.split(",")[0]?.trim();
+  if (platform) return platform;
+  return req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
+}
+
 const SYSTEM = `Tu es un gate d'évaluation qui décide si une fonctionnalité IA est prête à passer en production.
 
 Tu évalues la description fournie par l'utilisateur contre quatre règles éliminatoires, et rien d'autre :
@@ -106,8 +116,7 @@ export async function POST(req: Request) {
   if (!text) return NextResponse.json({ error: "empty_input" }, { status: 400 });
   const locale = body.locale === "en" ? "en" : "fr";
 
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "local";
-  if (rateLimited(ip)) {
+  if (rateLimited(clientIp(req))) {
     return NextResponse.json({ error: "rate_limited" }, { status: 429 });
   }
 
