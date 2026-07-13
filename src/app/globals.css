@@ -295,12 +295,12 @@ html[data-view="machine"] body { background-image: linear-gradient(color-mix(in 
 .verdict.is-fail .verdict__b { background: var(--fail); }
 .verdict__s { font-size: 12px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 .gaterules { list-style: none; margin: 16px 0 0; padding: 0; }
-.gaterules li { display: grid; grid-template-columns: 22px 128px 1fr; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
+.gaterules li { display: grid; grid-template-columns: 22px 128px 1fr; align-items: start; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--rule); font-size: 14px; }
 .gaterules li:last-child { border-bottom: none; }
 .gr__i { width: 20px; height: 20px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; }
 .gaterules li.ok .gr__i { background: var(--ok); }
 .gaterules li.no .gr__i { background: var(--fail); }
-.gr__n { font-size: 11.5px; color: var(--muted); }
+.gr__n { font-size: 11.5px; color: var(--muted); line-height: 1.5; }
 .gate__rat { margin: 18px 0 0; font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
 .gate__src { margin-top: 14px; font-size: 10.5px; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 

@@ -76,7 +76,7 @@ export const fr = {
     label: "Démo live · gate d'éval",
     title: "Un gate d'éval, avant la prod.",
     intro:
-      "Décris une fonctionnalité IA : le gate la score contre des règles fermes et éliminatoires, un système d'évaluation avant mise en production. Mon différenciant, la fiabilité par les règles, rendu jouable.",
+      "Décris une fonctionnalité IA : un modèle la juge en direct contre quatre règles fermes et éliminatoires. Chaque règle revient avec sa justification, et ce qu'il faudrait ajouter quand elle échoue. Mon différenciant, la fiabilité par les règles, rendu jouable.",
     inputLabel: "Décris une fonctionnalité IA",
     placeholder: "ex. un agent qui rédige des e-mails de remboursement…",
     defaultInput:
@@ -94,10 +94,11 @@ export const fr = {
       },
     ],
     run: "Lancer le gate",
-    note: "Gate d'éval : évals · relecture humaine · coût borné · gestion d'échec. La démo elle-même est plafonnée (6 essais, entrées bornées).",
+    note: "Gate d'éval : évals · relecture humaine · coût borné · gestion d'échec. Claude Haiku 4.5 juge chaque règle, le verdict reste calculé côté serveur. La démo est elle-même plafonnée : 6 essais, 600 caractères.",
     empty: "Lance le gate pour voir un verdict en direct.",
     loading: "évaluation face au gate…",
     limitReached: "Limite de démonstration atteinte (6 essais). Recharge la page pour relancer.",
+    throttled: "Trop d'appels sur la démo en ce moment. Réessaie dans quelques minutes.",
     scoreWord: "score",
     rules: {
       evals: "Evals",
@@ -109,7 +110,8 @@ export const fr = {
     noteAbsent: "absent",
     rationalePass: "Toutes les règles éliminatoires sont satisfaites : prêt à livrer.",
     rationaleFail: "Une ou plusieurs règles éliminatoires manquent : pas prêt à livrer.",
-    srcMock: "simulé · hors-ligne",
+    srcLive: "claude haiku 4.5 · évalué en direct",
+    srcFallback: "moteur de règles · repli hors-ligne",
   },
 
   machine: {

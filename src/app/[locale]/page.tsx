@@ -24,7 +24,7 @@ export default async function Home({
     <>
       <Hero dict={dict.hero} />
       <WorkSection dict={dict.work} products={products} />
-      <LiveGate dict={dict.live} />
+      <LiveGate dict={dict.live} locale={locale} />
       <MachineSection dict={dict.machine} products={products} />
       <Manifesto dict={dict.manifesto} />
       <ApproachSection dict={dict.approach} />

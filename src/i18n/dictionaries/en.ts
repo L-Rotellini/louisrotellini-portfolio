@@ -76,7 +76,7 @@ export const en: Dictionary = {
     label: "Live demo · eval gate",
     title: "An eval gate, before production.",
     intro:
-      "Describe an AI feature: the gate scores it against hard, eliminatory rules, an evaluation system before anything ships. My differentiator, reliability through rules, made playable.",
+      "Describe an AI feature: a model judges it live against four hard, eliminatory rules. Every rule comes back with its reasoning, and with what you would need to add when it fails. My differentiator, reliability through rules, made playable.",
     inputLabel: "Describe an AI feature",
     placeholder: "e.g. an agent that writes refund emails…",
     defaultInput:
@@ -94,10 +94,11 @@ export const en: Dictionary = {
       },
     ],
     run: "Run the gate",
-    note: "Eval gate: evals · human review · bounded cost · failure handling. The demo itself is capped (6 runs, bounded inputs).",
+    note: "Eval gate: evals · human review · bounded cost · failure handling. Claude Haiku 4.5 judges each rule, the verdict is still computed server-side. The demo itself is capped: 6 runs, 600 characters.",
     empty: "Run the gate to see a live verdict.",
     loading: "evaluating against the gate…",
     limitReached: "Demo limit reached (6 runs). Reload the page to start over.",
+    throttled: "Too many calls on the demo right now. Try again in a few minutes.",
     scoreWord: "score",
     rules: {
       evals: "Evals",
@@ -109,7 +110,8 @@ export const en: Dictionary = {
     noteAbsent: "missing",
     rationalePass: "All eliminatory rules are satisfied: ready to ship.",
     rationaleFail: "One or more eliminatory rules are missing: not ready to ship.",
-    srcMock: "simulated · offline",
+    srcLive: "claude haiku 4.5 · judged live",
+    srcFallback: "rule engine · offline fallback",
   },
 
   machine: {

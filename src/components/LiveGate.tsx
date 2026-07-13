@@ -2,46 +2,24 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { RUN_GATE_EVENT } from "@/lib/site";
+import { GATE_MAX, INPUT_MAX, type GateResult } from "@/lib/gate";
+import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries/fr";
-
-const RULE_IDS = ["evals", "human_loop", "cost", "failure"] as const;
-type RuleId = (typeof RULE_IDS)[number];
-
-type GateResult = {
-  verdict: "PASS" | "FAIL";
-  score: number;
-  rules: { id: RuleId; ok: boolean }[];
-};
-
-const GATE_MAX = 6;
-const INPUT_MAX = 600;
-
-/* Moteur de règles local (fallback du handoff) : mots-clés FR + EN.
-   À remplacer plus tard par une route /api/gate appelant un LLM. */
-const CHECKS: Record<RuleId, RegExp> = {
-  evals: /eval|éval|test|golden|référen|scor|benchmark/i,
-  human_loop: /human|humain|review|relectur|valid|révis|contrôl|approv|sign-?off|verif/i,
-  cost: /cost|coût|cout|budget|cap|plafon|rate limit|quota|bounded|born|limite|per doc|par doc/i,
-  failure: /retr|réessai|ressai|fallback|repli|timeout|error|erreur|graceful|robust|échec|echec|panne/i,
-};
-
-function mockGate(text: string): GateResult {
-  const rules = RULE_IDS.map((id) => ({ id, ok: CHECKS[id].test(text) }));
-  const ok = rules.filter((r) => r.ok).length;
-  return {
-    verdict: ok === RULE_IDS.length ? "PASS" : "FAIL",
-    score: Math.round((ok / RULE_IDS.length) * 100),
-    rules,
-  };
-}
 
 type PanelState =
   | { kind: "empty" }
   | { kind: "loading" }
   | { kind: "limit" }
+  | { kind: "throttled" }
   | { kind: "done"; result: GateResult };
 
-export default function LiveGate({ dict }: { dict: Dictionary["live"] }) {
+export default function LiveGate({
+  dict,
+  locale,
+}: {
+  dict: Dictionary["live"];
+  locale: Locale;
+}) {
   const [input, setInput] = useState(dict.defaultInput);
   const [panel, setPanel] = useState<PanelState>({ kind: "empty" });
   const [disabled, setDisabled] = useState(false);
@@ -50,7 +28,7 @@ export default function LiveGate({ dict }: { dict: Dictionary["live"] }) {
   const inputRef = useRef<HTMLTextAreaElement | null>(null);
   const runBtn = useRef<HTMLButtonElement | null>(null);
 
-  const runGate = useCallback(() => {
+  const runGate = useCallback(async () => {
     const text = (inputRef.current?.value ?? "").trim();
     if (!text) {
       inputRef.current?.focus();
@@ -66,19 +44,31 @@ export default function LiveGate({ dict }: { dict: Dictionary["live"] }) {
     cooldown.current = true;
     setDisabled(true);
     setPanel({ kind: "loading" });
-    // Petite latence simulée pour matérialiser l'évaluation.
-    setTimeout(() => {
-      setPanel({ kind: "done", result: mockGate(text.slice(0, INPUT_MAX)) });
-      setTimeout(() => {
-        cooldown.current = false;
-        if (runs.current < GATE_MAX) setDisabled(false);
-      }, 2500);
-    }, 700);
-  }, []);
+
+    try {
+      const res = await fetch("/api/gate", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ text: text.slice(0, INPUT_MAX), locale }),
+      });
+      if (res.status === 429) {
+        setPanel({ kind: "throttled" });
+      } else if (!res.ok) {
+        throw new Error(String(res.status));
+      } else {
+        setPanel({ kind: "done", result: (await res.json()) as GateResult });
+      }
+    } catch {
+      setPanel({ kind: "throttled" });
+    } finally {
+      cooldown.current = false;
+      if (runs.current < GATE_MAX) setDisabled(false);
+    }
+  }, [locale]);
 
   /* Déclenchement depuis la palette ⌘K */
   useEffect(() => {
-    const onRun = () => runGate();
+    const onRun = () => void runGate();
     document.addEventListener(RUN_GATE_EVENT, onRun);
     return () => document.removeEventListener(RUN_GATE_EVENT, onRun);
   }, [runGate]);
@@ -146,7 +136,12 @@ export default function LiveGate({ dict }: { dict: Dictionary["live"] }) {
                 </button>
               ))}
             </div>
-            <button ref={runBtn} className="live__run magnetic" onClick={runGate} disabled={disabled}>
+            <button
+              ref={runBtn}
+              className="live__run magnetic"
+              onClick={() => void runGate()}
+              disabled={disabled}
+            >
               {dict.run} <span className="mono">→</span>
             </button>
             <div className="live__note">{dict.note}</div>
@@ -159,6 +154,7 @@ export default function LiveGate({ dict }: { dict: Dictionary["live"] }) {
               </div>
             )}
             {panel.kind === "limit" && <div className="live__empty">{dict.limitReached}</div>}
+            {panel.kind === "throttled" && <div className="live__empty">{dict.throttled}</div>}
             {panel.kind === "done" && (
               <>
                 <div className={`verdict ${pass ? "is-pass" : "is-fail"}`}>
@@ -172,12 +168,16 @@ export default function LiveGate({ dict }: { dict: Dictionary["live"] }) {
                     <li key={r.id} className={r.ok ? "ok" : "no"}>
                       <span className="gr__i">{r.ok ? "✓" : "✕"}</span>
                       <span className="gr__l">{dict.rules[r.id]}</span>
-                      <span className="gr__n mono">{r.ok ? dict.notePresent : dict.noteAbsent}</span>
+                      <span className={r.note ? "gr__n" : "gr__n mono"}>
+                        {r.note || (r.ok ? dict.notePresent : dict.noteAbsent)}
+                      </span>
                     </li>
                   ))}
                 </ul>
                 <p className="gate__rat">{pass ? dict.rationalePass : dict.rationaleFail}</p>
-                <div className="gate__src mono">{dict.srcMock}</div>
+                <div className="gate__src mono">
+                  {panel.result.source === "claude" ? dict.srcLive : dict.srcFallback}
+                </div>
               </>
             )}
           </div>
