@@ -18,7 +18,7 @@ export const productsEn: Record<string, ProductOverlay> = {
     problem:
       "Digitize a document from a phone, without a native app or a heavy server, including sensitive documents (originally a home-care health context).",
     approach:
-      "Two pipelines. Photos mode: 100% local, no data ever leaves the device. AI mode: only compressed images are sent for OCR; originals, crops and PDFs stay on the device, the server stores nothing.",
+      "Two pipelines. Photos mode: processed on the device, no photo or document is sent. AI mode: only compressed images are sent for transcription; originals, crops and PDFs stay on the device, and DocTap stores nothing on its servers.",
     outcome:
       "Designed and shipped to production solo. Privacy by design: deliberately refused a named patient vault to stay clear of French HDS health-data constraints.",
     ops:

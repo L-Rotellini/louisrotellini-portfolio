@@ -37,7 +37,7 @@ export const products: Product[] = [
     problem:
       "Numériser un document depuis un mobile, sans app native ni serveur lourd, y compris des documents sensibles (contexte santé à domicile à l'origine).",
     approach:
-      "Deux pipelines. Mode Photos : 100% local, aucune donnée ne quitte l'appareil. Mode IA : seules les images compressées sont envoyées pour l'OCR ; originaux, recadrages et PDF restent sur l'appareil, le serveur ne stocke rien.",
+      "Deux pipelines. Mode Photos : traitement sur l'appareil, aucune photo ni aucun document envoyé. Mode IA : seules les images compressées sont envoyées pour la transcription ; originaux, recadrages et PDF restent sur l'appareil, et DocTap ne stocke rien sur ses serveurs.",
     outcome:
       "Conçu et mis en production en autonomie. Confidentialité par conception : refus délibéré d'un coffre patient nominatif pour éviter les contraintes HDS.",
     ops:
