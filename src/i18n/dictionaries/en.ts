@@ -150,7 +150,7 @@ export const en: Dictionary = {
       },
       {
         t: "Drawing the deterministic / probabilistic boundary",
-        x: "The core move of the craft: deciding where a hard rule must apply and where the model may decide. DocTap has two pipelines. A 100% local mode where no data leaves the device, and an AI mode with OCR followed by human verification before export. I deliberately refused a named patient vault to stay out of the French HDS health-data scope.",
+        x: "The core move of the craft: deciding where a hard rule must apply and where the model may decide. DocTap has two pipelines. A Photos mode where no photo or document leaves the device, and an AI mode with OCR followed by human verification before export. I deliberately refused a named patient vault to stay out of the French HDS health-data scope.",
       },
       {
         t: "Reliability comes from rules and evals",

@@ -18,11 +18,11 @@ export const productsEn: Record<string, ProductOverlay> = {
     problem:
       "Digitize a document from a phone, without a native app or a heavy server, including sensitive documents (originally a home-care health context).",
     approach:
-      "Two pipelines. Photos mode: 100% local, no data ever leaves the device. AI mode: only compressed images are sent for OCR; originals, crops and PDFs stay on the device, the server stores nothing.",
+      "Two pipelines. Photos mode: photos and PDF processed on the device, no photo or document is sent. AI mode: compressed copies of the photos go to Mistral for transcription, which keeps inputs and outputs for 30 days for abuse monitoring; the verified text goes to DocTap's server to lay out the PDF, and is not stored there.",
     outcome:
       "Designed and shipped to production solo. Privacy by design: deliberately refused a named patient vault to stay clear of French HDS health-data constraints.",
     ops:
-      "Mandatory human check before any export or share. Configurable local retention (7 / 30 / 90 days), actually purged. Zero server-side storage (no database, no bucket), verified in the code.",
+      "Mandatory human check before any export or share. Recents kept on the device for 7, 30 or 90 days (user setting), erased when the app is opened once that period has passed. Zero server-side storage (no database, no bucket), verified in the code.",
     kpi: "Measured PDF assembly: 3 to 20 ms for 1 to 12 pages, on-device · ~87 KB of shared JS.",
     metric: "In production · doctap.app",
     imageAlt: "DocTap: document capture and PDF assembly on mobile",

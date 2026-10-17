@@ -150,7 +150,7 @@ export const fr = {
       },
       {
         t: "Tracer la frontière déterministe / probabiliste",
-        x: "Le geste central du métier : décider où une règle dure s'impose et où le modèle peut trancher. DocTap a deux pipelines. Un mode 100 % local où aucune donnée ne quitte l'appareil, et un mode IA avec OCR puis vérification humaine avant export. J'ai refusé délibérément un coffre patient nominatif pour rester hors du périmètre HDS.",
+        x: "Le geste central du métier : décider où une règle dure s'impose et où le modèle peut trancher. DocTap a deux pipelines. Un mode Photos où aucune photo ni aucun document ne quitte l'appareil, et un mode IA avec OCR puis vérification humaine avant export. J'ai refusé délibérément un coffre patient nominatif pour rester hors du périmètre HDS.",
       },
       {
         t: "La fiabilité vient des règles et des évals",
