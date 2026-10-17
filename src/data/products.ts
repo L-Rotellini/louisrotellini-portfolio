@@ -37,11 +37,11 @@ export const products: Product[] = [
     problem:
       "Numériser un document depuis un mobile, sans app native ni serveur lourd, y compris des documents sensibles (contexte santé à domicile à l'origine).",
     approach:
-      "Deux pipelines. Mode Photos : 100% local, aucune donnée ne quitte l'appareil. Mode IA : seules les images compressées sont envoyées pour l'OCR ; originaux, recadrages et PDF restent sur l'appareil, le serveur ne stocke rien.",
+      "Deux pipelines. Mode Photos : photos et PDF traités sur l'appareil, aucune photo ni aucun document envoyé. Mode IA : des copies compressées des photos partent chez Mistral pour la transcription, qui en conserve entrées et sorties 30 jours contre les abus ; le texte vérifié part au serveur de DocTap pour la mise en page du PDF, sans y être stocké.",
     outcome:
       "Conçu et mis en production en autonomie. Confidentialité par conception : refus délibéré d'un coffre patient nominatif pour éviter les contraintes HDS.",
     ops:
-      "Vérification humaine obligatoire avant tout export ou partage. Rétention locale configurable (7 / 30 / 90 jours), réellement purgée. Zéro stockage serveur (aucune base, aucun bucket), vérifié dans le code.",
+      "Vérification humaine obligatoire avant tout export ou partage. Récents conservés sur l'appareil 7, 30 ou 90 jours au choix, effacés à l'ouverture de l'app une fois le délai passé. Zéro stockage serveur (aucune base, aucun bucket), vérifié dans le code.",
     kpi: "Assemblage PDF mesuré : 3 à 20 ms pour 1 à 12 pages, sur l'appareil · ~87 Ko de JS partagé.",
     metric: "En production · doctap.app",
     image: { src: "/projects/doctap-desktop.jpg", alt: "DocTap : capture de documents et assemblage PDF sur mobile" },
